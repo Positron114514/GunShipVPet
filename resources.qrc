@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/ico">
+        <file>resources/icons/logo-tmp.ico</file>
+    </qresource>
+</RCC>

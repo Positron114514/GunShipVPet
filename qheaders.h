@@ -16,5 +16,9 @@
 #include <QOpenGLWidget>
 #include <QTimer>
 #include <QMouseEvent>
+#include <QSystemTrayIcon>
+#include <QAction>
+#include <QMenu>
+#include <QDebug>
 
 #endif // QHEADERS_H
