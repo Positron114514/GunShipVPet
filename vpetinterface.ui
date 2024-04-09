@@ -15,7 +15,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="MyOpenGL" name="openGLWidget"/>
+    <widget class="MyOpenGL" name="live2dWidget"/>
    </item>
   </layout>
  </widget>

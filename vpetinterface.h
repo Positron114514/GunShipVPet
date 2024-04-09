@@ -1,6 +1,8 @@
 #ifndef VPETINTERFACE_H
 #define VPETINTERFACE_H
 
+#pragma once
+
 #include "qheaders.h"
 
 QT_BEGIN_NAMESPACE
@@ -18,6 +20,9 @@ public:
     ~VPetInterface();
 
     void InitializeSystemTray();
+
+    // 重载事件过滤器
+    // bool eventFilter(QObject *watched, QEvent *event);
 
 public slots:
     void onSettingsClicked();

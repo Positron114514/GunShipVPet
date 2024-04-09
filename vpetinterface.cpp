@@ -17,7 +17,7 @@ VPetInterface::VPetInterface(QWidget *parent)
     this->setWindowFlag(Qt::WindowType::MSWindowsOwnDC, false);
     this->setWindowFlag(Qt::FramelessWindowHint);
     this->setWindowFlag(Qt::Tool);
-    this->setWindowFlag(Qt::WindowStaysOnTopHint);
+    // this->setWindowFlag(Qt::WindowStaysOnTopHint);   // 窗口置顶
     this->setAttribute(Qt::WA_TranslucentBackground);
 
     // 初始化托盘图标
@@ -56,5 +56,5 @@ void VPetInterface::InitializeSystemTray()
 void VPetInterface::onSettingsClicked()
 {
     // 空实现
-    qDebug() << "Settings Action triggered";
+    qDebug() << QT_INTERFACE_LOG << "Settings Action triggered";
 }

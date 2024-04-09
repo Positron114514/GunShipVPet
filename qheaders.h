@@ -1,6 +1,11 @@
 #ifndef QHEADERS_H
 #define QHEADERS_H
 
+// Macros
+#define QT_INTERFACE_LOG "[QT]user interface:"
+#define QT_BACKGROUND_LOG "[QT]background thread:"
+#define QT_DEBUG_OUTPUT "[QT]debug output:"
+
 // C++ headers
 #include <windows.h>
 
@@ -20,5 +25,6 @@
 #include <QAction>
 #include <QMenu>
 #include <QDebug>
+#include <QPoint>
 
 #endif // QHEADERS_H
