@@ -25,7 +25,8 @@ LAppSprite::LAppSprite(float x, float y, float width, float height, GLuint textu
     _spriteColor[0] = 1.0f;
     _spriteColor[1] = 1.0f;
     _spriteColor[2] = 1.0f;
-    _spriteColor[3] = 1.0f;
+    // _spriteColor[3] = 1.0f;
+    _spriteColor[3] = 0.0f;
 }
 
 LAppSprite::~LAppSprite()
@@ -128,7 +129,8 @@ void LAppSprite::SetColor(float r, float g, float b, float a)
     _spriteColor[0] = r;
     _spriteColor[1] = g;
     _spriteColor[2] = b;
-    _spriteColor[3] = a;
+    // _spriteColor[3] = a;
+    _spriteColor[3] = 0.0f;
 }
 
 void LAppSprite::ResetRect(float x, float y, float width, float height)

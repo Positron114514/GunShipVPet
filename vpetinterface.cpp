@@ -13,12 +13,15 @@ VPetInterface::VPetInterface(QWidget *parent)
 {
     ui->setupUi(this);
 
+    this->resize(230, 460);
+
     // 设置窗体透明
     this->setWindowFlag(Qt::WindowType::MSWindowsOwnDC, false);
     this->setWindowFlag(Qt::FramelessWindowHint);
     this->setWindowFlag(Qt::Tool);
-    // this->setWindowFlag(Qt::WindowStaysOnTopHint);   // 窗口置顶
+    this->setWindowFlag(Qt::WindowStaysOnTopHint);   // 窗口置顶
     this->setAttribute(Qt::WA_TranslucentBackground);
+    this->setAttribute(Qt::WA_ShowWithoutActivating);
 
     // 初始化托盘图标
     InitializeSystemTray();

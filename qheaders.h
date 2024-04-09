@@ -6,8 +6,9 @@
 #define QT_BACKGROUND_LOG "[QT]background thread:"
 #define QT_DEBUG_OUTPUT "[QT]debug output:"
 
-// C++ headers
+// Windows native headers
 #include <windows.h>
+#include <dwmapi.h>
 
 // OpenGL headers
 #include <GL/glew.h>
@@ -26,5 +27,6 @@
 #include <QMenu>
 #include <QDebug>
 #include <QPoint>
+#include <QFlags>
 
 #endif // QHEADERS_H

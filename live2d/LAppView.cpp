@@ -52,9 +52,9 @@ LAppView::~LAppView()
     delete _viewMatrix;
     delete _deviceToScreen;
     delete _touchManager;
-    delete _back;
-    delete _gear;
-    delete _power;
+    // delete _back;
+    // delete _gear;
+    // delete _power;
 }
 
 void LAppView::Initialize()
@@ -164,17 +164,17 @@ void LAppView::InitializeSprite()
 {
     _programId = LAppDelegate::GetInstance()->CreateShader();
 
-    int width, height;
+    // int width, height;
     // glfwGetWindowSize(LAppDelegate::GetInstance()->GetWindow(), &width, &height);
     // Qt改写
-    width = LAppDelegate::GetInstance()->GetWindow()->width();
-    height = LAppDelegate::GetInstance()->GetWindow()->height();
+    // width = LAppDelegate::GetInstance()->GetWindow()->width();
+    // height = LAppDelegate::GetInstance()->GetWindow()->height();
 
     // LAppTextureManager* textureManager = LAppDelegate::GetInstance()->GetTextureManager();
-    // const string resourcesPath = ResourcesPath;
+    // // const string resourcesPath = ResourcesPath;
 
     // string imageName = BackImageName;
-    // LAppTextureManager::TextureInfo* backgroundTexture = textureManager->CreateTextureFromPngFile(resourcesPath + imageName);
+    // LAppTextureManager::TextureInfo* backgroundTexture = textureManager->CreateTextureFromPngFile(":/img/resources/images/bg-transparent.png");
 
     // float x = width * 0.5f;
     // float y = height * 0.5f;
@@ -201,9 +201,9 @@ void LAppView::InitializeSprite()
     // _power = new LAppSprite(x, y, fWidth, fHeight, powerTexture->id, _programId);
 
     // 画面全体を覆うサイズ
-    float x = width * 0.5f;
-    float y = height * 0.5f;
-    _renderSprite = new LAppSprite(x, y, static_cast<float>(width), static_cast<float>(height), 0, _programId);
+    // float x = width * 0.5f;
+    // float y = height * 0.5f;
+    // _renderSprite = new LAppSprite(x, y, static_cast<float>(width), static_cast<float>(height), 0, _programId);
 }
 
 void LAppView::OnTouchesBegan(float px, float py) const
@@ -386,16 +386,16 @@ void LAppView::ResizeSprite()
     }
 
     // 描画領域サイズ
-    int width, height;
+    // int width, height;
     // glfwGetWindowSize(LAppDelegate::GetInstance()->GetWindow(), &width, &height);
     // Qt改写
-    width = LAppDelegate::GetInstance()->GetWindow()->width();
-    height = LAppDelegate::GetInstance()->GetWindow()->height();
+    // width = LAppDelegate::GetInstance()->GetWindow()->width();
+    // height = LAppDelegate::GetInstance()->GetWindow()->height();
 
-    float x = 0.0f;
-    float y = 0.0f;
-    float fWidth = 0.0f;
-    float fHeight = 0.0f;
+    // float x = 0.0f;
+    // float y = 0.0f;
+    // float fWidth = 0.0f;
+    // float fHeight = 0.0f;
 
     // if (_back)
     // {

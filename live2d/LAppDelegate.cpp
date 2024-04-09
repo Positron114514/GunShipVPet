@@ -187,7 +187,7 @@ void LAppDelegate::resize(int width, int height)
         //AppViewの初期化
         _view->Initialize();
         // スプライトサイズを再設定
-        _view->ResizeSprite();
+        // _view->ResizeSprite();
         // サイズを保存しておく
         _windowWidth = width;
         _windowHeight = height;
@@ -204,7 +204,7 @@ void LAppDelegate::update()
     LAppPal::UpdateTime();
 
     // 画面の初期化
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);   // 设置透明度
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearDepth(1.0);
 
@@ -249,7 +249,7 @@ void LAppDelegate::InitializeCubism()
 
     LAppPal::UpdateTime();
 
-    _view->InitializeSprite();
+    // _view->InitializeSprite();
 }
 
 void LAppDelegate::OnMouseCallBack(GLFWwindow* window, int button, int action, int modify)

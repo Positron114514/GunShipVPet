@@ -1,8 +1,12 @@
 #include "myopengl.h"
 
+#pragma comment (lib, "Dwmapi.lib")
+
 MyOpenGL::MyOpenGL(QWidget *parent)
     : QOpenGLWidget{parent}
 {
+    this->setAttribute(Qt::WA_TranslucentBackground, true);
+
     // 定时器任务
     QTimer *timer = new QTimer;
     // 定时器信号与槽
@@ -69,7 +73,7 @@ void MyOpenGL::wheelEvent(QWheelEvent *event)
 
     if(event->angleDelta().y() > 0)
     {
-        if(this->width() >= 1000 || this->height() >= 750)
+        if(this->width() >= 500 || this->height() >= 1000)
         {
             qDebug() << QT_BACKGROUND_LOG << "invalid zoom: current size" << this->size();
             return;
@@ -82,7 +86,7 @@ void MyOpenGL::wheelEvent(QWheelEvent *event)
 
     if(event->angleDelta().y() < 0)
     {
-        if(this->width() <= 400 || this->height() <= 300)
+        if(this->width() <= 120 || this->height() <= 240)
         {
             qDebug() << QT_BACKGROUND_LOG << "invalid zoom: current size" << this->size();
             return;
@@ -108,4 +112,6 @@ void MyOpenGL::resizeGL(int w, int h)
 void MyOpenGL::paintGL()
 {
     LAppDelegate::GetInstance()->update();
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }

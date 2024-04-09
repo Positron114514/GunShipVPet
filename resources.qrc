@@ -2,4 +2,7 @@
     <qresource prefix="/ico">
         <file>resources/icons/logo-tmp.ico</file>
     </qresource>
+    <qresource prefix="/img">
+        <file>resources/images/bg-transparent.png</file>
+    </qresource>
 </RCC>
