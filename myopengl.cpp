@@ -5,6 +5,8 @@
 MyOpenGL::MyOpenGL(QWidget *parent)
     : QOpenGLWidget{parent}
 {
+    p = (VPetInterface*) this->parentWidget(); // 新增变量存父对象
+
     this->setAttribute(Qt::WA_TranslucentBackground, true);
 
     // 定时器任务
@@ -16,6 +18,11 @@ MyOpenGL::MyOpenGL(QWidget *parent)
     // 设置鼠标追踪
     this->setMouseTracking(true);
 
+}
+
+MyOpenGL::~MyOpenGL()
+{
+    qDebug() << QT_BACKGROUND_LOG << "Live2D OpenGL released";
 }
 
 // 重载Qt鼠标移动事件
@@ -38,8 +45,8 @@ void MyOpenGL::mouseMoveEvent(QMouseEvent *event)
 
         qDebug() << QT_DEBUG_OUTPUT << "dx=" << moveX << " dy=" << moveY;
 
-        QPointF window = this->parentWidget()->pos();
-        this->parentWidget()->move(window.x() + moveX, window.y() + moveY);
+        QPointF window = p->pos();
+        p->move(window.x() + moveX, window.y() + moveY);
 
         originPos = event->globalPosition();
     }
@@ -70,6 +77,11 @@ void MyOpenGL::mouseReleaseEvent(QMouseEvent *event)
 
 void MyOpenGL::wheelEvent(QWheelEvent *event)
 {
+    if(!p->wheelZoomState())
+    {
+        qDebug() << QT_BACKGROUND_LOG << "wheel zoom disabled";
+        return;
+    }
 
     if(event->angleDelta().y() > 0)
     {
@@ -78,7 +90,7 @@ void MyOpenGL::wheelEvent(QWheelEvent *event)
             qDebug() << QT_BACKGROUND_LOG << "invalid zoom: current size" << this->size();
             return;
         }
-        QWidget *p = this->parentWidget();
+
         p->resize(p->width() * 1.01, p->height() * 1.01);
         resizeGL(this->width() * 1.01, this->height() * 1.01);
         return;
@@ -91,7 +103,7 @@ void MyOpenGL::wheelEvent(QWheelEvent *event)
             qDebug() << QT_BACKGROUND_LOG << "invalid zoom: current size" << this->size();
             return;
         }
-        QWidget *p = this->parentWidget();
+
         p->resize(p->width() * 0.99, p->height() * 0.99);
         resizeGL(this->width() * 0.99, this->height() * 0.99);
         return;

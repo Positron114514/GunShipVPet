@@ -4,5 +4,6 @@
     </qresource>
     <qresource prefix="/img">
         <file>resources/images/bg-transparent.png</file>
+        <file>resources/icons/settings.png</file>
     </qresource>
 </RCC>

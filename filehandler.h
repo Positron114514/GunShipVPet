@@ -5,8 +5,8 @@
  * 管理Qt和live2D处理文件的方式 以及模型切换功能
  */
 
-#include "LAppLive2DManager.hpp"
-#include "LAppPal.hpp"
+#include "live2d/LAppLive2DManager.hpp"
+#include "live2d/LAppPal.hpp"
 #include "qheaders.h"
 
 // Unfinished

@@ -18,6 +18,7 @@
 // SDK headers
 
 // Qt headers
+#include <QDialog>
 #include <QWidget>
 #include <QOpenGLWidget>
 #include <QTimer>
@@ -28,5 +29,6 @@
 #include <QDebug>
 #include <QPoint>
 #include <QFlags>
+#include <QCheckBox>
 
 #endif // QHEADERS_H

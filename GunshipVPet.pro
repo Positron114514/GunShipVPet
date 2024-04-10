@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    filehandler.cpp \
     live2d/LAppAllocator.cpp \
     live2d/LAppDefine.cpp \
     live2d/LAppDelegate.cpp \
@@ -22,9 +23,12 @@ SOURCES += \
     live2d/TouchManager.cpp \
     main.cpp \
     myopengl.cpp \
+    settingsdialog.cpp \
     vpetinterface.cpp
 
 HEADERS += \
+    FileHandler.hpp \
+    filehandler.h \
     live2d/LAppAllocator.hpp \
     live2d/LAppDefine.hpp \
     live2d/LAppDelegate.hpp \
@@ -38,9 +42,11 @@ HEADERS += \
     live2d/TouchManager.hpp \
     myopengl.h \
     qheaders.h \
+    settingsdialog.h \
     vpetinterface.h
 
 FORMS += \
+    settingsdialog.ui \
     vpetinterface.ui
 
 # OpenGL相关
@@ -77,3 +83,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources.qrc
+
+DISTFILES += \
+    todolist.md

@@ -1,5 +1,6 @@
 #include "vpetinterface.h"
 #include "ui_vpetinterface.h"
+#include "settingsdialog.h"
 
 #pragma comment(lib, "kernel32.lib")
 #pragma comment(lib, "user32.lib")
@@ -19,9 +20,13 @@ VPetInterface::VPetInterface(QWidget *parent)
     this->setWindowFlag(Qt::WindowType::MSWindowsOwnDC, false);
     this->setWindowFlag(Qt::FramelessWindowHint);
     this->setWindowFlag(Qt::Tool);
-    this->setWindowFlag(Qt::WindowStaysOnTopHint);   // 窗口置顶
+    windowState = this->windowFlags();
     this->setAttribute(Qt::WA_TranslucentBackground);
     this->setAttribute(Qt::WA_ShowWithoutActivating);
+
+    // 程序初始化
+    setWindowOnTopState(true);
+    setWheelZoomState(true);
 
     // 初始化托盘图标
     InitializeSystemTray();
@@ -29,6 +34,7 @@ VPetInterface::VPetInterface(QWidget *parent)
 
 VPetInterface::~VPetInterface()
 {
+    qDebug() << QT_BACKGROUND_LOG << "VPetInterface released";
     delete ui;
 }
 
@@ -58,6 +64,41 @@ void VPetInterface::InitializeSystemTray()
 
 void VPetInterface::onSettingsClicked()
 {
-    // 空实现
     qDebug() << QT_INTERFACE_LOG << "Settings Action triggered";
+
+    SettingsDialog settings(this);
+    int returnStatus = settings.exec();
+
+    qDebug() << QT_INTERFACE_LOG << "Settings quited, return value" << returnStatus;
+}
+
+void VPetInterface::setWheelZoomState(bool state)
+{
+    isWheelZoomActive = state;
+
+    qDebug() << QT_BACKGROUND_LOG << "wheel zoom active?" << state;
+}
+
+void VPetInterface::setWindowOnTopState(bool state)
+{
+    isWindowOnTop = state;
+
+    if(state)
+        this->setWindowFlag(Qt::WindowStaysOnTopHint);   // 窗口置顶
+    else
+        this->setWindowFlags(windowState);  // 取消窗口置顶
+
+    this->activateWindow(); // 设置窗口激活
+
+    qDebug() << QT_BACKGROUND_LOG << "window on top state" << state;
+}
+
+bool VPetInterface::wheelZoomState()
+{
+    return isWheelZoomActive;
+}
+
+bool VPetInterface::windowOnTopState()
+{
+    return isWindowOnTop;
 }

@@ -20,9 +20,14 @@ public:
     ~VPetInterface();
 
     void InitializeSystemTray();
+    void setWindowOnTopState(bool state);
+    void setWheelZoomState(bool state);
+    bool windowOnTopState();
+    bool wheelZoomState();
 
     // 重载事件过滤器
     // bool eventFilter(QObject *watched, QEvent *event);
+
 
 public slots:
     void onSettingsClicked();
@@ -35,6 +40,11 @@ private:
     QMenu *trayMenu;    // 托盘菜单
     QAction *actionQuit;    // 退出动作
     QAction *actionSettings;    // 设置动作
+
+    Qt::WindowFlags windowState;
+
+    bool isWindowOnTop = true;
+    bool isWheelZoomActive = true;
 
 };
 #endif // VPETINTERFACE_H

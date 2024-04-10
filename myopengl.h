@@ -10,13 +10,17 @@
 #include "live2d/LAppDefine.hpp"
 
 #include "qheaders.h"
+#include "vpetinterface.h"
 
 class MyOpenGL : public QOpenGLWidget
 {
 public:
     explicit MyOpenGL(QWidget *parent = nullptr);
+    ~MyOpenGL();
 
     int fps = 60;   // 帧数设置，后续可以提供设置接口
+
+    VPetInterface *p = nullptr;// 父对象存储
 
 protected:
     // 重载函数
