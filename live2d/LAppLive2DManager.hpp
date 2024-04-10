@@ -43,6 +43,12 @@ public:
     void SetUpModel();
 
     /**
+     * @brief AddModel 选定文件夹, 扫描整个文件夹, 并将其中的模型添加进来
+     * @param modelDir 文件夹路径
+     */
+    void AddModel(Csm::csmString modelDir);
+
+    /**
     * @brief   Resources フォルダにあるモデルフォルダ名を取得する
     *
     */
@@ -125,8 +131,8 @@ private:
     virtual ~LAppLive2DManager();
 
     Csm::CubismMatrix44* _viewMatrix; ///< モデル描画に用いるView行列
-    Csm::csmVector<LAppModel*> _models; ///< モデルインスタンスのコンテナ
+    Csm::csmVector<LAppModel*> _models; ///< モデルインスタンスのコンテナ // 模型
     Csm::csmInt32 _sceneIndex; ///< 表示するシーンのインデックス値
 
-    Csm::csmVector<Csm::csmString> _modelDir; ///< モデルディレクトリ名のコンテナ
+    Csm::csmVector<Csm::csmString> _modelDir; ///< モデルディレクトリ名のコンテナ // 模型路径
 };

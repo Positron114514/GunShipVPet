@@ -83,10 +83,40 @@ void LAppLive2DManager::ReleaseAllModel()
     _models.Clear();
 }
 
+void LAppLive2DManager::AddModel(Csm::csmString modelDir){
+    csmString crawlPath(modelDir);
+    crawlPath += "*.*";
+
+    struct _finddata_t fdata;
+    intptr_t fh = _findfirst(crawlPath.GetRawString(), &fdata);
+    if (fh == -1) return;
+
+    while (_findnext(fh, &fdata) == 0)
+    {
+        if ((fdata.attrib & _A_SUBDIR) && strcmp(fdata.name, "..") != 0)
+        {
+            // フォルダと同名の.model3.jsonがあるか探索する
+            // 翻译: 搜索是否有与文件夹同名的 model3.json
+            csmString model3jsonPath(modelDir);
+            model3jsonPath += fdata.name;
+            model3jsonPath.Append(1, '/');
+            model3jsonPath += fdata.name;
+            model3jsonPath += ".model3.json";
+
+            struct _finddata_t fdata2;
+            if (_findfirst(model3jsonPath.GetRawString(), &fdata2) != -1)
+            {
+                _modelDir.PushBack(csmString(fdata.name));
+            }
+        }
+    }
+}
+
 void LAppLive2DManager::SetUpModel()
 {
     // ResourcesPathの中にあるフォルダ名を全てクロールし、モデルが存在するフォルダを定義する。
     // フォルダはあるが同名の.model3.jsonが見つからなかった場合はリストに含めない。
+    // 翻译: 获取 Resource 文件夹中的模型 若找不到则不包含 (?)
     csmString crawlPath(ResourcesPath);
     crawlPath += "*.*";
 
@@ -101,6 +131,7 @@ void LAppLive2DManager::SetUpModel()
         if ((fdata.attrib & _A_SUBDIR) && strcmp(fdata.name, "..") != 0)
         {
             // フォルダと同名の.model3.jsonがあるか探索する
+            // 翻译: 搜索是否有与文件夹同名的 model3.json
             csmString model3jsonPath(ResourcesPath);
             model3jsonPath += fdata.name;
             model3jsonPath.Append(1, '/');

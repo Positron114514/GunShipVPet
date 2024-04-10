@@ -20,6 +20,7 @@
 #include "LAppPal.hpp"
 #include "LAppTextureManager.hpp"
 #include "LAppDelegate.hpp"
+// #include "ModelAPI.hpp"
 
 using namespace Live2D::Cubism::Framework;
 using namespace Live2D::Cubism::Framework::DefaultParameterId;
@@ -260,6 +261,10 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
     _updating = false;
     _initialized = true;
 }
+
+// void LAppModel::ResetModel(ModelAPI::Model *model){
+//     LoadAssets(model->_modelHomeDir.GetRawString(), model->fileName);
+// }
 
 void LAppModel::PreloadMotionGroup(const csmChar* group)
 {

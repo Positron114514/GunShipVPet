@@ -12,7 +12,7 @@
 #include <ICubismModelSetting.hpp>
 #include <Type/csmRectF.hpp>
 #include <Rendering/OpenGL/CubismOffscreenSurface_OpenGLES2.hpp>
-
+// #include "ModelAPI.hpp"
 #include "LAppWavFileHandler.hpp"
 
 /**
@@ -39,6 +39,12 @@ public:
      *
      */
     void LoadAssets(const Csm::csmChar* dir, const  Csm::csmChar* fileName);
+
+    /**
+     * @brief LAppModel::ResetModel 重置模型
+     * @param model MoldeAPI::Model, 即存放model信息的函数
+     */
+    // void LAppModel::ResetModel(ModelAPI::Model *model);
 
     /**
      * @brief レンダラを再構築する
@@ -175,23 +181,24 @@ private:
     */
     void ReleaseExpressions();
 
-    Csm::ICubismModelSetting* _modelSetting; ///< モデルセッティング情報
-    Csm::csmString _modelHomeDir; ///< モデルセッティングが置かれたディレクトリ
-    Csm::csmFloat32 _userTimeSeconds; ///< デルタ時間の積算値[秒]
-    Csm::csmVector<Csm::CubismIdHandle> _eyeBlinkIds; ///< モデルに設定されたまばたき機能用パラメータID
-    Csm::csmVector<Csm::CubismIdHandle> _lipSyncIds; ///< モデルに設定されたリップシンク機能用パラメータID
-    Csm::csmMap<Csm::csmString, Csm::ACubismMotion*>   _motions; ///< 読み込まれているモーションのリスト
-    Csm::csmMap<Csm::csmString, Csm::ACubismMotion*>   _expressions; ///< 読み込まれている表情のリスト
-    Csm::csmVector<Csm::csmRectF> _hitArea;
-    Csm::csmVector<Csm::csmRectF> _userArea;
-    const Csm::CubismId* _idParamAngleX; ///< パラメータID: ParamAngleX
-    const Csm::CubismId* _idParamAngleY; ///< パラメータID: ParamAngleX
-    const Csm::CubismId* _idParamAngleZ; ///< パラメータID: ParamAngleX
-    const Csm::CubismId* _idParamBodyAngleX; ///< パラメータID: ParamBodyAngleX
-    const Csm::CubismId* _idParamEyeBallX; ///< パラメータID: ParamEyeBallX
-    const Csm::CubismId* _idParamEyeBallY; ///< パラメータID: ParamEyeBallXY
+    // 将注释改成了中文, 玛德看不懂
+    Csm::ICubismModelSetting* _modelSetting; ///< 模型设定信息
+    Csm::csmString _modelHomeDir; ///< 存放模型设定的目录
+    Csm::csmFloat32 _userTimeSeconds; ///< 时间差的累积值[秒]
+    Csm::csmVector<Csm::CubismIdHandle> _eyeBlinkIds; ///< 模型设定的眨眼功能参数ID
+    Csm::csmVector<Csm::CubismIdHandle> _lipSyncIds; ///< 模型设定的嘴唇同步功能参数ID
+    Csm::csmMap<Csm::csmString, Csm::ACubismMotion*> _motions; ///< 已加载动作的列表
+    Csm::csmMap<Csm::csmString, Csm::ACubismMotion*> _expressions; ///< 已加载表情的列表
+    Csm::csmVector<Csm::csmRectF> _hitArea; ///< 点击区域
+    Csm::csmVector<Csm::csmRectF> _userArea; ///< 用户区域
+    const Csm::CubismId* _idParamAngleX; ///< 参数ID: ParamAngleX
+    const Csm::CubismId* _idParamAngleY; ///< 参数ID: ParamAngleX
+    const Csm::CubismId* _idParamAngleZ; ///< 参数ID: ParamAngleX
+    const Csm::CubismId* _idParamBodyAngleX; ///< 参数ID: ParamBodyAngleX
+    const Csm::CubismId* _idParamEyeBallX; ///< 参数ID: ParamEyeBallX
+    const Csm::CubismId* _idParamEyeBallY; ///< 参数ID: ParamEyeBallXY
 
-    LAppWavFileHandler _wavFileHandler; ///< wavファイルハンドラ
+    LAppWavFileHandler _wavFileHandler; ///< wav文件处理程序
 
-    Csm::Rendering::CubismOffscreenSurface_OpenGLES2  _renderBuffer;   ///< フレームバッファ以外の描画先
+    Csm::Rendering::CubismOffscreenSurface_OpenGLES2 _renderBuffer; ///< 非帧缓冲绘制目标
 };
