@@ -14,13 +14,15 @@ VPetInterface::VPetInterface(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->resize(230, 460);
+    this->setWindowTitle("GunshipVPet虚拟桌宠");
+    this->setWindowIcon(QIcon(":/ico/resources/icons/logo-temp.ico"));
+
+    this->resize(DEFAULT_MODEL_WIDTH, DEFAULT_MODEL_WIDTH * MODEL_PROPORTION);
 
     // 设置窗体透明
     this->setWindowFlag(Qt::WindowType::MSWindowsOwnDC, false);
     this->setWindowFlag(Qt::FramelessWindowHint);
     this->setWindowFlag(Qt::Tool);
-    windowState = this->windowFlags();
     this->setAttribute(Qt::WA_TranslucentBackground);
     this->setAttribute(Qt::WA_ShowWithoutActivating);
 
@@ -84,11 +86,11 @@ void VPetInterface::setWindowOnTopState(bool state)
     isWindowOnTop = state;
 
     if(state)
-        this->setWindowFlag(Qt::WindowStaysOnTopHint);   // 窗口置顶
+        this->setWindowFlag(Qt::WindowStaysOnTopHint, true);   // 窗口置顶
     else
-        this->setWindowFlags(windowState);  // 取消窗口置顶
+        this->setWindowFlag(Qt::WindowStaysOnTopHint, false);  // 取消窗口置顶
 
-    this->activateWindow(); // 设置窗口激活
+    this->show();   // 设置窗口出现
 
     qDebug() << QT_BACKGROUND_LOG << "window on top state" << state;
 }
@@ -127,4 +129,27 @@ void VPetInterface::resizeWindow(QSize size)
     int dh = l2dSize.height() - orgSize.height();
 
     ui->live2dWidget->resizeGL(size.width() + dw, size.height() + dh);
+}
+
+void VPetInterface::setFps(int fps)
+{
+    curFps = fps;
+    ui->live2dWidget->setOpenGLFps();
+    qDebug() << QT_INTERFACE_LOG << "set fps" << fps;
+}
+
+int VPetInterface::fps()
+{
+    return curFps;
+}
+
+void VPetInterface::setModelIndex(int index)
+{
+    curModel = index;
+    qDebug() << QT_INTERFACE_LOG << "set model index" << index;
+}
+
+int VPetInterface::modelIndex()
+{
+    return curModel;
 }

@@ -1,10 +1,18 @@
 #ifndef QHEADERS_H
 #define QHEADERS_H
 
-// Macros
+// qDebug Macros
 #define QT_INTERFACE_LOG "[QT]user interface:"
 #define QT_BACKGROUND_LOG "[QT]background thread:"
 #define QT_DEBUG_OUTPUT "[QT]debug output:"
+
+// Application based Macros
+#define MAX_MODEL_WIDTH 500
+#define MIN_MODEL_WIDTH 200
+#define DEFAULT_MODEL_WIDTH 300
+#define MODEL_PROPORTION 1.2
+#define DEFAULT_FPS 30
+#define DEFAULT_MODEL 0
 
 // Windows native headers
 #include <windows.h>
@@ -31,5 +39,7 @@
 #include <QFlags>
 #include <QCheckBox>
 #include <QSlider>
+#include <QStringList>
+#include <QComboBox>
 
 #endif // QHEADERS_H

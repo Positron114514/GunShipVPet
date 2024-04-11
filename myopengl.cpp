@@ -10,11 +10,11 @@ MyOpenGL::MyOpenGL(QWidget *parent)
     this->setAttribute(Qt::WA_TranslucentBackground, true);
 
     // 定时器任务
-    QTimer *timer = new QTimer;
+    timer = new QTimer(this);
     // 定时器信号与槽
     connect(timer, &QTimer::timeout, this, &MyOpenGL::paintGL);
     // 定时器启动
-    timer->start((1.0 / fps) * 100);
+    timer->start((1.0 / p->fps()) * 100);
     // 设置鼠标追踪
     this->setMouseTracking(true);
 
@@ -86,29 +86,34 @@ void MyOpenGL::wheelEvent(QWheelEvent *event)
     // 修改为线性缩放
     if(event->angleDelta().y() > 0)
     {
-        if(this->width() >= 500 || this->height() >= 1000)
+        if(this->width() >= MAX_MODEL_WIDTH)
         {
             qDebug() << QT_BACKGROUND_LOG << "invalid zoom: current size" << this->size();
             return;
         }
 
-        p->resizeWindow(p->width() + 5, p->height() + 5);
+        p->resizeWindow(p->width() + 5, p->height() + 5 * MODEL_PROPORTION);
 
         return;
     }
 
     if(event->angleDelta().y() < 0)
     {
-        if(this->width() <= 120 || this->height() <= 240)
+        if(this->width() <= MIN_MODEL_WIDTH)
         {
             qDebug() << QT_BACKGROUND_LOG << "invalid zoom: current size" << this->size();
             return;
         }
 
-        p->resizeWindow(p->width() - 5, p->height() - 5);
+        p->resizeWindow(p->width() - 5, p->height() - 5 * MODEL_PROPORTION);
 
         return;
     }
+}
+
+void MyOpenGL::setOpenGLFps()
+{
+    timer->setInterval((1.0 / p->fps()) * 100);
 }
 
 // OpenGL相关重载

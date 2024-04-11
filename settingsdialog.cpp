@@ -9,6 +9,8 @@ SettingsDialog::SettingsDialog(QWidget *parent)
 {
     ui->setupUi(this);
 
+    this->setFixedSize(this->size());
+
     p = (VPetInterface *) this->parentWidget();
     orgSize = p->size();
 
@@ -22,6 +24,7 @@ SettingsDialog::SettingsDialog(QWidget *parent)
 
 SettingsDialog::~SettingsDialog()
 {
+    qDebug() << QT_BACKGROUND_LOG << "Settings released";
     delete ui;
 }
 
@@ -31,24 +34,51 @@ void SettingsDialog::GeneralSettingsInit()
 
     ui->checkBoxWindowTop->setChecked(p->windowOnTopState());
     ui->checkBoxWheelZoom->setChecked(p->wheelZoomState());
-    ui->labelSize->setText(QString("缩放").append(ZOOM_ENABLE_REQ));
 
     ui->sliderZoom->setEnabled(isSliderZoomAvailable);
-    ui->sliderZoom->setMaximum(500);    // in width
-    ui->sliderZoom->setMinimum(120);    // in width
+    ui->sliderZoom->setMaximum(MAX_MODEL_WIDTH);    // in width
+    ui->sliderZoom->setMinimum(MIN_MODEL_WIDTH);    // in width
     ui->sliderZoom->setPageStep(5);     // in width
+
+    // 设置拖动条状态
+    if(isSliderZoomAvailable)
+    {
+        auto size = p->size();
+        QString sizeStr = QString("(%1×%2)").arg(size.width()).arg(size.height());
+        ui->labelSize->setText(QString("缩放").append(sizeStr));
+        ui->sliderZoom->setValue(size.width());
+    } else
+        ui->labelSize->setText(QString("缩放").append(ZOOM_ENABLE_REQ));
+
+    fileDir = FileHandler::getModelDirList();
+    ui->comboModel->addItems(fileDir);
+    ui->comboModel->setCurrentIndex(p->modelIndex());
+    modelIndex[1] = ui->comboModel->currentIndex();
+
+    QStringList fpsValues;
+    fpsValues << "30" << "60";
+    ui->comboFPSSetting->addItems(fpsValues);
+    ui->comboFPSSetting->setCurrentText(QString::number(p->fps()));
 
     connect(ui->checkBoxWheelZoom, &QCheckBox::stateChanged,
             this, &SettingsDialog::onZoomBoxChanged);
+
+    connect(ui->comboModel, &QComboBox::textActivated,
+            this, &SettingsDialog::onComboBoxChanged);
 }
 
 void SettingsDialog::accept()
 {
-    // hint: bug occurs
-    // 窗口置顶状态更改后，live2d widget消失，但析构函数并未执行
-
     p->setWindowOnTopState(ui->checkBoxWindowTop->isChecked());
     p->setWheelZoomState(ui->checkBoxWheelZoom->isChecked());
+
+    if(modelIndex[0] != modelIndex[1])
+    {
+        FileHandler::switchModel(modelIndex[0]);
+        p->setModelIndex(modelIndex[0]);
+    }
+
+    p->setFps(ui->comboFPSSetting->currentText().toInt());
 
     qDebug() << QT_BACKGROUND_LOG << "settings carded";
 
@@ -92,9 +122,15 @@ void SettingsDialog::onZoomBoxChanged()
 void SettingsDialog::onSliderChanged()
 {
     int value = ui->sliderZoom->value();
-    p->resizeWindow(value, value * 2);
+    p->resizeWindow(value, value * MODEL_PROPORTION);
 
     auto size = p->size();
     QString sizeStr = QString("(%1×%2)").arg(size.width()).arg(size.height());
     ui->labelSize->setText(QString("缩放").append(sizeStr));
+}
+
+void SettingsDialog::onComboBoxChanged()
+{
+    modelIndex[0] = ui->comboModel->currentIndex();
+    qDebug() << QT_DEBUG_OUTPUT << "current index:" << modelIndex[0];
 }

@@ -18,9 +18,9 @@ public:
     explicit MyOpenGL(QWidget *parent = nullptr);
     ~MyOpenGL();
 
-    int fps = 60;   // 帧数设置，后续可以提供设置接口
-
     VPetInterface *p = nullptr;     // 父对象存储
+
+    void setOpenGLFps();
 
     // 重载函数
     void initializeGL() override;
@@ -34,6 +34,7 @@ protected:
     void wheelEvent(QWheelEvent *event) override;
 
 private:
+    QTimer * timer;
     bool isDragging = false;
     QPointF originPos;
 

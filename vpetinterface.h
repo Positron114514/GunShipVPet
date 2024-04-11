@@ -20,6 +20,8 @@ public:
     ~VPetInterface();
 
     void InitializeSystemTray();
+
+    // 功能开关接口
     void setWindowOnTopState(bool state);
     void setWheelZoomState(bool state);
     bool windowOnTopState();
@@ -28,6 +30,14 @@ public:
     // 窗口缩放接口
     void resizeWindow(int width, int height);
     void resizeWindow(QSize size);
+
+    // 帧率设置接口
+    void setFps(int fps);
+    int fps();
+
+    // 模型状态存储接口
+    void setModelIndex(int index);
+    int modelIndex();
 
     // 重载事件过滤器
     // bool eventFilter(QObject *watched, QEvent *event);
@@ -45,7 +55,10 @@ private:
     QAction *actionQuit;    // 退出动作
     QAction *actionSettings;    // 设置动作
 
-    Qt::WindowFlags windowState;
+    // Qt::WindowFlags windowState;
+
+    int curFps = DEFAULT_FPS;
+    int curModel = DEFAULT_MODEL;
 
     bool isWindowOnTop = true;
     bool isWheelZoomActive = true;

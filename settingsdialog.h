@@ -5,6 +5,7 @@
 
 #include "qheaders.h"
 #include "vpetinterface.h"
+#include "filehandler.h"
 
 namespace Ui {
 class SettingsDialog;
@@ -25,6 +26,7 @@ public:
 public slots:
     void onZoomBoxChanged();    // checkbox状态改变槽函数
     void onSliderChanged();     // slider状态改变槽函数
+    void onComboBoxChanged();   // combobox状态改变槽函数
 
 protected:
     // 重写qdialogbuttonbox操作
@@ -35,6 +37,8 @@ private:
     Ui::SettingsDialog *ui;
 
     bool isSliderZoomAvailable;
+    QStringList fileDir;
+    int modelIndex[2];    // 存储combobox选中的模型索引,下标1存储原始索引,下标0存储修改后索引
     QSize orgSize;  // 初始窗口大小状态存储
 };
 
