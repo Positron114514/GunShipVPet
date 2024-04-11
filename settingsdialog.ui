@@ -14,20 +14,7 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0">
-    <widget class="QDialogButtonBox" name="configureBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-     <property name="centerButtons">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
+   <item row="4" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
       <number>0</number>
@@ -38,7 +25,7 @@
       </attribute>
       <layout class="QFormLayout" name="formLayout">
        <item row="0" column="0">
-        <widget class="QLabel" name="commandSetLabel">
+        <widget class="QLabel" name="labelTitle1">
          <property name="font">
           <font>
            <pointsize>10</pointsize>
@@ -46,7 +33,7 @@
           </font>
          </property>
          <property name="text">
-          <string>操作设置</string>
+          <string>缩放设置</string>
          </property>
         </widget>
        </item>
@@ -57,7 +44,44 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="5" column="0">
+        <widget class="QLabel" name="labelSize">
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+         <property name="openExternalLinks">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="OptimizedSlider" name="sliderZoom">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="Line" name="line">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="labelTitle2">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>窗口设置</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0">
         <widget class="QCheckBox" name="checkBoxWindowTop">
          <property name="text">
           <string>窗口置顶</string>
@@ -73,8 +97,28 @@
      </widget>
     </widget>
    </item>
+   <item row="5" column="0">
+    <widget class="QDialogButtonBox" name="configureBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+     <property name="centerButtons">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>OptimizedSlider</class>
+   <extends>QSlider</extends>
+   <header location="global">optimizedslider.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

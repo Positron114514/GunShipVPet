@@ -25,6 +25,10 @@ public:
     bool windowOnTopState();
     bool wheelZoomState();
 
+    // 窗口缩放接口
+    void resizeWindow(int width, int height);
+    void resizeWindow(QSize size);
+
     // 重载事件过滤器
     // bool eventFilter(QObject *watched, QEvent *event);
 

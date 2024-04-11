@@ -102,3 +102,29 @@ bool VPetInterface::windowOnTopState()
 {
     return isWindowOnTop;
 }
+
+void VPetInterface::resizeWindow(int width, int height)
+{
+    QSize orgSize = this->size();
+
+    this->resize(width, height);
+
+    QSize l2dSize = ui->live2dWidget->size();
+    int dw = l2dSize.width() - orgSize.width();
+    int dh = l2dSize.height() - orgSize.height();
+
+    ui->live2dWidget->resizeGL(width + dw, height + dh);
+}
+
+void VPetInterface::resizeWindow(QSize size)
+{
+    QSize orgSize = this->size();
+
+    this->resize(size);
+
+    QSize l2dSize = ui->live2dWidget->size();
+    int dw = l2dSize.width() - orgSize.width();
+    int dh = l2dSize.height() - orgSize.height();
+
+    ui->live2dWidget->resizeGL(size.width() + dw, size.height() + dh);
+}

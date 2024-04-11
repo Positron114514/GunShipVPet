@@ -30,5 +30,6 @@
 #include <QPoint>
 #include <QFlags>
 #include <QCheckBox>
+#include <QSlider>
 
 #endif // QHEADERS_H

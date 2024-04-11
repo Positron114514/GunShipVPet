@@ -22,7 +22,7 @@ public:
     static void switchModel();
 
     // 添加模型
-    static void addModel(Csm::csmString path);
+    static void addModel(QString path);
 
     // 获取模型路径列表
     // 返回值类型: QStringList

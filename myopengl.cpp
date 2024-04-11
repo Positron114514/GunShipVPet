@@ -83,6 +83,7 @@ void MyOpenGL::wheelEvent(QWheelEvent *event)
         return;
     }
 
+    // 修改为线性缩放
     if(event->angleDelta().y() > 0)
     {
         if(this->width() >= 500 || this->height() >= 1000)
@@ -91,8 +92,8 @@ void MyOpenGL::wheelEvent(QWheelEvent *event)
             return;
         }
 
-        p->resize(p->width() * 1.01, p->height() * 1.01);
-        resizeGL(this->width() * 1.01, this->height() * 1.01);
+        p->resizeWindow(p->width() + 5, p->height() + 5);
+
         return;
     }
 
@@ -104,8 +105,8 @@ void MyOpenGL::wheelEvent(QWheelEvent *event)
             return;
         }
 
-        p->resize(p->width() * 0.99, p->height() * 0.99);
-        resizeGL(this->width() * 0.99, this->height() * 0.99);
+        p->resizeWindow(p->width() - 5, p->height() - 5);
+
         return;
     }
 }

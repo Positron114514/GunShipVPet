@@ -1,25 +1,30 @@
 #include "FileHandler.h"
 
-void FileHandler::switchModel(int index){
+void FileHandler::switchModel(int index)
+{
     if (index < 0 || index > LAppLive2DManager::GetInstance()->GetModelNum()){
         LAppPal::PrintLogLn("Invalid index");
     }
     LAppLive2DManager::GetInstance()->ChangeScene(index);
 }
 
-void FileHandler::switchModel(){
+void FileHandler::switchModel()
+{
     LAppLive2DManager::GetInstance()->NextScene();
 }
 
-int FileHandler::getModelNum(){
+int FileHandler::getModelNum()
+{
     return LAppLive2DManager::GetInstance()->GetModelDirSize();
 }
 
-void FileHandler::addModel(Csm::csmString path){
-    LAppLive2DManager::GetInstance()->AddModel(path);
+void FileHandler::addModel(QString path)
+{
+    LAppLive2DManager::GetInstance()->AddModel(path.toLocal8Bit().data());
 }
 
-QStringList *FileHandler::getModelList(){
+QStringList *FileHandler::getModelList()
+{
     QStringList *returnList = new QStringList();
     auto modelList = LAppLive2DManager::GetInstance()->GetModelDir();
 

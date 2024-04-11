@@ -23,6 +23,7 @@ SOURCES += \
     live2d/TouchManager.cpp \
     main.cpp \
     myopengl.cpp \
+    optimizedslider.cpp \
     settingsdialog.cpp \
     vpetinterface.cpp
 
@@ -41,6 +42,7 @@ HEADERS += \
     live2d/LAppWavFileHandler.hpp \
     live2d/TouchManager.hpp \
     myopengl.h \
+    optimizedslider.h \
     qheaders.h \
     settingsdialog.h \
     vpetinterface.h

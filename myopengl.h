@@ -20,14 +20,14 @@ public:
 
     int fps = 60;   // 帧数设置，后续可以提供设置接口
 
-    VPetInterface *p = nullptr;// 父对象存储
+    VPetInterface *p = nullptr;     // 父对象存储
 
-protected:
     // 重载函数
     void initializeGL() override;
     void resizeGL(int w, int h) override;
     void paintGL() override;
 
+protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
