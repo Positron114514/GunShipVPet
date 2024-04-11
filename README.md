@@ -29,7 +29,7 @@
 
 计划使用Python实现大语言模型API接入，并用Qt实现与Python程序交互的数据接口与交互界面
 
-*更多功能开发与规划中*
+*更多功能开发与规划中* 详见[TodoList](https://github.com/Positron114514/GunShipVPet/blob/master/todolist.md)
 
 <br>
 
