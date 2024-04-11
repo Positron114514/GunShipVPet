@@ -19,8 +19,8 @@ class LAppView;
 class LAppTextureManager;
 
 /**
-* @brief   アプリケーションクラス。
-*   Cubism SDK の管理を行う。
+* @brief   应用程序类
+*   管理Cubism SDK
 */
 class LAppDelegate
 {

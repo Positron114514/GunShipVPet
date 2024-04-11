@@ -6,12 +6,15 @@
  */
 
 #include "live2d/LAppLive2DManager.hpp"
+#include "live2d/LAppWavFileHandler.hpp"
 #include "live2d/LAppPal.hpp"
 #include "qheaders.h"
 
 // Unfinished
 class FileHandler{
 public:
+
+    // 一些操作模型的函数
     // 获取当前的模型数量
     static int getModelNum();
 
@@ -26,8 +29,20 @@ public:
 
     // 获取模型路径列表
     // 返回值类型: QStringList
-    static QStringList *getModelList();
+    static QStringList &getModelDirList();
 
+
+    // 一些类型转换函数
+    // 用不用都行, 设成 public 了
+
+    //
+    static Csm::csmString &toCsmString(const QString &target);
+
+    static Csm::csmVector<Csm::csmString> &toCsmStringList(const QStringList &target);
+
+    static QString &toQString(const Csm::csmString &target);
+
+    static QStringList &toQStringList(const Csm::csmVector<Csm::csmString> &target);
 };
 
 #endif // FILEHANDLER_H
