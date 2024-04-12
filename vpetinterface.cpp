@@ -1,6 +1,7 @@
 #include "vpetinterface.h"
 #include "ui_vpetinterface.h"
 #include "settingsdialog.h"
+#include "configsaver.h"
 
 #pragma comment(lib, "kernel32.lib")
 #pragma comment(lib, "user32.lib")
@@ -30,12 +31,16 @@ VPetInterface::VPetInterface(QWidget *parent)
     setWindowOnTopState(true);
     setWheelZoomState(true);
 
+    // 初始化配置文件
+    ConfigSaver::loadConfig(this);
+
     // 初始化托盘图标
     InitializeSystemTray();
 }
 
 VPetInterface::~VPetInterface()
 {
+    ConfigSaver::writeConfig(this); // 保存配置文件
     qDebug() << QT_BACKGROUND_LOG << "VPetInterface released";
     delete ui;
 }
@@ -146,6 +151,7 @@ int VPetInterface::fps()
 void VPetInterface::setModelIndex(int index)
 {
     curModel = index;
+    FileHandler::switchModel(index);
     qDebug() << QT_INTERFACE_LOG << "set model index" << index;
 }
 

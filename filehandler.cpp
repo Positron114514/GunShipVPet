@@ -2,7 +2,8 @@
 
 void FileHandler::switchModel(int index)
 {
-    if (index < 0 || index > LAppLive2DManager::GetInstance()->GetModelNum()){
+    if (index < 0 || index > LAppLive2DManager::GetInstance()->GetModelNum())
+    {
         LAppPal::PrintLogLn("Invalid index");
     }
     LAppLive2DManager::GetInstance()->ChangeScene(index);
@@ -42,7 +43,8 @@ Csm::csmString &FileHandler::toCsmString(const QString &target)
 Csm::csmVector<Csm::csmString> &FileHandler::toCsmStringList(const QStringList &target)
 {
     Csm::csmVector<Csm::csmString> *retVector = new Csm::csmVector<Csm::csmString>();
-    for(auto x:target){
+    for(auto x:target)
+    {
         retVector->PushBack(toCsmString(x));
     }
 
@@ -58,7 +60,8 @@ QStringList &FileHandler::toQStringList(const Csm::csmVector<Csm::csmString> &ta
 {
     QStringList *retList = new QStringList();
 
-    for(int i = 0; i < target.GetSize(); i++){
+    for(int i = 0; i < target.GetSize(); i++)
+    {
         retList->push_back(toQString(target[i]));
     }
 

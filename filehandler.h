@@ -11,9 +11,9 @@
 #include "qheaders.h"
 
 // Unfinished
-class FileHandler{
+class FileHandler
+{
 public:
-
     // 一些操作模型的函数
     // 获取当前的模型数量
     static int getModelNum();

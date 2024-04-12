@@ -41,5 +41,12 @@
 #include <QSlider>
 #include <QStringList>
 #include <QComboBox>
+#include <QFile>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument> // 解析Json
+#include <QJsonValue>
+#include <QJsonParseError>
+#include <QPushButton>
 
 #endif // QHEADERS_H

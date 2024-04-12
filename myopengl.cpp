@@ -1,4 +1,5 @@
 #include "myopengl.h"
+#include "filehandler.h"
 
 #pragma comment (lib, "Dwmapi.lib")
 
@@ -13,6 +14,9 @@ MyOpenGL::MyOpenGL(QWidget *parent)
     timer = new QTimer(this);
     // 定时器信号与槽
     connect(timer, &QTimer::timeout, this, &MyOpenGL::paintGL);
+    connect(timer, &QTimer::timeout, this, [=]() {
+        update();
+    });
     // 定时器启动
     timer->start((1.0 / p->fps()) * 100);
     // 设置鼠标追踪
@@ -34,6 +38,8 @@ void MyOpenGL::mouseMoveEvent(QMouseEvent *event)
     // live2d交互
     LAppDelegate::GetInstance()->GetView()->
         OnTouchesMoved(event->pos().x(), event->pos().y());
+    LAppDelegate::GetInstance()->GetView()->
+        OnTouchesMoved(event->globalPosition().x(), event->globalPosition().y());
     update();
 
     if(isDragging)
@@ -59,11 +65,16 @@ void MyOpenGL::mousePressEvent(QMouseEvent *event)
     // live2d交互
     LAppDelegate::GetInstance()->GetView()->
         OnTouchesBegan(event->pos().x(), event->pos().y());
+    LAppDelegate::GetInstance()->GetView()->
+        OnTouchesMoved(event->globalPosition().x(), event->globalPosition().y());
 
     if(event->buttons() == Qt::LeftButton)
     {
         isDragging = true;
         originPos = event->globalPosition();
+    } else {
+        int modelNum = FileHandler::getModelNum();
+        p->setModelIndex((p->modelIndex() + 1) % modelNum);
     }
 }
 
@@ -73,6 +84,12 @@ void MyOpenGL::mouseReleaseEvent(QMouseEvent *event)
         OnTouchesEnded(event->pos().x(), event->pos().y());
 
     isDragging = false;
+}
+
+void MyOpenGL::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    // 空实现
+    qDebug() << QT_INTERFACE_LOG << "LLM action";
 }
 
 void MyOpenGL::wheelEvent(QWheelEvent *event)

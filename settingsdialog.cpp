@@ -19,6 +19,9 @@ SettingsDialog::SettingsDialog(QWidget *parent)
     this->setWindowIcon(QIcon(":/img/resources/icons/settings.png"));
     this->setWindowModality(Qt::WindowModal);
 
+    ui->configureBox->button(QDialogButtonBox::Cancel)->setText("取消");
+    ui->configureBox->button(QDialogButtonBox::Ok)->setText("确定");
+
     GeneralSettingsInit();
 }
 
@@ -52,8 +55,8 @@ void SettingsDialog::GeneralSettingsInit()
 
     fileDir = FileHandler::getModelDirList();
     ui->comboModel->addItems(fileDir);
-    ui->comboModel->setCurrentIndex(p->modelIndex());
-    modelIndex[1] = ui->comboModel->currentIndex();
+    modelIndex = p->modelIndex();
+    ui->comboModel->setCurrentIndex(modelIndex);
 
     QStringList fpsValues;
     fpsValues << "30" << "60";
@@ -72,11 +75,7 @@ void SettingsDialog::accept()
     p->setWindowOnTopState(ui->checkBoxWindowTop->isChecked());
     p->setWheelZoomState(ui->checkBoxWheelZoom->isChecked());
 
-    if(modelIndex[0] != modelIndex[1])
-    {
-        FileHandler::switchModel(modelIndex[0]);
-        p->setModelIndex(modelIndex[0]);
-    }
+    p->setModelIndex(modelIndex);
 
     p->setFps(ui->comboFPSSetting->currentText().toInt());
 
@@ -131,6 +130,6 @@ void SettingsDialog::onSliderChanged()
 
 void SettingsDialog::onComboBoxChanged()
 {
-    modelIndex[0] = ui->comboModel->currentIndex();
-    qDebug() << QT_DEBUG_OUTPUT << "current index:" << modelIndex[0];
+    modelIndex = ui->comboModel->currentIndex();
+    qDebug() << QT_DEBUG_OUTPUT << "current index:" << modelIndex;
 }

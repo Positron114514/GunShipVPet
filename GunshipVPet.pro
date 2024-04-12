@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    configsaver.cpp \
     filehandler.cpp \
     live2d/LAppAllocator.cpp \
     live2d/LAppDefine.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
 
 HEADERS += \
     FileHandler.hpp \
+    configsaver.h \
     filehandler.h \
     live2d/LAppAllocator.hpp \
     live2d/LAppDefine.hpp \

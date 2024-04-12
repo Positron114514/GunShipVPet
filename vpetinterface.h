@@ -55,7 +55,7 @@ private:
     QAction *actionQuit;    // 退出动作
     QAction *actionSettings;    // 设置动作
 
-    // Qt::WindowFlags windowState;
+    // ConfigSaver *saver;
 
     int curFps = DEFAULT_FPS;
     int curModel = DEFAULT_MODEL;

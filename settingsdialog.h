@@ -4,8 +4,8 @@
 #pragma once
 
 #include "qheaders.h"
-#include "vpetinterface.h"
 #include "filehandler.h"
+#include "vpetinterface.h"
 
 namespace Ui {
 class SettingsDialog;
@@ -38,7 +38,7 @@ private:
 
     bool isSliderZoomAvailable;
     QStringList fileDir;
-    int modelIndex[2];    // 存储combobox选中的模型索引,下标1存储原始索引,下标0存储修改后索引
+    int modelIndex;    // 存储combobox选中的模型索引
     QSize orgSize;  // 初始窗口大小状态存储
 };
 
