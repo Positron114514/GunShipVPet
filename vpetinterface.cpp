@@ -151,7 +151,14 @@ int VPetInterface::fps()
 void VPetInterface::setModelIndex(int index)
 {
     curModel = index;
-    FileHandler::switchModel(index);
+    if(index <= FileHandler::getModelNum())
+        FileHandler::switchModel(index);
+    else
+    {
+        FileHandler::switchModel(DEFAULT_MODEL);
+        curModel = DEFAULT_MODEL;
+        qDebug() << QT_BACKGROUND_LOG << "model overwrite";
+    }
     qDebug() << QT_INTERFACE_LOG << "set model index" << index;
 }
 

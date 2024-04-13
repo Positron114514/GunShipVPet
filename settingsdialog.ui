@@ -22,7 +22,7 @@
       </font>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="generalTab">
       <attribute name="title">
@@ -226,6 +226,19 @@
        </property>
        <property name="text">
         <string>从现有模型</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="importButton">
+       <property name="geometry">
+        <rect>
+         <x>510</x>
+         <y>60</y>
+         <width>80</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>导入</string>
        </property>
       </widget>
      </widget>

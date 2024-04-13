@@ -68,6 +68,9 @@ void SettingsDialog::GeneralSettingsInit()
 
     connect(ui->comboModel, &QComboBox::textActivated,
             this, &SettingsDialog::onComboBoxChanged);
+
+    connect(ui->importButton, &QPushButton::clicked,
+            this, &SettingsDialog::onImportClicked);
 }
 
 void SettingsDialog::accept()
@@ -132,4 +135,19 @@ void SettingsDialog::onComboBoxChanged()
 {
     modelIndex = ui->comboModel->currentIndex();
     qDebug() << QT_DEBUG_OUTPUT << "current index:" << modelIndex;
+}
+
+void SettingsDialog::onImportClicked()
+{
+    // unfinished
+    QString folderDir = QFileDialog::getExistingDirectory(this, "选择模型文件夹", "/");
+
+    // QDir fromDir(folderDir);
+    // QDir targetDir("Resources/");
+
+    FileHandler::addModel(folderDir);
+
+    ui->comboModel->clear();
+    fileDir = FileHandler::getModelDirList();
+    ui->comboModel->addItems(fileDir);
 }

@@ -6,9 +6,15 @@
 #include "qheaders.h"
 #include "vpetinterface.h"
 
+#define RELEASE
 
-
+#ifdef FIXED
 #define CONFIG_DIR "E:\\config.json"
+#endif
+
+#ifdef RELEASE
+#define CONFIG_DIR "config.json"
+#endif
 
 class ConfigSaver : public QWidget
 {
@@ -25,7 +31,6 @@ public:
         Model
     };
 
-    // void initConfigSaver(VPetInterface *p);
     static void loadConfig(VPetInterface *p);
 
     static void writeConfig(VPetInterface *p);

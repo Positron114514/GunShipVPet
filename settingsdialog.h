@@ -27,6 +27,7 @@ public slots:
     void onZoomBoxChanged();    // checkbox状态改变槽函数
     void onSliderChanged();     // slider状态改变槽函数
     void onComboBoxChanged();   // combobox状态改变槽函数
+    void onImportClicked();     // 导入操作槽函数
 
 protected:
     // 重写qdialogbuttonbox操作
@@ -40,6 +41,7 @@ private:
     QStringList fileDir;
     int modelIndex;    // 存储combobox选中的模型索引
     QSize orgSize;  // 初始窗口大小状态存储
+
 };
 
 #endif // SETTINGSDIALOG_H

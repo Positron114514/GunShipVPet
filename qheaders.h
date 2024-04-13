@@ -48,5 +48,7 @@
 #include <QJsonValue>
 #include <QJsonParseError>
 #include <QPushButton>
+#include <QFileDialog>
+#include <QDir>
 
 #endif // QHEADERS_H
