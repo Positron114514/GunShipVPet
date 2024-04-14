@@ -18,7 +18,7 @@ void LogHandler::initLog()
             stream << "";
         }
     }
-    std::cout << QString(QT_BACKGROUND_LOG).toStdString() << "log file cleaned";
+    std::cout << QString(QT_BACKGROUND_LOG).toStdString() << "log file cleaned\n";
 }
 
 void LogHandler::message(QtMsgType type, const QMessageLogContext &context, const QString &msg)

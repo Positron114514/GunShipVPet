@@ -1,16 +1,15 @@
 # To do list
 
+2024.4.14 23:07
+
 ### features:
 
-虚拟桌宠配置设置UI
+向config.json添加更多内容：例如窗体大小设置等
 
-FileHandler对接Live2D接口
+~~FileHandler对接Live2D接口~~
 
 Python大模型Api的Qt UI接口
 
 ### bugs:
 
-~~设置界面切换窗口指定状态后Live2DWidget消失但
-<code>MyOpenGL</code>
-并未释放~~
-(Solved)
+若退出前“鼠标滚轮调整缩放”未勾选，退出后再次启动软件，会导致无法通过任何手段调整缩放大小（可以拖动滑动条但是大小不会改变）；再次勾选并取消后才可以调整。
