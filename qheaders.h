@@ -13,6 +13,8 @@
 #define MODEL_PROPORTION 1.2
 #define DEFAULT_FPS 30
 #define DEFAULT_MODEL 0
+#define LOG_DIR "log.txt"
+#define CONFIG_DIR "config.json"
 
 // Windows native headers
 #include <windows.h>
@@ -50,5 +52,10 @@
 #include <QPushButton>
 #include <QFileDialog>
 #include <QDir>
+#include <QMutex>
+#include <QDateTime>
+#include <QLoggingCategory>
+#include <QFileInfo>
+#include <QFileInfoList>
 
 #endif // QHEADERS_H
