@@ -49,7 +49,7 @@ void MyOpenGL::mouseMoveEvent(QMouseEvent *event)
         int moveX = cursor.x() - originPos.x();
         int moveY = cursor.y() - originPos.y();
 
-        qDebug() << QT_DEBUG_OUTPUT << "dx=" << moveX << " dy=" << moveY;
+        // qDebug() << QT_DEBUG_OUTPUT << "dx=" << moveX << " dy=" << moveY;
 
         QPointF window = p->pos();
         p->move(window.x() + moveX, window.y() + moveY);

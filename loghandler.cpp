@@ -23,7 +23,7 @@ void LogHandler::initLog()
 void LogHandler::message(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     QMutex mutex;
-    mutex.lock();
+    mutex.lock();   // 进程锁
 
     QString text = QString();
 
@@ -49,9 +49,7 @@ void LogHandler::message(QtMsgType type, const QMessageLogContext &context, cons
         break;
     }
 
-    QString log = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss\n") + msg + "\n"
-                  + context.file + " " + QString::number(context.line) + " " + context.function;
-
+    QString log = QDateTime::currentDateTime().toString("{yyyy-MM-dd hh:mm:ss}\n") + msg + "\n";
 
     QFile file(LOG_DIR);
 
