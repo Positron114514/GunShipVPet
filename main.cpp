@@ -3,7 +3,7 @@
 #include <QApplication>
 #include "loghandler.h"
 
-#define LOG_FILE_ENABLED
+// #define LOG_FILE_ENABLED
 
 QMutex mutex;
 
