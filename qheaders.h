@@ -7,6 +7,7 @@
 #define QT_DEBUG_OUTPUT "[QT]debug output:"
 
 // Application based Macros
+#define APP_NAME "GunshipVPet"
 #define MAX_MODEL_WIDTH 500
 #define MIN_MODEL_WIDTH 200
 #define DEFAULT_MODEL_WIDTH 300
@@ -57,5 +58,6 @@
 #include <QLoggingCategory>
 #include <QFileInfo>
 #include <QFileInfoList>
+#include <QStandardPaths>>
 
 #endif // QHEADERS_H

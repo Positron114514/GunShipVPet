@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     configsaver.cpp \
+    customdir.cpp \
     filehandler.cpp \
     live2d/LAppAllocator.cpp \
     live2d/LAppDefine.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
 HEADERS += \
     FileHandler.hpp \
     configsaver.h \
+    customdir.h \
     filehandler.h \
     live2d/LAppAllocator.hpp \
     live2d/LAppDefine.hpp \

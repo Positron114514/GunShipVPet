@@ -1,6 +1,7 @@
 #include "FileHandler.h"
 #include "configsaver.h"
 
+
 void FileHandler::switchModel(int index)
 {
     if (index < 0 || index > LAppLive2DManager::GetInstance()->GetModelNum())

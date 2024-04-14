@@ -1,4 +1,5 @@
 #include "loghandler.h"
+#include "customdir.h"
 
 #include <iostream>
 
@@ -8,7 +9,7 @@ LogHandler::LogHandler() {
 
 void LogHandler::initLog()
 {
-    QFile file(LOG_DIR);
+    QFile file(CustomDir::customDir() + QDir::separator() + LOG_DIR);
     if(file.exists())
     {
         if(file.open(QIODevice::WriteOnly))
@@ -51,7 +52,7 @@ void LogHandler::message(QtMsgType type, const QMessageLogContext &context, cons
 
     QString log = QDateTime::currentDateTime().toString("{yyyy-MM-dd hh:mm:ss}\n") + msg + "\n";
 
-    QFile file(LOG_DIR);
+    QFile file(CustomDir::customDir() + QDir::separator() + LOG_DIR);
 
     if(file.open(QIODevice::WriteOnly | QIODevice::Append))
     {

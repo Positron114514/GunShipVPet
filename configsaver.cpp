@@ -1,4 +1,5 @@
 #include "configsaver.h"
+#include "customdir.h"
 
 ConfigSaver::ConfigSaver(VPetInterface *parent)
 {
@@ -7,7 +8,7 @@ ConfigSaver::ConfigSaver(VPetInterface *parent)
 
 QJsonObject *ConfigSaver::readConfigFile()
 {
-    QFile file(CONFIG_DIR);
+    QFile file(CustomDir::customDir() + QDir::separator() + CONFIG_DIR);
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
         qDebug() << QT_BACKGROUND_LOG << "can't open config file: " << CONFIG_DIR;
@@ -44,7 +45,7 @@ void ConfigSaver::saveConfigFile(QJsonObject &root)
     QJsonDocument setDoc;
     setDoc.setObject(root);
 
-    QFile file(CONFIG_DIR);
+    QFile file(CustomDir::customDir() + QDir::separator() + CONFIG_DIR);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
     {
         qDebug() << "can't open config file: " << CONFIG_DIR;

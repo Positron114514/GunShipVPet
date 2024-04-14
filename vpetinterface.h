@@ -21,6 +21,8 @@ public:
 
     void InitializeSystemTray();
 
+    void InitializeAppDir();
+
     // 功能开关接口
     void setWindowOnTopState(bool state);
     void setWheelZoomState(bool state);
@@ -38,6 +40,9 @@ public:
     // 模型状态存储接口
     void setModelIndex(int index);
     int modelIndex();
+
+    // 目录读取接口
+    QString customDir();
 
     // 重载事件过滤器
     // bool eventFilter(QObject *watched, QEvent *event);
@@ -62,6 +67,5 @@ private:
 
     bool isWindowOnTop = true;
     bool isWheelZoomActive = true;
-
 };
 #endif // VPETINTERFACE_H

@@ -2,6 +2,7 @@
 #include "ui_vpetinterface.h"
 #include "settingsdialog.h"
 #include "configsaver.h"
+#include "customdir.h"
 
 #pragma comment(lib, "kernel32.lib")
 #pragma comment(lib, "user32.lib")
@@ -30,6 +31,9 @@ VPetInterface::VPetInterface(QWidget *parent)
     // 程序初始化
     setWindowOnTopState(true);
     setWheelZoomState(true);
+
+    // 初始化用户文件目录
+    InitializeAppDir();
 
     // 初始化托盘图标
     InitializeSystemTray();
@@ -67,6 +71,13 @@ void VPetInterface::InitializeSystemTray()
 
     trayIcon->setContextMenu(trayMenu);
     trayIcon->show();
+}
+
+void VPetInterface::InitializeAppDir()
+{
+    QDir dir(CustomDir::customDir());
+    if(!dir.exists())
+        QDir().mkdir(CustomDir::customDir());  // 不存在则创建文件夹
 }
 
 void VPetInterface::onSettingsClicked()
