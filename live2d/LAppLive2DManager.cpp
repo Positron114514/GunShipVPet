@@ -17,6 +17,7 @@
 #include "LAppDelegate.hpp"
 #include "LAppModel.hpp"
 #include "LAppView.hpp"
+#include "filehandler.h"
 
 using namespace Csm;
 using namespace LAppDefine;
@@ -146,6 +147,12 @@ void LAppLive2DManager::SetUpModel()
         }
     }
     qsort(_modelDir.GetPtr(), _modelDir.GetSize(), sizeof(csmString), CompareCsmString);
+    // 添加用户自定义的模型路径
+    Csm::csmVector<Csm::csmString> configModelList = FileHandler::toCsmStringList(*FileHandler::getModelPath());
+    for(int i = 0; i < configModelList.GetSize(); i++)
+    {
+        AddModel(configModelList[i]);
+    }
 }
 
 csmVector<csmString> LAppLive2DManager::GetModelDir() const

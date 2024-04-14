@@ -31,11 +31,11 @@ VPetInterface::VPetInterface(QWidget *parent)
     setWindowOnTopState(true);
     setWheelZoomState(true);
 
-    // 初始化配置文件
-    ConfigSaver::loadConfig(this);
-
     // 初始化托盘图标
     InitializeSystemTray();
+
+    // 初始化配置文件
+    ConfigSaver::loadConfig(this);
 }
 
 VPetInterface::~VPetInterface()

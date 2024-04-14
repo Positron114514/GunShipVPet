@@ -147,6 +147,9 @@ void SettingsDialog::onImportClicked()
 
     FileHandler::addModel(folderDir);
 
+    // 将选定路径保存在 config.json 中
+    FileHandler::saveModelPath(folderDir);
+
     ui->comboModel->clear();
     fileDir = FileHandler::getModelDirList();
     ui->comboModel->addItems(fileDir);
