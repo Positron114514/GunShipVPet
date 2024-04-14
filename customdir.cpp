@@ -7,7 +7,6 @@ CustomDir::CustomDir()
 
 QString CustomDir::customDir()
 {
-    return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
+    return QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) +
         QDir::separator() + APP_NAME;
 }
-
