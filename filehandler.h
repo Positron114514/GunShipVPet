@@ -31,6 +31,14 @@ public:
     // 返回值类型: QStringList
     static QStringList &getModelDirList();
 
+    // 保存模型路径到 config.json
+    static void saveModelPath(QString &path);
+
+    // 从 config.json 中获取模型路径
+    static QStringList *getModelPath();
+
+    // static void getModelPath
+
 
     // 一些类型转换函数
     // 用不用都行, 设成 public 了

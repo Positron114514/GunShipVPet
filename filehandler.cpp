@@ -1,4 +1,5 @@
 #include "FileHandler.h"
+#include "configsaver.h"
 
 void FileHandler::switchModel(int index)
 {
@@ -27,6 +28,21 @@ void FileHandler::addModel(QString path)
 QStringList &FileHandler::getModelDirList()
 {
     return toQStringList(LAppLive2DManager::GetInstance()->GetModelDir());
+}
+
+void FileHandler::saveModelPath(QString &path)
+{
+    ConfigSaver::saveModelPath(path);
+}
+
+QStringList *FileHandler::getModelPath()
+{
+    QStringList *ret = ConfigSaver::getModelPath();
+    if(ret == NULL)
+    {
+        return new QStringList();
+    }
+    return ret;
 }
 
 
