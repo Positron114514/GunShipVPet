@@ -16,10 +16,13 @@ VPetInterface::VPetInterface(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // 窗体初始化设置
     this->setWindowTitle("GunshipVPet虚拟桌宠");
     this->setWindowIcon(QIcon(":/ico/resources/icons/logo-temp.ico"));
 
+    // 窗体几何设置
     this->resize(DEFAULT_MODEL_WIDTH, DEFAULT_MODEL_WIDTH * MODEL_PROPORTION);
+    this->move(1350, 650);  // 窗体默认放右下角
 
     // 设置窗体透明
     this->setWindowFlag(Qt::WindowType::MSWindowsOwnDC, false);
@@ -28,7 +31,7 @@ VPetInterface::VPetInterface(QWidget *parent)
     this->setAttribute(Qt::WA_TranslucentBackground);
     this->setAttribute(Qt::WA_ShowWithoutActivating);
 
-    // 程序初始化
+    // 设置初始化
     setWindowOnTopState(true);
     setWheelZoomState(true);
 
@@ -176,4 +179,50 @@ void VPetInterface::setModelIndex(int index)
 int VPetInterface::modelIndex()
 {
     return curModel;
+}
+
+void VPetInterface::autoRun(const QString &appPath, bool flag)
+{
+    QSettings settings(REG_AUTO_RUN, QSettings::NativeFormat);
+
+    // 获取app名
+    QFileInfo info(appPath);
+    QString name = info.baseName();
+
+    // 检查是否有更换路径
+    QString oldPath = settings.value(name).toString();
+    QString newPath = QDir::toNativeSeparators(appPath);
+
+    if(flag)
+    {
+        if(oldPath != newPath)
+            settings.setValue(name, newPath);
+    }
+    else
+        settings.remove(name);
+}
+
+bool VPetInterface::isAutoRun(const QString &appPath)
+{
+    QSettings settings(REG_AUTO_RUN, QSettings::NativeFormat);
+    QFileInfo fInfo(appPath);
+    QString name = fInfo.baseName();
+    QString oldPath = settings.value(name).toString();
+    QString newPath = QDir::toNativeSeparators(appPath);
+    return (settings.contains(name) && newPath == oldPath);
+}
+
+void VPetInterface::setStartupAutoRun(bool state)
+{
+    isSystemStartup = state;
+    autoRun(QApplication::applicationFilePath(), state);
+
+    qDebug() << QT_BACKGROUND_LOG << "auto run when startup set, value"
+             << isAutoRun(QApplication::applicationFilePath());
+}
+
+bool VPetInterface::startupAutoRun()
+{
+    isSystemStartup = isAutoRun(QApplication::applicationFilePath());
+    return isSystemStartup;
 }

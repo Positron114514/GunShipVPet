@@ -9,13 +9,16 @@
 // Application based Macros
 #define APP_NAME "GunshipVPet"
 #define MAX_MODEL_WIDTH 500
-#define MIN_MODEL_WIDTH 200
-#define DEFAULT_MODEL_WIDTH 300
+#define MIN_MODEL_WIDTH 140
+#define DEFAULT_MODEL_WIDTH 250
 #define MODEL_PROPORTION 1.2
 #define DEFAULT_FPS 30
 #define DEFAULT_MODEL 0
 #define LOG_DIR "log.txt"
 #define CONFIG_DIR "config.json"
+
+// System based macros
+#define REG_AUTO_RUN "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
 
 // Windows native headers
 #include <windows.h>
@@ -58,6 +61,7 @@
 #include <QLoggingCategory>
 #include <QFileInfo>
 #include <QFileInfoList>
-#include <QStandardPaths>>
+#include <QStandardPaths>
+#include <QSettings>
 
 #endif // QHEADERS_H

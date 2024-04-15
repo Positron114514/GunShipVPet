@@ -22,7 +22,7 @@
       </font>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="generalTab">
       <attribute name="title">
@@ -176,6 +176,38 @@
         <string>fps</string>
        </property>
       </widget>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>280</y>
+         <width>56</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>开机自启</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBoxAutorun">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>310</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>开机时自动启动</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="modelTab">
       <attribute name="title">
@@ -241,6 +273,11 @@
         <string>导入</string>
        </property>
       </widget>
+     </widget>
+     <widget class="QWidget" name="fileTab">
+      <attribute name="title">
+       <string>文件</string>
+      </attribute>
      </widget>
     </widget>
    </item>

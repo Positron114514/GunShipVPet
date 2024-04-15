@@ -68,8 +68,20 @@ void ConfigSaver::writeConfig(VPetInterface *p)
     rootObject.insert("fps", p->fps());
     // Window on top
     rootObject.insert("windowOnTop", p->windowOnTopState());
-    // Whell zoom state
-    rootObject.insert("whellZoom", p->wheelZoomState());
+    // Wheel zoom state
+    rootObject.insert("wheelZoom", p->wheelZoomState());
+    // System startup autorun state
+    rootObject.insert("startupAutoRun", p->startupAutoRun());
+    // Mainwindow size config
+    QJsonArray windowSize;
+    windowSize.append(p->width());
+    windowSize.append(p->height());
+    rootObject.insert("windowSize", windowSize);
+    // Mainwindow position config
+    QJsonArray windowPos;
+    windowPos.append(p->pos().x());
+    windowPos.append(p->pos().y());
+    rootObject.insert("position", windowPos);
 
     saveConfigFile(rootObject);
 }
@@ -140,9 +152,20 @@ void ConfigSaver::loadConfig(VPetInterface *p)
     // Window on top
     QJsonValue windowOnTop = root->value("windowOnTop");
     p->setWindowOnTopState(windowOnTop.toBool());
-    // Whell zoom state
-    QJsonValue whellZoom = root->value("whellZoom");
-    p->setWheelZoomState(whellZoom.toBool());
+    // Wheel zoom state
+    QJsonValue wheelZoom = root->value("wheelZoom");
+    p->setWheelZoomState(wheelZoom.toBool());
+    // System startup autorun state
+    QJsonValue autoRun = root->value("startupAutoRun");
+    p->setStartupAutoRun(autoRun.toBool());
+    // Mainwindow size config
+    auto windowSize = root->value("windowSize");
+    p->resizeWindow(windowSize[0].toInt(), windowSize[1].toInt());
+    // Window position config
+    auto windowPos = root->value("position");
+    p->move(windowPos[0].toInt(), windowPos[1].toInt());
+
+
     // // Model Path
     // QJsonArray *ModelPath = getModelPath();
     // for(int i = 0; i < ModelPath->size(); i++)

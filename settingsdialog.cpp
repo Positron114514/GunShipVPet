@@ -37,6 +37,7 @@ void SettingsDialog::GeneralSettingsInit()
 
     ui->checkBoxWindowTop->setChecked(p->windowOnTopState());
     ui->checkBoxWheelZoom->setChecked(p->wheelZoomState());
+    ui->checkBoxAutorun->setChecked(p->startupAutoRun());
 
     ui->sliderZoom->setEnabled(isSliderZoomAvailable);
     ui->sliderZoom->setMaximum(MAX_MODEL_WIDTH);    // in width
@@ -50,6 +51,10 @@ void SettingsDialog::GeneralSettingsInit()
         QString sizeStr = QString("(%1×%2)").arg(size.width()).arg(size.height());
         ui->labelSize->setText(QString("缩放").append(sizeStr));
         ui->sliderZoom->setValue(size.width());
+
+        // 缩放条时间槽连接:实现拖动缩放
+        connect(ui->sliderZoom, &QSlider::sliderMoved, this, &SettingsDialog::onSliderChanged);
+        connect(ui->sliderZoom, &QSlider::sliderReleased, this, &SettingsDialog::onSliderChanged);
     } else
         ui->labelSize->setText(QString("缩放").append(ZOOM_ENABLE_REQ));
 
@@ -77,6 +82,7 @@ void SettingsDialog::accept()
 {
     p->setWindowOnTopState(ui->checkBoxWindowTop->isChecked());
     p->setWheelZoomState(ui->checkBoxWheelZoom->isChecked());
+    p->setStartupAutoRun(ui->checkBoxAutorun->isChecked());
 
     p->setModelIndex(modelIndex);
 

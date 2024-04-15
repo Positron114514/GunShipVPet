@@ -41,12 +41,16 @@ public:
     void setModelIndex(int index);
     int modelIndex();
 
+    // 开机自启实现函数
+    void autoRun(const QString &appPath, bool flag);
+    bool isAutoRun(const QString &appPath);
+
+    // 开机自启状态存储接口
+    void setStartupAutoRun(bool state);
+    bool startupAutoRun();
+
     // 目录读取接口
-    QString customDir();
-
-    // 重载事件过滤器
-    // bool eventFilter(QObject *watched, QEvent *event);
-
+    // QString customDir();
 
 public slots:
     void onSettingsClicked();
@@ -67,5 +71,6 @@ private:
 
     bool isWindowOnTop = true;
     bool isWheelZoomActive = true;
+    bool isSystemStartup = false;
 };
 #endif // VPETINTERFACE_H
