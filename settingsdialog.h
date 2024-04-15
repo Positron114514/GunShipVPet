@@ -28,6 +28,7 @@ public slots:
     void onSliderChanged();     // slider状态改变槽函数
     void onComboBoxChanged();   // combobox状态改变槽函数
     void onImportClicked();     // 导入操作槽函数
+    void onLLMBoxChanged();
 
 protected:
     // 重写qdialogbuttonbox操作

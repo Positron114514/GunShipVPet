@@ -38,6 +38,7 @@ void SettingsDialog::GeneralSettingsInit()
     ui->checkBoxWindowTop->setChecked(p->windowOnTopState());
     ui->checkBoxWheelZoom->setChecked(p->wheelZoomState());
     ui->checkBoxAutorun->setChecked(p->startupAutoRun());
+    ui->checkBoxTTS->setCheckable(false);
 
     ui->sliderZoom->setEnabled(isSliderZoomAvailable);
     ui->sliderZoom->setMaximum(MAX_MODEL_WIDTH);    // in width
@@ -76,6 +77,9 @@ void SettingsDialog::GeneralSettingsInit()
 
     connect(ui->importButton, &QPushButton::clicked,
             this, &SettingsDialog::onImportClicked);
+
+    connect(ui->checkBoxLLM, &QCheckBox::stateChanged,
+            this, &SettingsDialog::onLLMBoxChanged);
 }
 
 void SettingsDialog::accept()
@@ -159,4 +163,14 @@ void SettingsDialog::onImportClicked()
     ui->comboModel->clear();
     fileDir = FileHandler::getModelDirList();
     ui->comboModel->addItems(fileDir);
+}
+
+void SettingsDialog::onLLMBoxChanged()
+{
+    if(!ui->checkBoxLLM->isChecked())
+    {
+        ui->checkBoxTTS->setCheckable(false);
+    } else {
+        ui->checkBoxTTS->setCheckable(true);
+    }
 }

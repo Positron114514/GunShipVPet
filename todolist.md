@@ -1,10 +1,10 @@
 # To do list
 
-2024.4.14 23:07
+2024.4.15 22:27
 
 ### features:
 
-向config.json添加更多内容：例如窗体大小设置等
+~~向config.json添加更多内容：例如窗体大小设置等~~
 
 ~~FileHandler对接Live2D接口~~
 

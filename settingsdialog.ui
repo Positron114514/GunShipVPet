@@ -14,7 +14,20 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="8" column="0">
+   <item row="9" column="0">
+    <widget class="QDialogButtonBox" name="configureBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+     <property name="centerButtons">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="font">
       <font>
@@ -22,7 +35,7 @@
       </font>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="generalTab">
       <attribute name="title">
@@ -274,24 +287,127 @@
        </property>
       </widget>
      </widget>
-     <widget class="QWidget" name="fileTab">
+     <widget class="QWidget" name="LLMTab">
       <attribute name="title">
-       <string>文件</string>
+       <string>智能助手</string>
       </attribute>
+      <widget class="QCheckBox" name="checkBoxLLM">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>50</y>
+         <width>191</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>开启智能助手（基于文心一言）</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>56</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>常规设置</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBoxTTS">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>50</y>
+         <width>151</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>开启TTS（文本转语音）</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>140</y>
+         <width>56</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>高级设置</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_8">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>170</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>自定义API配置</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="textEditAPIKey">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>190</y>
+         <width>551</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>键入API Key...</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="textEditSecretKey">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>230</y>
+         <width>551</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>键入Secret Key...</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnAPISave">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>270</y>
+         <width>101</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>保存并配置</string>
+       </property>
+      </widget>
      </widget>
-    </widget>
-   </item>
-   <item row="9" column="0">
-    <widget class="QDialogButtonBox" name="configureBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-     <property name="centerButtons">
-      <bool>false</bool>
-     </property>
     </widget>
    </item>
   </layout>
