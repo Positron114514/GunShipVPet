@@ -63,5 +63,6 @@
 #include <QFileInfoList>
 #include <QStandardPaths>
 #include <QSettings>
+#include <QDesktopServices>
 
 #endif // QHEADERS_H

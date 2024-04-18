@@ -22,6 +22,9 @@ public:
     VPetInterface *p = nullptr;
 
     void GeneralSettingsInit();  // 通用设置tab信号与槽的初始化
+    void ModelSettingsInit();   // Live2d模型设置tab信号与槽的初始化
+    void LLMSettingsInit();     // 大语言模型设置tab信号与槽的初始化
+    void AboutSettingsInit();   // 关于设置tab信号与槽的初始化
 
 public slots:
     void onZoomBoxChanged();    // checkbox状态改变槽函数

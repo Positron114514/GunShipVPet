@@ -61,6 +61,8 @@ void VPetInterface::InitializeSystemTray()
     trayIcon->setIcon(QIcon(":/ico/resources/icons/logo-tmp.ico"));
     trayIcon->setToolTip("虚拟桌宠");
 
+    connect(trayIcon, &QSystemTrayIcon::activated, this, &VPetInterface::onTrayIconActivated);
+
     actionQuit = new QAction("退出", this);
     actionSettings = new QAction("设置", this);
 
@@ -183,7 +185,7 @@ int VPetInterface::modelIndex()
 
 void VPetInterface::autoRun(const QString &appPath, bool flag)
 {
-    QSettings settings(REG_AUTO_RUN, QSettings::NativeFormat);
+    QSettings settings(REG_AUTO_RUN, QSettings::Registry64Format);
 
     // 获取app名
     QFileInfo info(appPath);
@@ -225,4 +227,19 @@ bool VPetInterface::startupAutoRun()
 {
     isSystemStartup = isAutoRun(QApplication::applicationFilePath());
     return isSystemStartup;
+}
+
+void VPetInterface::onTrayIconActivated(QSystemTrayIcon::ActivationReason reason)
+{
+    switch(reason)
+    {
+    case QSystemTrayIcon::Trigger:
+        this->showNormal(); // 单击，显示桌宠本身
+        break;
+    case QSystemTrayIcon::DoubleClick:
+        onSettingsClicked();    // 双击，显示设置界面
+        break;
+    default:
+        break;
+    }
 }

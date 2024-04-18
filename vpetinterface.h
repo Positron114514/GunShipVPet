@@ -54,6 +54,7 @@ public:
 
 public slots:
     void onSettingsClicked();
+    void onTrayIconActivated(QSystemTrayIcon::ActivationReason reason);
 
 private:
     Ui::VPetInterface *ui;

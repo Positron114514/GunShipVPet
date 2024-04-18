@@ -23,6 +23,9 @@ SettingsDialog::SettingsDialog(QWidget *parent)
     ui->configureBox->button(QDialogButtonBox::Ok)->setText("确定");
 
     GeneralSettingsInit();
+    ModelSettingsInit();
+    LLMSettingsInit();
+    AboutSettingsInit();
 }
 
 SettingsDialog::~SettingsDialog()
@@ -59,11 +62,6 @@ void SettingsDialog::GeneralSettingsInit()
     } else
         ui->labelSize->setText(QString("缩放").append(ZOOM_ENABLE_REQ));
 
-    fileDir = FileHandler::getModelDirList();
-    ui->comboModel->addItems(fileDir);
-    modelIndex = p->modelIndex();
-    ui->comboModel->setCurrentIndex(modelIndex);
-
     QStringList fpsValues;
     fpsValues << "30" << "60";
     ui->comboFPSSetting->addItems(fpsValues);
@@ -71,15 +69,33 @@ void SettingsDialog::GeneralSettingsInit()
 
     connect(ui->checkBoxWheelZoom, &QCheckBox::stateChanged,
             this, &SettingsDialog::onZoomBoxChanged);
+}
+
+void SettingsDialog::ModelSettingsInit()
+{
+    fileDir = FileHandler::getModelDirList();
+    ui->comboModel->addItems(fileDir);
+    modelIndex = p->modelIndex();
+    ui->comboModel->setCurrentIndex(modelIndex);
 
     connect(ui->comboModel, &QComboBox::textActivated,
             this, &SettingsDialog::onComboBoxChanged);
-
     connect(ui->importButton, &QPushButton::clicked,
             this, &SettingsDialog::onImportClicked);
+}
 
+void SettingsDialog::LLMSettingsInit()
+{
     connect(ui->checkBoxLLM, &QCheckBox::stateChanged,
             this, &SettingsDialog::onLLMBoxChanged);
+}
+
+void SettingsDialog::AboutSettingsInit()
+{
+    connect(ui->btnWebRaw, &QPushButton::clicked, this, [=]() {
+        QString url = "https://github.com/Positron114514/GunShipVPet";
+        QDesktopServices::openUrl(QUrl(url.toLatin1()));
+    });
 }
 
 void SettingsDialog::accept()
