@@ -522,7 +522,7 @@
         <string>通过注册表注入开机自启动项(可用于通用设置失效的情况)</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="btnRegAutoRun">
        <property name="geometry">
         <rect>
          <x>30</x>
