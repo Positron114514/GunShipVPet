@@ -41,9 +41,13 @@ public:
     void setModelIndex(int index);
     int modelIndex();
 
-    // 开机自启实现函数
+    // 开机自启实现函数:注册表实现（暂时废弃）
     void autoRun(const QString &appPath, bool flag);
     bool isAutoRun(const QString &appPath);
+
+    // 开机自启实现函数:快捷方式实现
+    void lnkAutoRun();
+    bool isLnkAutoRun();
 
     // 开机自启状态存储接口
     void setStartupAutoRun(bool state);

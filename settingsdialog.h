@@ -32,6 +32,7 @@ public slots:
     void onComboBoxChanged();   // combobox状态改变槽函数
     void onImportClicked();     // 导入操作槽函数
     void onLLMBoxChanged();
+    void onAutoRunBtnClicked(); // 添加开机自启动项槽函数
 
 protected:
     // 重写qdialogbuttonbox操作
@@ -46,6 +47,7 @@ private:
     int modelIndex;    // 存储combobox选中的模型索引
     QSize orgSize;  // 初始窗口大小状态存储
 
+    int autoRunErrorTime = 0;   // 添加自启失败次数
 };
 
 #endif // SETTINGSDIALOG_H

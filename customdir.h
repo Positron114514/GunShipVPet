@@ -9,6 +9,7 @@ public:
     CustomDir();
 
     static QString customDir();
+    static QString startupDir();
 };
 
 #endif // CUSTOMDIR_H

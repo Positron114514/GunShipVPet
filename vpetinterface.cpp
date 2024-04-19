@@ -214,18 +214,39 @@ bool VPetInterface::isAutoRun(const QString &appPath)
     return (settings.contains(name) && newPath == oldPath);
 }
 
+void VPetInterface::lnkAutoRun()
+{
+    QString startupPath = CustomDir::startupDir() + "/GunshipVPet.lnk";
+    QString srcFile = QApplication::applicationFilePath();
+
+    if(QFile(startupPath).exists())
+        QFile::remove(startupPath);
+
+    QFile::link(srcFile, startupPath);
+}
+
+bool VPetInterface::isLnkAutoRun()
+{
+    QString startupPath = CustomDir::startupDir() + "/GunshipVPet.lnk";
+    return QFile(startupPath).exists();
+}
+
 void VPetInterface::setStartupAutoRun(bool state)
 {
     isSystemStartup = state;
-    autoRun(QApplication::applicationFilePath(), state);
+    // autoRun(QApplication::applicationFilePath(), state);
 
-    qDebug() << QT_BACKGROUND_LOG << "auto run when startup set, value"
-             << isAutoRun(QApplication::applicationFilePath());
+    if(state)
+        lnkAutoRun();
+
+    // qDebug() << QT_BACKGROUND_LOG << "auto run when startup set, value"
+    //          << isAutoRun(QApplication::applicationFilePath());
 }
 
 bool VPetInterface::startupAutoRun()
 {
-    isSystemStartup = isAutoRun(QApplication::applicationFilePath());
+    // isSystemStartup = isAutoRun(QApplication::applicationFilePath());
+    isSystemStartup = isLnkAutoRun();
     return isSystemStartup;
 }
 
