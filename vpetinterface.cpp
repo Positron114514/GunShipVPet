@@ -183,8 +183,10 @@ int VPetInterface::modelIndex()
     return curModel;
 }
 
-void VPetInterface::autoRun(const QString &appPath, bool flag)
+void VPetInterface::regAutoRun()
 {
+    QString appPath = QApplication::applicationFilePath();
+
     QSettings settings(REG_AUTO_RUN, QSettings::Registry64Format);
 
     // 获取app名
@@ -195,18 +197,14 @@ void VPetInterface::autoRun(const QString &appPath, bool flag)
     QString oldPath = settings.value(name).toString();
     QString newPath = QDir::toNativeSeparators(appPath);
 
-    if(flag)
-    {
-        if(oldPath != newPath)
-            settings.setValue(name, newPath);
-    }
-    else
-        settings.remove(name);
+    if(oldPath != newPath)
+        settings.setValue(name, newPath);
 }
 
-bool VPetInterface::isAutoRun(const QString &appPath)
+bool VPetInterface::isRegAutoRun()
 {
-    QSettings settings(REG_AUTO_RUN, QSettings::NativeFormat);
+    QString appPath = QApplication::applicationFilePath();
+    QSettings settings(REG_AUTO_RUN, QSettings::Registry64Format);
     QFileInfo fInfo(appPath);
     QString name = fInfo.baseName();
     QString oldPath = settings.value(name).toString();
@@ -216,7 +214,7 @@ bool VPetInterface::isAutoRun(const QString &appPath)
 
 void VPetInterface::lnkAutoRun()
 {
-    QString startupPath = CustomDir::startupDir() + "/GunshipVPet.lnk";
+    QString startupPath = CustomDir::autoRunLnkDir();
     QString srcFile = QApplication::applicationFilePath();
 
     if(QFile(startupPath).exists())
@@ -227,27 +225,8 @@ void VPetInterface::lnkAutoRun()
 
 bool VPetInterface::isLnkAutoRun()
 {
-    QString startupPath = CustomDir::startupDir() + "/GunshipVPet.lnk";
+    QString startupPath = CustomDir::autoRunLnkDir();
     return QFile(startupPath).exists();
-}
-
-void VPetInterface::setStartupAutoRun(bool state)
-{
-    isSystemStartup = state;
-    // autoRun(QApplication::applicationFilePath(), state);
-
-    if(state)
-        lnkAutoRun();
-
-    // qDebug() << QT_BACKGROUND_LOG << "auto run when startup set, value"
-    //          << isAutoRun(QApplication::applicationFilePath());
-}
-
-bool VPetInterface::startupAutoRun()
-{
-    // isSystemStartup = isAutoRun(QApplication::applicationFilePath());
-    isSystemStartup = isLnkAutoRun();
-    return isSystemStartup;
 }
 
 void VPetInterface::onTrayIconActivated(QSystemTrayIcon::ActivationReason reason)

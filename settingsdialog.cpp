@@ -106,6 +106,12 @@ void SettingsDialog::AboutSettingsInit()
         QString url = "https://github.com/Positron114514/GunShipVPet";
         QDesktopServices::openUrl(QUrl(url.toLatin1()));
     });
+
+    if(p->isRegAutoRun())
+        ui->btnRegAutoRun->setDisabled(true);
+
+    connect(ui->btnRegAutoRun, &QPushButton::clicked,
+            this, &SettingsDialog::onRegBtnClicked);
 }
 
 void SettingsDialog::accept()
@@ -202,7 +208,7 @@ void SettingsDialog::onLLMBoxChanged()
 
 void SettingsDialog::onAutoRunBtnClicked()
 {
-    p->setStartupAutoRun(true);
+    p->lnkAutoRun();
     if(p->isLnkAutoRun())
     {
         QMessageBox msgBox;
@@ -246,5 +252,29 @@ void SettingsDialog::onAutoRunBtnClicked()
             ui->btnSetAutoRun->setDisabled(true);
             ui->labelAutoRunInfo->setText("看起来功能出现了问题，暂时不可用...");
         }
+    }
+}
+
+void SettingsDialog::onRegBtnClicked()
+{
+    qDebug() << QT_INTERFACE_LOG << "Experimental function regedit autorun activated";
+
+    p->regAutoRun();
+
+    if(p->isRegAutoRun())
+    {
+        QMessageBox msgBox;
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.setWindowTitle("操作成功");
+        msgBox.setText("开机自启动项成功注入注册表!");
+        msgBox.button(QMessageBox::Ok)->setText("确定");
+        msgBox.exec();
+    } else {
+        QMessageBox msgBox;
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.setWindowTitle("操作失败");
+        msgBox.setText("注入注册表失败...");
+        msgBox.button(QMessageBox::Ok)->setText("确定");
+        msgBox.exec();
     }
 }

@@ -71,7 +71,7 @@ void ConfigSaver::writeConfig(VPetInterface *p)
     // Wheel zoom state
     rootObject.insert("wheelZoom", p->wheelZoomState());
     // System startup autorun state
-    rootObject.insert("startupAutoRun", p->startupAutoRun());
+    // rootObject.insert("startupAutoRun", p->startupAutoRun());
     // Mainwindow size config
     QJsonArray windowSize;
     windowSize.append(p->width());
@@ -156,8 +156,8 @@ void ConfigSaver::loadConfig(VPetInterface *p)
     QJsonValue wheelZoom = root->value("wheelZoom");
     p->setWheelZoomState(wheelZoom.toBool());
     // System startup autorun state
-    QJsonValue autoRun = root->value("startupAutoRun");
-    p->setStartupAutoRun(autoRun.toBool());
+    // QJsonValue autoRun = root->value("startupAutoRun");
+    // p->setStartupAutoRun(autoRun.toBool());
     // Mainwindow size config
     auto windowSize = root->value("windowSize");
     p->resizeWindow(windowSize[0].toInt(), windowSize[1].toInt());

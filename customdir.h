@@ -10,6 +10,7 @@ public:
 
     static QString customDir();
     static QString startupDir();
+    static QString autoRunLnkDir();
 };
 
 #endif // CUSTOMDIR_H

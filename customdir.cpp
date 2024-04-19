@@ -14,5 +14,10 @@ QString CustomDir::customDir()
 QString CustomDir::startupDir()
 {
     return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
-           QDir::separator() + "Roaming/Microsoft/Windows/Start Menu/Programs/Startup";
+           QDir::separator() + "Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup";
+}
+
+QString CustomDir::autoRunLnkDir()
+{
+    return startupDir() + QDir::separator() + "\\GunshipVPet.lnk";
 }
