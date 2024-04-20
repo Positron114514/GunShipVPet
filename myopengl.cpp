@@ -38,8 +38,8 @@ void MyOpenGL::mouseMoveEvent(QMouseEvent *event)
     // live2d交互
     LAppDelegate::GetInstance()->GetView()->
         OnTouchesMoved(event->pos().x(), event->pos().y());
-    LAppDelegate::GetInstance()->GetView()->
-        OnTouchesMoved(event->globalPosition().x(), event->globalPosition().y());
+    // LAppDelegate::GetInstance()->GetView()->
+    //     OnTouchesMoved(event->globalPosition().x(), event->globalPosition().y());
     update();
 
     if(isDragging)
@@ -65,8 +65,8 @@ void MyOpenGL::mousePressEvent(QMouseEvent *event)
     // live2d交互
     LAppDelegate::GetInstance()->GetView()->
         OnTouchesBegan(event->pos().x(), event->pos().y());
-    LAppDelegate::GetInstance()->GetView()->
-        OnTouchesMoved(event->globalPosition().x(), event->globalPosition().y());
+    // LAppDelegate::GetInstance()->GetView()->
+    //     OnTouchesMoved(event->globalPosition().x(), event->globalPosition().y());
 
     if(event->buttons() == Qt::LeftButton)
     {
