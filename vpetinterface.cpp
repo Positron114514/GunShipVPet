@@ -3,7 +3,6 @@
 #include "settingsdialog.h"
 #include "configsaver.h"
 #include "customdir.h"
-#include "floatbuttonwidget.h"
 
 #pragma comment(lib, "kernel32.lib")
 #pragma comment(lib, "user32.lib")
@@ -177,6 +176,9 @@ int VPetInterface::fps()
 
 void VPetInterface::setModelIndex(int index)
 {
+    if(curModel == index)
+        return;
+
     curModel = index;
     if(index <= FileHandler::getModelNum())
         FileHandler::switchModel(index);

@@ -23,6 +23,8 @@
 // Windows native headers
 #include <windows.h>
 #include <dwmapi.h>
+#include <WinUser.h>
+#include <shellapi.h>
 
 // OpenGL headers
 #include <GL/glew.h>

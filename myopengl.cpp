@@ -1,5 +1,6 @@
 #include "myopengl.h"
 #include "filehandler.h"
+#include "live2d/LAppModel.hpp"
 
 #pragma comment (lib, "Dwmapi.lib")
 
@@ -8,7 +9,7 @@ MyOpenGL::MyOpenGL(QWidget *parent)
 {
     p = (VPetInterface*) this->parentWidget(); // 新增变量存父对象
 
-    this->setAttribute(Qt::WA_TranslucentBackground, true);
+    // this->setAttribute(Qt::WA_TranslucentBackground, true);
 
     // 定时器任务
     timer = new QTimer(this);
@@ -133,6 +134,24 @@ void MyOpenGL::setOpenGLFps()
     timer->setInterval((1.0 / p->fps()) * 100);
 }
 
+// 会出现恶性bug
+void MyOpenGL::transparentMouse()
+{
+    HWND hWnd=(HWND)(this->winId());
+    POINT pt;
+    GetCursorPos(&pt);
+    ScreenToClient(hWnd,&pt);
+    long double x, y;
+    x = pt.x * 2.0 / width() - 1.0;
+    y = 1.0 - pt.y * 2.0 / height();
+    bool res = LAppModel::GetInstance()->isMouseOnModel(x, y);
+    if(res)
+        SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLongW(hWnd,GWL_EXSTYLE)&(~WS_EX_TRANSPARENT));
+    else
+        SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLongW(hWnd,GWL_EXSTYLE)|WS_EX_TRANSPARENT);
+    DragAcceptFiles(hWnd,true);
+}
+
 // OpenGL相关重载
 void MyOpenGL::initializeGL()
 {
@@ -149,4 +168,5 @@ void MyOpenGL::paintGL()
     LAppDelegate::GetInstance()->update();
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    // glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 }

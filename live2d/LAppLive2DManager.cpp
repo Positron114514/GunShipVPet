@@ -12,12 +12,14 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <Rendering/CubismRenderer.hpp>
+#include <iostream>
 #include "LAppPal.hpp"
 #include "LAppDefine.hpp"
 #include "LAppDelegate.hpp"
 #include "LAppModel.hpp"
 #include "LAppView.hpp"
 #include "filehandler.h"
+#include "loghandler.h"
 
 using namespace Csm;
 using namespace LAppDefine;
@@ -288,7 +290,14 @@ void LAppLive2DManager::ChangeScene(Csm::csmInt32 index)
 
     ReleaseAllModel();
     _models.PushBack(new LAppModel());
+
+    // LogHandler::Sleep(1000);
+    // std::cout << "First" << std::endl;
+
     _models[0]->LoadAssets(modelPath.GetRawString(), modelJsonName.GetRawString());
+
+    // LogHandler::Sleep(1000);
+    // std::cout << "Second" << std::endl;
 
     /*
      * モデル半透明表示を行うサンプルを提示する。

@@ -560,6 +560,7 @@ void LAppModel::Draw(CubismMatrix44& matrix)
     DoDraw();
 }
 
+// csmBool LAppModel::HitTest(const csmChar* hitAreaName, csmFloat32 x, csmFloat32 y)
 csmBool LAppModel::HitTest(const csmChar* hitAreaName, csmFloat32 x, csmFloat32 y)
 {
     // 透明時は当たり判定なし。
@@ -577,6 +578,23 @@ csmBool LAppModel::HitTest(const csmChar* hitAreaName, csmFloat32 x, csmFloat32 
         }
     }
     return false; // 存在しない場合はfalse
+}
+
+/*
+ * 仿照hittest写一个任意区域判断函数
+ */
+bool LAppModel::isMouseOnModel(csmFloat32 x, csmFloat32 y)
+{
+    if(_opacity < 1)
+        return false;
+
+    const csmInt32 count = _modelSetting->GetHitAreasCount();
+    for(csmInt32 i = 0; i < count; i++)
+    {
+        const CubismIdHandle drawId = _modelSetting->GetHitAreaId(i);
+        return IsHit(drawId, x, y);
+    }
+    return false;
 }
 
 void LAppModel::SetExpression(const csmChar* expressionID)

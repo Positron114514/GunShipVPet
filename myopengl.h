@@ -22,6 +22,8 @@ public:
 
     void setOpenGLFps();
 
+    void transparentMouse();
+
     // 重载函数
     void initializeGL() override;
     void resizeGL(int w, int h) override;

@@ -2,6 +2,7 @@
 #include "customdir.h"
 
 #include <iostream>
+#include <QApplication>
 
 LogHandler::LogHandler() {
 
@@ -65,3 +66,10 @@ void LogHandler::message(QtMsgType type, const QMessageLogContext &context, cons
     mutex.unlock();
 }
 
+void LogHandler::Sleep(int mesc)
+{
+    QTime dieTime = QTime::currentTime().addMSecs(mesc);
+    while (QTime::currentTime() < dieTime) {
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    }
+}

@@ -128,6 +128,17 @@ public:
      */
     Csm::csmBool HasMocConsistencyFromFile(const Csm::csmChar* mocFileName);
 
+
+    // Custom
+    bool isMouseOnModel(Csm::csmFloat32 x, Csm::csmFloat32 y);
+
+    static LAppModel* GetInstance()
+    {
+        if(instance == nullptr)
+            instance = new LAppModel;
+        return instance;
+    }
+
 protected:
     /**
      *  @brief  モデルを描画する処理。モデルを描画する空間のView-Projection行列を渡す。
@@ -201,4 +212,6 @@ private:
     LAppWavFileHandler _wavFileHandler; ///< wav文件处理程序
 
     Csm::Rendering::CubismOffscreenSurface_OpenGLES2 _renderBuffer; ///< 非帧缓冲绘制目标
+
+    inline static LAppModel *instance = nullptr;
 };
