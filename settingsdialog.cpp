@@ -15,13 +15,12 @@ SettingsDialog::SettingsDialog(QWidget *parent)
     orgSize = p->size();
 
     // 窗体设置
+    this->move(150, 100);   // 设置窗体默认位置
     this->setWindowTitle("虚拟桌宠设置");
     this->setWindowIcon(QIcon(":/img/resources/icons/settings.png"));
     this->setWindowModality(Qt::WindowModal);
 
-    ui->configureBox->button(QDialogButtonBox::Cancel)->setText("取消");
-    ui->configureBox->button(QDialogButtonBox::Ok)->setText("确定");
-
+    ButtonBoxInit();
     GeneralSettingsInit();
     ModelSettingsInit();
     LLMSettingsInit();
@@ -32,6 +31,18 @@ SettingsDialog::~SettingsDialog()
 {
     qDebug() << QT_BACKGROUND_LOG << "Settings released";
     delete ui;
+}
+
+void SettingsDialog::ButtonBoxInit()
+{
+    // 设置文字
+    ui->configureBox->button(QDialogButtonBox::Cancel)->setText("取消");
+    ui->configureBox->button(QDialogButtonBox::Ok)->setText("确定");
+
+    // 设置大小
+    auto buttonList = ui->configureBox->buttons();
+    for(auto button: buttonList)
+        button->setFixedSize(72, 26);
 }
 
 void SettingsDialog::GeneralSettingsInit()
@@ -159,7 +170,7 @@ void SettingsDialog::onZoomBoxChanged()
         isSliderZoomAvailable = false;
     }
 
-    ui->sliderZoom->setEnabled(isSliderZoomAvailable);
+    ui->sliderZoom->setDisabled(!isSliderZoomAvailable);
 }
 
 void SettingsDialog::onSliderChanged()

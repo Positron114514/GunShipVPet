@@ -13,4 +13,43 @@
     <qresource prefix="/font">
         <file>MiSans-Regular.ttf</file>
     </qresource>
+    <qresource prefix="/svg">
+        <file>resources/qss_icons/base.svg</file>
+        <file>resources/qss_icons/branch-closed.svg</file>
+        <file>resources/qss_icons/branch-end.svg</file>
+        <file>resources/qss_icons/branch-more.svg</file>
+        <file>resources/qss_icons/branch-open.svg</file>
+        <file>resources/qss_icons/checkbox_checked.svg</file>
+        <file>resources/qss_icons/checkbox_checked_invert.svg</file>
+        <file>resources/qss_icons/checkbox_indeterminate.svg</file>
+        <file>resources/qss_icons/checkbox_indeterminate_invert.svg</file>
+        <file>resources/qss_icons/checkbox_unchecked.svg</file>
+        <file>resources/qss_icons/checkbox_unchecked_invert.svg</file>
+        <file>resources/qss_icons/checklist.svg</file>
+        <file>resources/qss_icons/checklist_indeterminate.svg</file>
+        <file>resources/qss_icons/checklist_indeterminate_invert.svg</file>
+        <file>resources/qss_icons/checklist_invert.svg</file>
+        <file>resources/qss_icons/close.svg</file>
+        <file>resources/qss_icons/downarrow.svg</file>
+        <file>resources/qss_icons/downarrow2.svg</file>
+        <file>resources/qss_icons/float.svg</file>
+        <file>resources/qss_icons/leftarrow.svg</file>
+        <file>resources/qss_icons/leftarrow2.svg</file>
+        <file>resources/qss_icons/radiobutton_checked.svg</file>
+        <file>resources/qss_icons/radiobutton_checked_invert.svg</file>
+        <file>resources/qss_icons/radiobutton_unchecked.svg</file>
+        <file>resources/qss_icons/radiobutton_unchecked_invert.svg</file>
+        <file>resources/qss_icons/rightarrow.svg</file>
+        <file>resources/qss_icons/rightarrow2.svg</file>
+        <file>resources/qss_icons/sizegrip.svg</file>
+        <file>resources/qss_icons/slider.svg</file>
+        <file>resources/qss_icons/splitter-horizontal.svg</file>
+        <file>resources/qss_icons/splitter-vertical.svg</file>
+        <file>resources/qss_icons/tab_close.svg</file>
+        <file>resources/qss_icons/toolbar-handle-horizontal.svg</file>
+        <file>resources/qss_icons/toolbar-handle-vertical.svg</file>
+        <file>resources/qss_icons/uparrow.svg</file>
+        <file>resources/qss_icons/uparrow2.svg</file>
+        <file>resources/qss_icons/vline.svg</file>
+    </qresource>
 </RCC>

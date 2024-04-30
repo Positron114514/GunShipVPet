@@ -14,7 +14,7 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="9" column="0">
+   <item row="10" column="0">
     <widget class="QDialogButtonBox" name="configureBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -45,7 +45,7 @@
        <property name="geometry">
         <rect>
          <x>9</x>
-         <y>9</y>
+         <y>13</y>
          <width>91</width>
          <height>16</height>
         </rect>
@@ -53,7 +53,7 @@
        <property name="font">
         <font>
          <pointsize>10</pointsize>
-         <bold>true</bold>
+         <fontweight>DemiBold</fontweight>
         </font>
        </property>
        <property name="text">
@@ -64,7 +64,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>40</y>
+         <y>44</y>
          <width>151</width>
          <height>21</height>
         </rect>
@@ -77,7 +77,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>80</y>
+         <y>87</y>
          <width>171</width>
          <height>16</height>
         </rect>
@@ -93,7 +93,7 @@
        <property name="geometry">
         <rect>
          <x>200</x>
-         <y>80</y>
+         <y>82</y>
          <width>401</width>
          <height>20</height>
         </rect>
@@ -106,7 +106,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>130</y>
+         <y>134</y>
          <width>91</width>
          <height>16</height>
         </rect>
@@ -114,7 +114,7 @@
        <property name="font">
         <font>
          <pointsize>10</pointsize>
-         <bold>true</bold>
+         <fontweight>DemiBold</fontweight>
         </font>
        </property>
        <property name="text">
@@ -125,7 +125,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>160</y>
+         <y>164</y>
          <width>141</width>
          <height>21</height>
         </rect>
@@ -138,7 +138,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>200</y>
+         <y>204</y>
          <width>81</width>
          <height>16</height>
         </rect>
@@ -146,7 +146,7 @@
        <property name="font">
         <font>
          <pointsize>10</pointsize>
-         <bold>true</bold>
+         <fontweight>DemiBold</fontweight>
         </font>
        </property>
        <property name="text">
@@ -157,9 +157,9 @@
        <property name="geometry">
         <rect>
          <x>110</x>
-         <y>235</y>
+         <y>233</y>
          <width>91</width>
-         <height>27</height>
+         <height>29</height>
         </rect>
        </property>
       </widget>
@@ -167,7 +167,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>240</y>
+         <y>239</y>
          <width>71</width>
          <height>16</height>
         </rect>
@@ -180,7 +180,7 @@
        <property name="geometry">
         <rect>
          <x>210</x>
-         <y>240</y>
+         <y>239</y>
          <width>56</width>
          <height>15</height>
         </rect>
@@ -193,7 +193,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>280</y>
+         <y>284</y>
          <width>101</width>
          <height>16</height>
         </rect>
@@ -201,7 +201,7 @@
        <property name="font">
         <font>
          <pointsize>10</pointsize>
-         <bold>true</bold>
+         <fontweight>DemiBold</fontweight>
         </font>
        </property>
        <property name="text">
@@ -212,9 +212,9 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>310</y>
+         <y>312</y>
          <width>81</width>
-         <height>23</height>
+         <height>29</height>
         </rect>
        </property>
        <property name="text">
@@ -225,7 +225,7 @@
        <property name="geometry">
         <rect>
          <x>110</x>
-         <y>313</y>
+         <y>318</y>
          <width>471</width>
          <height>16</height>
         </rect>
@@ -243,9 +243,9 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>60</y>
+         <y>69</y>
          <width>341</width>
-         <height>27</height>
+         <height>29</height>
         </rect>
        </property>
       </widget>
@@ -253,7 +253,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>10</y>
+         <y>19</y>
          <width>91</width>
          <height>16</height>
         </rect>
@@ -261,7 +261,7 @@
        <property name="font">
         <font>
          <pointsize>10</pointsize>
-         <bold>true</bold>
+         <fontweight>DemiBold</fontweight>
         </font>
        </property>
        <property name="text">
@@ -272,7 +272,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>40</y>
+         <y>49</y>
          <width>91</width>
          <height>16</height>
         </rect>
@@ -290,9 +290,9 @@
        <property name="geometry">
         <rect>
          <x>510</x>
-         <y>60</y>
+         <y>69</y>
          <width>80</width>
-         <height>27</height>
+         <height>29</height>
         </rect>
        </property>
        <property name="text">
@@ -329,7 +329,7 @@
        <property name="font">
         <font>
          <pointsize>10</pointsize>
-         <bold>true</bold>
+         <fontweight>DemiBold</fontweight>
         </font>
        </property>
        <property name="text">
@@ -361,7 +361,7 @@
        <property name="font">
         <font>
          <pointsize>10</pointsize>
-         <bold>true</bold>
+         <fontweight>DemiBold</fontweight>
         </font>
        </property>
        <property name="text">
@@ -381,43 +381,43 @@
         <string>自定义API配置</string>
        </property>
       </widget>
-      <widget class="QTextEdit" name="textEditAPIKey">
+      <widget class="QPushButton" name="btnAPISave">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>280</y>
+         <width>101</width>
+         <height>29</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>保存并配置</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="textEditAPIKey">
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>190</y>
+         <y>192</y>
          <width>551</width>
-         <height>25</height>
+         <height>32</height>
         </rect>
        </property>
        <property name="placeholderText">
         <string>键入API Key...</string>
        </property>
       </widget>
-      <widget class="QTextEdit" name="textEditSecretKey">
+      <widget class="QLineEdit" name="textEditSecretKey">
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>230</y>
+         <y>235</y>
          <width>551</width>
-         <height>25</height>
+         <height>32</height>
         </rect>
        </property>
        <property name="placeholderText">
         <string>键入Secret Key...</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="btnAPISave">
-       <property name="geometry">
-        <rect>
-         <x>480</x>
-         <y>270</y>
-         <width>101</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>保存并配置</string>
        </property>
       </widget>
      </widget>
@@ -438,7 +438,7 @@
         <font>
          <pointsize>10</pointsize>
          <italic>false</italic>
-         <bold>true</bold>
+         <fontweight>DemiBold</fontweight>
         </font>
        </property>
        <property name="text">
@@ -470,7 +470,7 @@
        <property name="font">
         <font>
          <pointsize>10</pointsize>
-         <bold>true</bold>
+         <fontweight>DemiBold</fontweight>
         </font>
        </property>
        <property name="text">
@@ -481,9 +481,9 @@
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>110</y>
+         <y>108</y>
          <width>121</width>
-         <height>23</height>
+         <height>29</height>
         </rect>
        </property>
        <property name="text">
@@ -494,7 +494,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>150</y>
+         <y>160</y>
          <width>51</width>
          <height>14</height>
         </rect>
@@ -502,7 +502,7 @@
        <property name="font">
         <font>
          <pointsize>10</pointsize>
-         <bold>true</bold>
+         <fontweight>DemiBold</fontweight>
         </font>
        </property>
        <property name="text">
@@ -513,7 +513,7 @@
        <property name="geometry">
         <rect>
          <x>170</x>
-         <y>173</y>
+         <y>198</y>
          <width>361</width>
          <height>16</height>
         </rect>
@@ -526,9 +526,9 @@
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>170</y>
+         <y>192</y>
          <width>121</width>
-         <height>21</height>
+         <height>29</height>
         </rect>
        </property>
        <property name="text">
