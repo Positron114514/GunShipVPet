@@ -19,6 +19,8 @@ public:
     VPetInterface(QWidget *parent = nullptr);
     ~VPetInterface();
 
+    void InitializeInterface();
+
     void InitializeSystemTray();
 
     void InitializeAppDir();
@@ -65,6 +67,8 @@ private:
     QMenu *trayMenu;    // 托盘菜单
     QAction *actionQuit;    // 退出动作
     QAction *actionSettings;    // 设置动作
+
+    QPushButton *btn;
 
     // ConfigSaver *saver;
 

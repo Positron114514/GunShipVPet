@@ -12,6 +12,7 @@ SOURCES += \
     configsaver.cpp \
     customdir.cpp \
     filehandler.cpp \
+    floatbuttonwidget.cpp \
     live2d/LAppAllocator.cpp \
     live2d/LAppDefine.cpp \
     live2d/LAppDelegate.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
     main.cpp \
     myopengl.cpp \
     optimizedslider.cpp \
+    qssloader.cpp \
     settingsdialog.cpp \
     vpetinterface.cpp
 
@@ -35,6 +37,7 @@ HEADERS += \
     configsaver.h \
     customdir.h \
     filehandler.h \
+    floatbuttonwidget.h \
     live2d/LAppAllocator.hpp \
     live2d/LAppDefine.hpp \
     live2d/LAppDelegate.hpp \
@@ -50,10 +53,12 @@ HEADERS += \
     myopengl.h \
     optimizedslider.h \
     qheaders.h \
+    qssloader.h \
     settingsdialog.h \
     vpetinterface.h
 
 FORMS += \
+    floatbuttonwidget.ui \
     settingsdialog.ui \
     vpetinterface.ui
 

@@ -7,4 +7,10 @@
         <file>resources/icons/settings.png</file>
         <file>resources/icons/notify.png</file>
     </qresource>
+    <qresource prefix="/qss">
+        <file>material_dark_teal.qss</file>
+    </qresource>
+    <qresource prefix="/font">
+        <file>MiSans-Regular.ttf</file>
+    </qresource>
 </RCC>

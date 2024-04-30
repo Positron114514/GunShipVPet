@@ -3,6 +3,7 @@
 #include "settingsdialog.h"
 #include "configsaver.h"
 #include "customdir.h"
+#include "floatbuttonwidget.h"
 
 #pragma comment(lib, "kernel32.lib")
 #pragma comment(lib, "user32.lib")
@@ -19,6 +20,7 @@ VPetInterface::VPetInterface(QWidget *parent)
     // 窗体初始化设置
     this->setWindowTitle("GunshipVPet虚拟桌宠");
     this->setWindowIcon(QIcon(":/ico/resources/icons/logo-temp.ico"));
+    this->setFont(QFont(":/font/MiSans-Regular.ttf"));
 
     // 窗体几何设置
     this->resize(DEFAULT_MODEL_WIDTH, DEFAULT_MODEL_WIDTH * MODEL_PROPORTION);
@@ -35,6 +37,9 @@ VPetInterface::VPetInterface(QWidget *parent)
     setWindowOnTopState(true);
     setWheelZoomState(true);
 
+    // 初始化交互控件
+    InitializeInterface();
+
     // 初始化用户文件目录
     InitializeAppDir();
 
@@ -50,6 +55,12 @@ VPetInterface::~VPetInterface()
     ConfigSaver::writeConfig(this); // 保存配置文件
     qDebug() << QT_BACKGROUND_LOG << "VPetInterface released";
     delete ui;
+}
+
+void VPetInterface::InitializeInterface()
+{
+    // FloatButtonWidget *w = new FloatButtonWidget;
+    // ui->live2dWidget->layout()->addWidget(w);
 }
 
 void VPetInterface::InitializeSystemTray()
