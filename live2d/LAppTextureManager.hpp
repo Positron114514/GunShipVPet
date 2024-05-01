@@ -12,6 +12,8 @@
 #include <GLFW/glfw3.h>
 #include <Type/csmVector.hpp>
 
+#include "qheaders.h"
+
 /**
 * @brief テクスチャ管理クラス
 *
@@ -105,4 +107,6 @@ public:
 
 private:
     Csm::csmVector<TextureInfo*> _textures;
+
+    // QOpenGLTexture *pTexture;
 };

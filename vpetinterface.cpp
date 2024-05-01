@@ -225,22 +225,22 @@ bool VPetInterface::isRegAutoRun()
     return (settings.contains(name) && newPath == oldPath);
 }
 
-void VPetInterface::lnkAutoRun()
-{
-    QString startupPath = CustomDir::autoRunLnkDir();
-    QString srcFile = QApplication::applicationFilePath();
+// void VPetInterface::lnkAutoRun()
+// {
+//     QString startupPath = CustomDir::autoRunLnkDir();
+//     QString srcFile = QApplication::applicationFilePath();
 
-    if(QFile(startupPath).exists())
-        QFile::remove(startupPath);
+//     if(QFile(startupPath).exists())
+//         QFile::remove(startupPath);
 
-    QFile::link(srcFile, startupPath);
-}
+//     QFile::link(srcFile, startupPath);
+// }
 
-bool VPetInterface::isLnkAutoRun()
-{
-    QString startupPath = CustomDir::autoRunLnkDir();
-    return QFile(startupPath).exists();
-}
+// bool VPetInterface::isLnkAutoRun()
+// {
+//     QString startupPath = CustomDir::autoRunLnkDir();
+//     return QFile(startupPath).exists();
+// }
 
 void VPetInterface::onTrayIconActivated(QSystemTrayIcon::ActivationReason reason)
 {

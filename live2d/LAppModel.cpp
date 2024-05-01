@@ -20,6 +20,8 @@
 #include "LAppPal.hpp"
 #include "LAppTextureManager.hpp"
 #include "LAppDelegate.hpp"
+
+#include "loghandler.h"
 // #include "ModelAPI.hpp"
 
 using namespace Live2D::Cubism::Framework;
@@ -651,12 +653,14 @@ void LAppModel::SetupTextures()
     for (csmInt32 modelTextureNumber = 0; modelTextureNumber < _modelSetting->GetTextureCount(); modelTextureNumber++)
     {
         // テクスチャ名が空文字だった場合はロード・バインド処理をスキップ
+        // 如果纹理名称为空字符，则跳过加载绑定过程
         if (strcmp(_modelSetting->GetTextureFileName(modelTextureNumber), "") == 0)
         {
             continue;
         }
 
-        //OpenGLのテクスチャユニットにテクスチャをロードする
+        // OpenGLのテクスチャユニットにテクスチャをロードする
+        // 将纹理加载到纹理单元
         csmString texturePath = _modelSetting->GetTextureFileName(modelTextureNumber);
         texturePath = _modelHomeDir + texturePath;
 
@@ -665,6 +669,8 @@ void LAppModel::SetupTextures()
 
         //OpenGL
         GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->BindTexture(modelTextureNumber, glTextueNumber);
+
+        qDebug() << QT_GL_CAPTURE_LOG << " SetupTextures " << LogHandler::captureGLError(glGetError());
     }
 
 #ifdef PREMULTIPLIED_ALPHA_ENABLE

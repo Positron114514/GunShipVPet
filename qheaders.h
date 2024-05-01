@@ -5,6 +5,7 @@
 #define QT_INTERFACE_LOG "[QT]user interface:"
 #define QT_BACKGROUND_LOG "[QT]background thread:"
 #define QT_DEBUG_OUTPUT "[QT]debug output:"
+#define QT_GL_CAPTURE_LOG "[OpenGL]thread:"
 
 // Application based Macros
 #define APP_NAME "GunshipVPet"
@@ -37,6 +38,7 @@
 #include <QDialog>
 #include <QWidget>
 #include <QOpenGLWidget>
+#include <QOpenGLTexture>
 #include <QTimer>
 #include <QMouseEvent>
 #include <QSystemTrayIcon>

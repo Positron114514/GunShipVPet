@@ -34,7 +34,7 @@ public slots:
     void onImportClicked();     // 导入操作槽函数
     void onLLMBoxChanged();
     void onAutoRunBtnClicked(); // 添加开机自启动项槽函数
-    void onRegBtnClicked();     // 实验功能槽函数
+    // void onRegBtnClicked();     // 实验功能槽函数
 
 protected:
     // 重写qdialogbuttonbox操作

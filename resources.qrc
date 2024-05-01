@@ -6,6 +6,8 @@
         <file>resources/images/bg-transparent.png</file>
         <file>resources/icons/settings.png</file>
         <file>resources/icons/notify.png</file>
+        <file>resources/images/MdiHelicopter.png</file>
+        <file>resources/images/MdiRobotExcited.png</file>
     </qresource>
     <qresource prefix="/qss">
         <file>material_dark_teal.qss</file>
@@ -51,5 +53,13 @@
         <file>resources/qss_icons/uparrow.svg</file>
         <file>resources/qss_icons/uparrow2.svg</file>
         <file>resources/qss_icons/vline.svg</file>
+        <file>resources/qss_icons/disabled/checkbox_checked.svg</file>
+        <file>resources/qss_icons/disabled/checkbox_unchecked.svg</file>
+        <file>resources/qss_icons/disabled/checkbox_indeterminate.svg</file>
+        <file>resources/qss_icons/disabled/slider.svg</file>
+        <file>resources/svgs/dev.svg</file>
+        <file>resources/svgs/github.svg</file>
+        <file>resources/svgs/help.svg</file>
+        <file>resources/svgs/issues.svg</file>
     </qresource>
 </RCC>

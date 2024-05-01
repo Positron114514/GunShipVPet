@@ -448,91 +448,127 @@
       <widget class="QLabel" name="label_10">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>50</y>
-         <width>181</width>
+         <x>187</x>
+         <y>46</y>
+         <width>291</width>
          <height>16</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>NJU EL 2024 武装直升机队</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_11">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>80</y>
-         <width>101</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <fontweight>DemiBold</fontweight>
-        </font>
-       </property>
-       <property name="text">
-        <string>Github Page</string>
-       </property>
-      </widget>
       <widget class="QPushButton" name="btnWebRaw">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>108</y>
-         <width>121</width>
+         <x>46</x>
+         <y>302</y>
+         <width>151</width>
          <height>29</height>
         </rect>
        </property>
        <property name="text">
-        <string>显示网页</string>
+        <string>Github主页</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/svg/resources/svgs/github.svg</normaloff>:/svg/resources/svgs/github.svg</iconset>
        </property>
       </widget>
-      <widget class="QLabel" name="label_12">
+      <widget class="QPushButton" name="btnWebRaw_2">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>160</y>
-         <width>51</width>
-         <height>14</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <fontweight>DemiBold</fontweight>
-        </font>
-       </property>
-       <property name="text">
-        <string>实验功能</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_13">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>198</y>
-         <width>361</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>通过注册表注入开机自启动项(可用于通用设置失效的情况)</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="btnRegAutoRun">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>192</y>
-         <width>121</width>
+         <x>226</x>
+         <y>302</y>
+         <width>151</width>
          <height>29</height>
         </rect>
        </property>
        <property name="text">
-        <string>注入开机自启</string>
+        <string>提交反馈</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/svg/resources/svgs/issues.svg</normaloff>:/svg/resources/svgs/issues.svg</iconset>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnWebRaw_3">
+       <property name="geometry">
+        <rect>
+         <x>406</x>
+         <y>302</y>
+         <width>151</width>
+         <height>29</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>说明文档</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/svg/resources/svgs/help.svg</normaloff>:/svg/resources/svgs/help.svg</iconset>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_11">
+       <property name="geometry">
+        <rect>
+         <x>150</x>
+         <y>39</y>
+         <width>30</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/svg/resources/svgs/dev.svg</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_14">
+       <property name="geometry">
+        <rect>
+         <x>134</x>
+         <y>102</y>
+         <width>111</width>
+         <height>111</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/img/resources/images/MdiHelicopter.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_15">
+       <property name="geometry">
+        <rect>
+         <x>352</x>
+         <y>102</y>
+         <width>111</width>
+         <height>111</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/img/resources/images/MdiRobotExcited.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -547,7 +583,9 @@
    <header location="global">optimizedslider.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>configureBox</sender>

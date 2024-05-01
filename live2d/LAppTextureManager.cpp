@@ -13,6 +13,8 @@
 #include "stb_image.h"
 #include "LAppPal.hpp"
 
+#include "loghandler.h"
+
 LAppTextureManager::LAppTextureManager()
 {
 }
@@ -61,17 +63,36 @@ LAppTextureManager::TextureInfo* LAppTextureManager::CreateTextureFromPngFile(st
 #endif
     }
 
+    glGetError();
+
     // OpenGL用のテクスチャを生成する
+    // OpenGL的规格化距离的幂函数
     glGenTextures(1, &textureId);
+    qDebug() << QT_GL_CAPTURE_LOG << " glGenTextures " << LogHandler::captureGLError(glGetError());
+
     glBindTexture(GL_TEXTURE_2D, textureId);
+    qDebug() << QT_GL_CAPTURE_LOG << " glBindTexture " << LogHandler::captureGLError(glGetError());
+
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, png);
+    qDebug() << QT_GL_CAPTURE_LOG << " glTexImage2D " << LogHandler::captureGLError(glGetError());
+
     glGenerateMipmap(GL_TEXTURE_2D);
+    qDebug() << QT_GL_CAPTURE_LOG << " glGenerateMipmap " << LogHandler::captureGLError(glGetError());
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    qDebug() << QT_GL_CAPTURE_LOG << " glTexParameteri " << LogHandler::captureGLError(glGetError());
+
     glBindTexture(GL_TEXTURE_2D, 0);
+    qDebug() << QT_GL_CAPTURE_LOG << " glBindTexture " << LogHandler::captureGLError(glGetError());
 
     // 解放処理
     stbi_image_free(png);
+
+    // pTexture = new QOpenGLTexture(QImage(QString::fromLocal8Bit(fileName)).mirrored());
+    // pTexture->bind(0);
+    // glDrawElements(GL_TEXTURE_2D, size, GL_UNSIGNED_INT, 0);
+
     LAppPal::ReleaseBytes(address);
 
     LAppTextureManager::TextureInfo* textureInfo = new LAppTextureManager::TextureInfo();

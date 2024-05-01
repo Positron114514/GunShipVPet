@@ -48,8 +48,8 @@ public:
     bool isRegAutoRun();
 
     // 开机自启实现函数:快捷方式实现
-    void lnkAutoRun();
-    bool isLnkAutoRun();
+    // void lnkAutoRun();
+    // bool isLnkAutoRun();
 
     // 开机自启状态存储接口
     // void setStartupAutoRun(bool state);

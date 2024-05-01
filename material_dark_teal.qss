@@ -538,7 +538,7 @@ QTableView::indicator:checked:selected:active {
 QTableView::indicator:disabled:checked,
 QTableView::indicator:disabled:checked:selected,
 QTableView::indicator:disabled:checked:focus {
-  image: url(:/svg/resources/qss_icons/checkbox_checked.svg);
+  image: url(:/svg/resources/qss_icons/disabled/checkbox_checked.svg);
 }
 
 QTableView::indicator:enabled:unchecked,
@@ -554,7 +554,7 @@ QTableView::indicator:unchecked:selected:active {
 QTableView::indicator:disabled:unchecked,
 QTableView::indicator:disabled:unchecked:selected,
 QTableView::indicator:disabled:unchecked:focus {
-  image: url(:/svg/resources/qss_icons/checkbox_unchecked.svg);
+  image: url(:/svg/resources/qss_icons/disabled/checkbox_unchecked.svg);
 }
 
 QTableView::indicator:enabled:indeterminate,
@@ -589,15 +589,15 @@ QGroupBox::indicator:indeterminate {
 }
 
 QGroupBox::indicator:checked:disabled {
-  image: url(:/svg/resources/qss_icons/checkbox_checked.svg);
+  image: url(:/svg/resources/qss_icons/disabled/checkbox_checked.svg);
 }
 
 QGroupBox::indicator:unchecked:disabled {
-  image: url(:/svg/resources/qss_icons/checkbox_unchecked.svg);
+  image: url(:/svg/resources/qss_icons/disabled/checkbox_unchecked.svg);
 }
 
 QGroupBox::indicator:indeterminate:disabled {
-  image: url(:/svg/resources/qss_icons/checkbox_indeterminate.svg);
+  image: url(:/svg/resources/qss_icons/disabled/checkbox_indeterminate.svg);
 }
 
 /*  ------------------------------------------------------------------------  */
@@ -622,19 +622,19 @@ QCheckBox::indicator:indeterminate {
 }
 
 QCheckBox::indicator:checked:disabled {
-  image: url(:/svg/resources/qss_icons/checkbox_checked.svg);
+  image: url(:/svg/resources/qss_icons/disabled/checkbox_checked.svg);
   height: 20px;
   width: 20px;
 }
 
 QCheckBox::indicator:unchecked:disabled {
-  image: url(:/svg/resources/qss_icons/checkbox_unchecked.svg);
+  image: url(:/svg/resources/qss_icons/disabled/checkbox_unchecked.svg);
   height: 20px;
   width: 20px;
 }
 
 QCheckBox::indicator:indeterminate:disabled {
-  image: url(:/svg/resources/qss_icons/checkbox_indeterminate.svg);
+  image: url(:/svg/resources/qss_icons/disabled/checkbox_indeterminate.svg);
   height: 20px;
   width: 20px;
 }
@@ -967,6 +967,24 @@ background: #232629;
 
 QSlider::sub-page {
 background: #1de9b6;
+}
+
+QSlider::handle:horizontal:disabled {
+  image: url(:/svg/resources/qss_icons/disabled/slider.svg);
+  width: 16px;
+  height: 16px;
+  margin: -24px -12px;
+}
+
+QSlider::handle:vertical:disabled {
+  image: url(:/svg/resources/qss_icons/disabled/slider.svg);
+  width: 16px;
+  height: 16px;
+  margin: -24px -12px;
+}
+
+QSlider::sub-page:disabled {
+background: #cccccc;
 }
 
 /*  ------------------------------------------------------------------------  */

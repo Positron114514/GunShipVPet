@@ -1,7 +1,7 @@
 #include "settingsdialog.h"
 #include "ui_settingsdialog.h"
 
-#define ZOOM_ENABLE_REQ "（关闭鼠标缩放后可用）"
+#define ZOOM_ENABLE_REQ "(关闭鼠标缩放后可用)"
 
 SettingsDialog::SettingsDialog(QWidget *parent)
     : QDialog(parent)
@@ -51,7 +51,6 @@ void SettingsDialog::GeneralSettingsInit()
 
     ui->checkBoxWindowTop->setChecked(p->windowOnTopState());
     ui->checkBoxWheelZoom->setChecked(p->wheelZoomState());
-    ui->checkBoxTTS->setCheckable(false);
 
     ui->sliderZoom->setEnabled(isSliderZoomAvailable);
     ui->sliderZoom->setMaximum(MAX_MODEL_WIDTH);    // in width
@@ -59,7 +58,7 @@ void SettingsDialog::GeneralSettingsInit()
     ui->sliderZoom->setPageStep(5);     // in width
 
     // 设置添加自启动按钮状态
-    if(!p->isLnkAutoRun())
+    if(p->isRegAutoRun())
     {
         ui->btnSetAutoRun->setDisabled(true);
         ui->labelAutoRunInfo->setText("开机自启动项已存在，请在系统启动设置中设置");
@@ -107,6 +106,7 @@ void SettingsDialog::ModelSettingsInit()
 
 void SettingsDialog::LLMSettingsInit()
 {
+    ui->checkBoxTTS->setDisabled(true);
     connect(ui->checkBoxLLM, &QCheckBox::stateChanged,
             this, &SettingsDialog::onLLMBoxChanged);
 }
@@ -118,11 +118,11 @@ void SettingsDialog::AboutSettingsInit()
         QDesktopServices::openUrl(QUrl(url.toLatin1()));
     });
 
-    if(p->isRegAutoRun())
-        ui->btnRegAutoRun->setDisabled(true);
+    // if(p->isRegAutoRun())
+    //     ui->btnRegAutoRun->setDisabled(true);
 
-    connect(ui->btnRegAutoRun, &QPushButton::clicked,
-            this, &SettingsDialog::onRegBtnClicked);
+    // connect(ui->btnRegAutoRun, &QPushButton::clicked,
+    //         this, &SettingsDialog::onRegBtnClicked);
 }
 
 void SettingsDialog::accept()
@@ -209,49 +209,44 @@ void SettingsDialog::onImportClicked()
 
 void SettingsDialog::onLLMBoxChanged()
 {
-    if(!ui->checkBoxLLM->isChecked())
-    {
-        ui->checkBoxTTS->setCheckable(false);
-    } else {
-        ui->checkBoxTTS->setCheckable(true);
-    }
+    ui->checkBoxTTS->setDisabled(!ui->checkBoxLLM->isChecked());
 }
 
 void SettingsDialog::onAutoRunBtnClicked()
 {
-    p->lnkAutoRun();
-    if(p->isLnkAutoRun())
+    p->regAutoRun();
+    if(p->isRegAutoRun())
     {
-        QMessageBox msgBox;
+        QMessageBox msgBox(this);
         msgBox.setIcon(QMessageBox::Information);
         msgBox.setWindowTitle("操作成功");
         msgBox.setText("开机自启动项添加成功！\n如果需要关闭请在系统启动设置中手动关闭");
-        msgBox.button(QMessageBox::Ok)->setText("确定");
+        // msgBox.button(QMessageBox::Ok)->setText("确定");
         msgBox.exec();
 
         ui->btnSetAutoRun->setDisabled(true);
         ui->labelAutoRunInfo->setText("开机自启动项已存在，请在系统启动设置中设置");
     } else {
-        qDebug() << QT_BACKGROUND_LOG << "AUTORUN link creation failed! Time"
+        qDebug() << QT_BACKGROUND_LOG << "AUTORUN regedit creation failed! Time"
                  << autoRunErrorTime + 1;
 
         if(autoRunErrorTime <= 3)
         {
-            QMessageBox msgBox;
+            QMessageBox msgBox(this);
             msgBox.setIcon(QMessageBox::Warning);
             msgBox.setWindowTitle("操作失败");
             msgBox.setText("开机自启动项添加失败！\n请重试...");
-            msgBox.button(QMessageBox::Ok)->setText("确定");
+            // msgBox.button(QMessageBox::Ok)->setText("确定");
             msgBox.exec();
 
             qDebug() << QT_INTERFACE_LOG << "Error window exec and notified";
             autoRunErrorTime++;
         } else {
-            QMessageBox msgBox;
+            QMessageBox msgBox(this);
             msgBox.setIcon(QMessageBox::Critical);
             msgBox.setWindowTitle("操作多次失败...");
             msgBox.setText("开机自启动项多次添加失败！\n请向我们提交log与Issues，谢谢！");
-            msgBox.button(QMessageBox::Ok)->setText("确定");
+            // msgBox.button(QMessageBox::Ok)->setText("确定");
             connect(msgBox.button(QMessageBox::Ok), &QPushButton::clicked, this, [=]() {
                 QString url = "https://github.com/Positron114514/GunShipVPet/issues";
                 QDesktopServices::openUrl(url);
@@ -263,29 +258,5 @@ void SettingsDialog::onAutoRunBtnClicked()
             ui->btnSetAutoRun->setDisabled(true);
             ui->labelAutoRunInfo->setText("看起来功能出现了问题，暂时不可用...");
         }
-    }
-}
-
-void SettingsDialog::onRegBtnClicked()
-{
-    qDebug() << QT_INTERFACE_LOG << "Experimental function regedit autorun activated";
-
-    p->regAutoRun();
-
-    if(p->isRegAutoRun())
-    {
-        QMessageBox msgBox;
-        msgBox.setIcon(QMessageBox::Information);
-        msgBox.setWindowTitle("操作成功");
-        msgBox.setText("开机自启动项成功注入注册表!");
-        msgBox.button(QMessageBox::Ok)->setText("确定");
-        msgBox.exec();
-    } else {
-        QMessageBox msgBox;
-        msgBox.setIcon(QMessageBox::Warning);
-        msgBox.setWindowTitle("操作失败");
-        msgBox.setText("注入注册表失败...");
-        msgBox.button(QMessageBox::Ok)->setText("确定");
-        msgBox.exec();
     }
 }

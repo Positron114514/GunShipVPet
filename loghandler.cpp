@@ -59,6 +59,7 @@ void LogHandler::message(QtMsgType type, const QMessageLogContext &context, cons
     {
         QTextStream stream(&file);
         stream << log << "\n";
+        std::cout << log.toStdString() << std::endl;  // 保证控制台同时有输出
         file.flush();
         file.close();
     }
@@ -66,10 +67,36 @@ void LogHandler::message(QtMsgType type, const QMessageLogContext &context, cons
     mutex.unlock();
 }
 
-void LogHandler::Sleep(int mesc)
+QString LogHandler::captureGLError(GLenum type)
 {
-    QTime dieTime = QTime::currentTime().addMSecs(mesc);
-    while (QTime::currentTime() < dieTime) {
-        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    switch(type)
+    {
+    case GL_NO_ERROR:
+        return "No Error";
+        break;
+    case GL_INVALID_ENUM:
+        return "Invalid Enum";
+        break;
+    case GL_INVALID_VALUE:
+        return "Invalid Value";
+        break;
+    case GL_INVALID_OPERATION:
+        return "Invalid Operation";
+        break;
+    case GL_STACK_OVERFLOW:
+        return "Stack: stack overflow";
+        break;
+    case GL_STACK_UNDERFLOW:
+        return "Stack: stack underflow";
+        break;
+    case GL_OUT_OF_MEMORY:
+        return "Out of memory";
+        break;
+    case GL_INVALID_FRAMEBUFFER_OPERATION:
+        return "Invalid framebuffer operation";
+        break;
+    default:
+        return 0;
+        break;
     }
 }
