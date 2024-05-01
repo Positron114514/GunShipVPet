@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "GunshipVPet虚拟桌宠"
-#define MyAppVersion "1.0-alpha2"
+#define MyAppVersion "1.0-base version"
 #define MyAppPublisher "NJU EL 武装直升机组"
 #define MyAppURL "https://github.com/Positron114514/GunShipVPet"
 #define MyAppExeName "GunshipVPet.exe"
@@ -23,8 +23,8 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=E:\Codes\Qt\GunshipVPetApp
-OutputBaseFilename=setup-GunshipVPet-v1.0-alpha2
-SetupIconFile=E:\Codes\Qt\GunshipVPet\resources\icons\logo-tmp.ico
+OutputBaseFilename=setup-GunshipVPet-v1.0-basever
+SetupIconFile=E:\Codes\Qt\GunshipVPet\resources\icons\logo.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern

@@ -60,7 +60,7 @@ FORMS += \
     vpetinterface.ui
 
 # 设置编译后图标
-RC_FILE = resources\icons\logo.rc
+RC_FILE += resources/icons/logo.rc
 
 # OpenGL相关
 QT += opengl
