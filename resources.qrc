@@ -13,7 +13,16 @@
         <file>material_dark_teal.qss</file>
     </qresource>
     <qresource prefix="/font">
-        <file>MiSans-Regular.ttf</file>
+        <file>resources/font/MiSans-Bold.ttf</file>
+        <file>resources/font/MiSans-Demibold.ttf</file>
+        <file>resources/font/MiSans-ExtraLight.ttf</file>
+        <file>resources/font/MiSans-Heavy.ttf</file>
+        <file>resources/font/MiSans-Light.ttf</file>
+        <file>resources/font/MiSans-Medium.ttf</file>
+        <file>resources/font/MiSans-Normal.ttf</file>
+        <file>resources/font/MiSans-Regular.ttf</file>
+        <file>resources/font/MiSans-Semibold.ttf</file>
+        <file>resources/font/MiSans-Thin.ttf</file>
     </qresource>
     <qresource prefix="/svg">
         <file>resources/qss_icons/base.svg</file>

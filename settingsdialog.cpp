@@ -43,6 +43,11 @@ void SettingsDialog::ButtonBoxInit()
     auto buttonList = ui->configureBox->buttons();
     for(auto button: buttonList)
         button->setFixedSize(72, 26);
+
+    QFont font;
+    font.setPointSize(16);
+    font.setFamily("MiSans");
+    ui->ourName->setFont(font);
 }
 
 void SettingsDialog::GeneralSettingsInit()

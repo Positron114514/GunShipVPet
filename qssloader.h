@@ -8,6 +8,7 @@ class QSSLoader
 public:
     QSSLoader();
 
+    static void setFontFamily();
     static bool setStyle(QString qssPath);
 };
 

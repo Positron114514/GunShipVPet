@@ -4,7 +4,6 @@
 #include "loghandler.h"
 #include "qssloader.h"
 
-#define LOG_FILE_ENABLED
 // #define HIGH_PRIOIRTY_ENABLED
 
 QMutex mutex;
@@ -12,13 +11,12 @@ QMutex mutex;
 int main(int argc, char *argv[])
 {
 
-#ifdef LOG_FILE_ENABLED
     LogHandler::initLog();
     qInstallMessageHandler(LogHandler::message);
-#endif
 
     QApplication a(argc, argv);
 
+    QSSLoader::setFontFamily();
     QSSLoader::setStyle(":/qss/material_dark_teal.qss");
 
 #ifdef HIGH_PRIOIRTY_ENABLED

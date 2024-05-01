@@ -35,7 +35,7 @@
       </font>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="generalTab">
       <attribute name="title">
@@ -445,13 +445,13 @@
         <string>制作团队</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_10">
+      <widget class="QLabel" name="ourName">
        <property name="geometry">
         <rect>
-         <x>187</x>
-         <y>46</y>
+         <x>200</x>
+         <y>40</y>
          <width>291</width>
-         <height>16</height>
+         <height>24</height>
         </rect>
        </property>
        <property name="font">
@@ -466,7 +466,7 @@
       <widget class="QPushButton" name="btnWebRaw">
        <property name="geometry">
         <rect>
-         <x>46</x>
+         <x>50</x>
          <y>302</y>
          <width>151</width>
          <height>29</height>
@@ -483,7 +483,7 @@
       <widget class="QPushButton" name="btnWebRaw_2">
        <property name="geometry">
         <rect>
-         <x>226</x>
+         <x>230</x>
          <y>302</y>
          <width>151</width>
          <height>29</height>
@@ -500,7 +500,7 @@
       <widget class="QPushButton" name="btnWebRaw_3">
        <property name="geometry">
         <rect>
-         <x>406</x>
+         <x>410</x>
          <y>302</y>
          <width>151</width>
          <height>29</height>
@@ -517,8 +517,8 @@
       <widget class="QLabel" name="label_11">
        <property name="geometry">
         <rect>
-         <x>150</x>
-         <y>39</y>
+         <x>163</x>
+         <y>37</y>
          <width>30</width>
          <height>30</height>
         </rect>
@@ -536,7 +536,7 @@
       <widget class="QLabel" name="label_14">
        <property name="geometry">
         <rect>
-         <x>134</x>
+         <x>138</x>
          <y>102</y>
          <width>111</width>
          <height>111</height>
@@ -555,7 +555,7 @@
       <widget class="QLabel" name="label_15">
        <property name="geometry">
         <rect>
-         <x>352</x>
+         <x>356</x>
          <y>102</y>
          <width>111</width>
          <height>111</height>
