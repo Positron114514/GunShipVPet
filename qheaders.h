@@ -26,6 +26,8 @@
 #include <dwmapi.h>
 #include <WinUser.h>
 #include <shellapi.h>
+#include <direct.h>
+#include <io.h>
 
 // OpenGL headers
 #include <GL/glew.h>

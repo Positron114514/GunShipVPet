@@ -10,6 +10,8 @@
 #include "live2d/LAppPal.hpp"
 #include "qheaders.h"
 
+#define BUF_SIZE 256
+
 // Unfinished
 class FileHandler
 {
@@ -38,6 +40,12 @@ public:
     static QStringList *getModelPath();
 
     // static void getModelPath
+
+    // sourceDir -> toDir
+    static bool copyFileToPath(QString sourceDir ,QString toDir, bool coverFileIfExist=true);
+
+    // fromDir -> toDir, 复制文件夹中的内容
+    static bool copyDirectoryFiles(const QString &fromDir, const QString &toDir, bool coverFileIfExist=true);
 
 
     // 一些类型转换函数

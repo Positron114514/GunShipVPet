@@ -86,32 +86,60 @@ void LAppLive2DManager::ReleaseAllModel()
     _models.Clear();
 }
 
+
+// 直接copy代码无法使用
 void LAppLive2DManager::AddModel(Csm::csmString modelDir){
-    csmString crawlPath(modelDir);
+    // ResourcesPathの中にあるフォルダ名を全てクロールし、モデルが存在するフォルダを定義する。
+    // フォルダはあるが同名の.model3.jsonが見つからなかった場合はリストに含めない。
+    // 翻译: 获取 Resource 文件夹中的模型 若找不到则不包含 (?)
+    // 为了后面复制文件夹方便
+    Csm::csmString targetDir(modelDir);
+    targetDir.Append(1, '/');
+    csmString crawlPath(targetDir);
+    qDebug() << QT_BACKGROUND_LOG << "Add Model Path: " << modelDir.GetRawString();
     crawlPath += "*.*";
 
     struct _finddata_t fdata;
     intptr_t fh = _findfirst(crawlPath.GetRawString(), &fdata);
-    if (fh == -1) return;
+    if (fh == -1)
+    {
+        qDebug() << QT_BACKGROUND_LOG << "Fail to find model from path: " << modelDir.GetRawString();
+        return;
+    }else{
+        qDebug() << QT_BACKGROUND_LOG << "Successfully load path: " << modelDir.GetRawString() << ", folder name:" << fdata.name;
+    }
+
+    // _modelDir.Clear();
 
     while (_findnext(fh, &fdata) == 0)
     {
         if ((fdata.attrib & _A_SUBDIR) && strcmp(fdata.name, "..") != 0)
         {
+
             // フォルダと同名の.model3.jsonがあるか探索する
             // 翻译: 搜索是否有与文件夹同名的 model3.json
-            csmString model3jsonPath(modelDir);
+            csmString model3jsonPath(targetDir);
             model3jsonPath += fdata.name;
             model3jsonPath.Append(1, '/');
             model3jsonPath += fdata.name;
             model3jsonPath += ".model3.json";
 
+            qDebug() << QT_BACKGROUND_LOG << "Finding: " << model3jsonPath.GetRawString();
+
             struct _finddata_t fdata2;
             if (_findfirst(model3jsonPath.GetRawString(), &fdata2) != -1)
             {
                 _modelDir.PushBack(csmString(fdata.name));
+                qsort(_modelDir.GetPtr(), _modelDir.GetSize(), sizeof(csmString), CompareCsmString);
+                // 把所有文件复制到 Resource文件夹中
+                QString resDirPath(ResourcesPath);
+                resDirPath.append(fdata.name);
+                qDebug() << QT_BACKGROUND_LOG << "saving files to: " << resDirPath;
+                FileHandler::copyDirectoryFiles((targetDir + fdata.name).GetRawString(), resDirPath);
+                qDebug() << QT_BACKGROUND_LOG << "Find json file successfully.";
             }
         }
+
     }
 }
 
@@ -126,6 +154,8 @@ void LAppLive2DManager::SetUpModel()
     struct _finddata_t fdata;
     intptr_t fh = _findfirst(crawlPath.GetRawString(), &fdata);
     if (fh == -1) return;
+
+    qDebug() << QT_BACKGROUND_LOG << "Successfully init path, folder name: " << fdata.name;
 
     _modelDir.Clear();
 
@@ -145,16 +175,17 @@ void LAppLive2DManager::SetUpModel()
             if (_findfirst(model3jsonPath.GetRawString(), &fdata2) != -1)
             {
                 _modelDir.PushBack(csmString(fdata.name));
+                qDebug() << QT_BACKGROUND_LOG << "Add Model: " << fdata.name;
             }
         }
     }
     qsort(_modelDir.GetPtr(), _modelDir.GetSize(), sizeof(csmString), CompareCsmString);
     // 添加用户自定义的模型路径
-    Csm::csmVector<Csm::csmString> configModelList = FileHandler::toCsmStringList(*FileHandler::getModelPath());
-    for(int i = 0; i < configModelList.GetSize(); i++)
-    {
-        AddModel(configModelList[i]);
-    }
+    // Csm::csmVector<Csm::csmString> configModelList = FileHandler::toCsmStringList(*FileHandler::getModelPath());
+    // for(int i = 0; i < configModelList.GetSize(); i++)
+    // {
+    //     AddModel(configModelList[i]);
+    // }
 }
 
 csmVector<csmString> LAppLive2DManager::GetModelDir() const
