@@ -45,8 +45,8 @@ void SettingsDialog::ButtonBoxInit()
         button->setFixedSize(72, 26);
 
     QFont font;
-    font.setPointSize(16);
     font.setFamily("MiSans");
+    font.setPointSize(16);
     ui->ourName->setFont(font);
 }
 

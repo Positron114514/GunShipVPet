@@ -27,6 +27,10 @@ bool QSSLoader::setStyle(QString qssPath)
     QFile qss(qssPath);
     if(qss.open(QFile::ReadOnly))
     {
+        QFont font("MiSans");
+        font.setStyleStrategy(QFont::PreferAntialias);
+        font.setStyleStrategy(QFont::NoAntialias);
+        // 字体抗锯齿
         qApp->setStyleSheet(qss.readAll());
         qss.close();
         return true;

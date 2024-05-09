@@ -21,6 +21,10 @@
 // System based macros
 #define REG_AUTO_RUN "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
 
+// C++ native headers
+#include <string>
+#include <cstring>
+
 // Windows native headers
 #include <windows.h>
 #include <dwmapi.h>
@@ -71,5 +75,6 @@
 #include <QSettings>
 #include <QDesktopServices>
 #include <QMessageBox>
+#include <QCloseEvent>
 
 #endif // QHEADERS_H

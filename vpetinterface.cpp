@@ -32,6 +32,8 @@ VPetInterface::VPetInterface(QWidget *parent)
     this->setAttribute(Qt::WA_TranslucentBackground);
     this->setAttribute(Qt::WA_ShowWithoutActivating);
 
+    // this->setAttribute(Qt::WA_TransparentForMouseEvents, true);  // 鼠标操作穿透测试
+
     // 设置初始化
     setWindowOnTopState(true);
     setWheelZoomState(true);
@@ -194,6 +196,28 @@ void VPetInterface::setModelIndex(int index)
 int VPetInterface::modelIndex()
 {
     return curModel;
+}
+
+void VPetInterface::setLLMEnable(bool state)
+{
+    isLLMEnable = state;
+    qDebug() << QT_INTERFACE_LOG << "LLM Status" << isLLMEnable;
+}
+
+bool VPetInterface::LLMEnable()
+{
+    return isLLMEnable;
+}
+
+void VPetInterface::setTTSEnable(bool state)
+{
+    isTTSEnable = state;
+    qDebug() << QT_INTERFACE_LOG << "TTS Status" << isTTSEnable;
+}
+
+bool VPetInterface::TTSEnable()
+{
+    return isTTSEnable;
 }
 
 void VPetInterface::regAutoRun()

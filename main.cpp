@@ -16,6 +16,8 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
+    // a.setQuitOnLastWindowClosed(true);
+
     QSSLoader::setFontFamily();
     QSSLoader::setStyle(":/qss/material_dark_teal.qss");
 

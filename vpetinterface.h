@@ -43,6 +43,12 @@ public:
     void setModelIndex(int index);
     int modelIndex();
 
+    // 对话功能实现接口
+    void setLLMEnable(bool state);
+    bool LLMEnable();
+    void setTTSEnable(bool state);
+    bool TTSEnable();
+
     // 开机自启实现函数:注册表实现（实验性）
     void regAutoRun();
     bool isRegAutoRun();
@@ -78,5 +84,8 @@ private:
     bool isWindowOnTop = true;
     bool isWheelZoomActive = true;
     bool isSystemStartup = false;
+
+    bool isLLMEnable = true;
+    bool isTTSEnable = false;
 };
 #endif // VPETINTERFACE_H
