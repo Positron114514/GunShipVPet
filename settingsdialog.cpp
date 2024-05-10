@@ -43,11 +43,6 @@ void SettingsDialog::ButtonBoxInit()
     auto buttonList = ui->configureBox->buttons();
     for(auto button: buttonList)
         button->setFixedSize(72, 26);
-
-    QFont font;
-    font.setFamily("MiSans");
-    font.setPointSize(16);
-    ui->ourName->setFont(font);
 }
 
 void SettingsDialog::GeneralSettingsInit()
@@ -122,6 +117,8 @@ void SettingsDialog::AboutSettingsInit()
         QString url = "https://github.com/Positron114514/GunShipVPet";
         QDesktopServices::openUrl(QUrl(url.toLatin1()));
     });
+
+    connect(ui->tabWidget, &QTabWidget::currentChanged, this, &SettingsDialog::onChangedAboutPage);
 
     // if(p->isRegAutoRun())
     //     ui->btnRegAutoRun->setDisabled(true);
@@ -263,5 +260,17 @@ void SettingsDialog::onAutoRunBtnClicked()
             ui->btnSetAutoRun->setDisabled(true);
             ui->labelAutoRunInfo->setText("看起来功能出现了问题，暂时不可用...");
         }
+    }
+}
+
+void SettingsDialog::onChangedAboutPage()
+{
+    QWidget *tab = ui->tabWidget->currentWidget();
+    if(tab == ui->aboutTab)
+    {
+        QFont font;
+        font.setFamily("MiSans");
+        font.setPointSize(16);
+        ui->ourName->setFont(font);
     }
 }

@@ -63,6 +63,7 @@ public:
 
 public slots:
     void onSettingsClicked();
+    void onChatClicked();
     void onTrayIconActivated(QSystemTrayIcon::ActivationReason reason);
 
 private:
@@ -73,6 +74,7 @@ private:
     QMenu *trayMenu;    // 托盘菜单
     QAction *actionQuit;    // 退出动作
     QAction *actionSettings;    // 设置动作
+    QAction *actionChat;    // 大模型对话动作
 
     QPushButton *btn;
 

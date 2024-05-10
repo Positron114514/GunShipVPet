@@ -3,6 +3,7 @@
 #include "settingsdialog.h"
 #include "configsaver.h"
 #include "customdir.h"
+#include "chatwindow.h"
 
 #pragma comment(lib, "kernel32.lib")
 #pragma comment(lib, "user32.lib")
@@ -77,12 +78,16 @@ void VPetInterface::InitializeSystemTray()
 
     actionQuit = new QAction("退出", this);
     actionSettings = new QAction("设置", this);
+    actionChat = new QAction("对话", this);
 
     // action 信号与槽
     connect(actionQuit, &QAction::triggered, this, &QApplication::quit);
     connect(actionSettings, &QAction::triggered, this, &VPetInterface::onSettingsClicked);
+    connect(actionChat, &QAction::triggered, this, &VPetInterface::onChatClicked);
 
     // 菜单设置：添加actions时，从上往下
+    trayMenu->addAction(actionChat);
+    trayMenu->addSeparator();
     trayMenu->addAction(actionSettings);
     trayMenu->addAction(actionQuit);
 
@@ -105,6 +110,19 @@ void VPetInterface::onSettingsClicked()
     int returnStatus = settings.exec();
 
     qDebug() << QT_INTERFACE_LOG << "Settings quited, return value" << returnStatus;
+}
+
+void VPetInterface::onChatClicked()
+{
+    ChatWindow *window = ui->live2dWidget->chatWindowP();
+    if(window == nullptr)
+    {
+        window = new ChatWindow(this);
+        ui->live2dWidget->setChatWindowP(window);
+        window->show();
+        connect(window, &ChatWindow::windowClose, ui->live2dWidget, &MyOpenGL::chatWindowDestroy);
+        qDebug() << QT_INTERFACE_LOG << "ChatWindow created";
+    }
 }
 
 void VPetInterface::setWheelZoomState(bool state)

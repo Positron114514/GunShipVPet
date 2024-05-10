@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-    // a.setQuitOnLastWindowClosed(true);
+    QApplication::setQuitOnLastWindowClosed(false); // 设置平行顶层窗口逻辑：文心一言我爱你xD
 
     QSSLoader::setFontFamily();
     QSSLoader::setStyle(":/qss/material_dark_teal.qss");

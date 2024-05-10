@@ -76,5 +76,6 @@
 #include <QDesktopServices>
 #include <QMessageBox>
 #include <QCloseEvent>
+#include <QThread>
 
 #endif // QHEADERS_H

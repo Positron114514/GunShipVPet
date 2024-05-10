@@ -98,10 +98,15 @@ void MyOpenGL::mouseReleaseEvent(QMouseEvent *event)
 
 void MyOpenGL::mouseDoubleClickEvent(QMouseEvent *event)
 {
-    // 空实现
-    qDebug() << QT_INTERFACE_LOG << "LLM action";
-    chat = new ChatWidget(nullptr, p);
-    chat->show();
+    // 设置只能存在一个chat窗口
+    if(chat == nullptr)
+    {
+        chat = new ChatWindow(p);
+        chat->show();
+        connect(chat, &ChatWindow::windowClose, this, &MyOpenGL::chatWindowDestroy);
+        qDebug() << QT_INTERFACE_LOG << "ChatWindow created";
+    }
+
 }
 
 void MyOpenGL::wheelEvent(QWheelEvent *event)
@@ -193,4 +198,20 @@ bool MyOpenGL::isMouseOnModel()
     LAppDelegate::GetInstance()->GetView()->TransformCoordinate(&clickX, &clickY);
 
     return LAppLive2DManager::GetInstance()->GetModel(p->modelIndex())->isMouseOnModel(clickX, clickY);
+}
+
+void MyOpenGL::setChatWindowP(ChatWindow *window)
+{
+    chat = window;
+}
+
+ChatWindow * MyOpenGL::chatWindowP()
+{
+    return chat;
+}
+
+void MyOpenGL::chatWindowDestroy()
+{
+    delete chat;
+    chat = nullptr;
 }
