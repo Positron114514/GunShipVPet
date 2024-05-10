@@ -84,6 +84,7 @@ void VPetInterface::InitializeSystemTray()
     connect(actionQuit, &QAction::triggered, this, &QApplication::quit);
     connect(actionSettings, &QAction::triggered, this, &VPetInterface::onSettingsClicked);
     connect(actionChat, &QAction::triggered, this, &VPetInterface::onChatClicked);
+    connect(this, &VPetInterface::LLMChanged, this, &VPetInterface::onLLMChanged);
 
     // 菜单设置：添加actions时，从上往下
     trayMenu->addAction(actionChat);
@@ -216,6 +217,20 @@ int VPetInterface::modelIndex()
     return curModel;
 }
 
+void VPetInterface::setAPI(QString api, QString secret)
+{
+    apiKey = api;
+    secretKey = secret;
+}
+
+QStringList VPetInterface::api()
+{
+    QStringList list;
+    list.push_back(apiKey);
+    list.push_back(secretKey);
+    return list;
+}
+
 void VPetInterface::setLLMEnable(bool state)
 {
     isLLMEnable = state;
@@ -231,6 +246,8 @@ void VPetInterface::setTTSEnable(bool state)
 {
     isTTSEnable = state;
     qDebug() << QT_INTERFACE_LOG << "TTS Status" << isTTSEnable;
+
+    emit LLMChanged(isLLMEnable);  // 信号触发
 }
 
 bool VPetInterface::TTSEnable()
@@ -297,4 +314,9 @@ void VPetInterface::onTrayIconActivated(QSystemTrayIcon::ActivationReason reason
     default:
         break;
     }
+}
+
+void VPetInterface::onLLMChanged(bool state)
+{
+    actionChat->setDisabled(!state);
 }

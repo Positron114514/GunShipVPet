@@ -378,7 +378,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>自定义API配置</string>
+        <string>配置文心一言API</string>
        </property>
       </widget>
       <widget class="QPushButton" name="btnAPISave">

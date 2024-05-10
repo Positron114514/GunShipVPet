@@ -33,9 +33,11 @@ public slots:
     void onComboBoxChanged();   // combobox状态改变槽函数
     void onImportClicked();     // 导入操作槽函数
     void onLLMBoxChanged();
+    void onTTSBoxChanged();
     void onAutoRunBtnClicked(); // 添加开机自启动项槽函数
     // void onRegBtnClicked();     // 实验功能槽函数
     void onChangedAboutPage();  // 切换到帮助与反馈界面后的槽函数
+    void onAPISaveClicked();    // API保存按钮按下操作
 
 protected:
     // 重写qdialogbuttonbox操作

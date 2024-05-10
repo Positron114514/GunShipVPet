@@ -49,6 +49,10 @@ public:
     void setTTSEnable(bool state);
     bool TTSEnable();
 
+    // api接口：其中api返回值下标为0是apikey，1是secretkey
+    void setAPI(QString api, QString secret);
+    QStringList api();
+
     // 开机自启实现函数:注册表实现（实验性）
     void regAutoRun();
     bool isRegAutoRun();
@@ -61,10 +65,14 @@ public:
     // void setStartupAutoRun(bool state);
     // bool startupAutoRun();
 
+signals:
+    void LLMChanged(bool state);
+
 public slots:
     void onSettingsClicked();
     void onChatClicked();
     void onTrayIconActivated(QSystemTrayIcon::ActivationReason reason);
+    void onLLMChanged(bool state);
 
 private:
     Ui::VPetInterface *ui;
@@ -89,5 +97,8 @@ private:
 
     bool isLLMEnable = true;
     bool isTTSEnable = false;
+
+    QString apiKey;
+    QString secretKey;
 };
 #endif // VPETINTERFACE_H

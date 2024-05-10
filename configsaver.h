@@ -7,7 +7,7 @@
 #include "vpetinterface.h"
 #include "filehandler.h"
 
-class ConfigSaver : public QWidget
+class ConfigSaver : public QObject
 {
     Q_OBJECT
 
@@ -21,6 +21,9 @@ public:
         Fps,
         Model
     };
+
+    static QString CesarEncrypt(QString str);
+    static QString CesarDecrypt(QString str);
 
     static void loadConfig(VPetInterface *p);
 

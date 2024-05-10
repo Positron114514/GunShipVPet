@@ -98,6 +98,9 @@ void MyOpenGL::mouseReleaseEvent(QMouseEvent *event)
 
 void MyOpenGL::mouseDoubleClickEvent(QMouseEvent *event)
 {
+    if(!p->LLMEnable())
+        return; // 若功能未开启，则不执行新建窗口
+
     // 设置只能存在一个chat窗口
     if(chat == nullptr)
     {
