@@ -4,6 +4,8 @@
 
 这是参与2024 NJU EL程序设计大赛交互组的作品，使用Qt和Cubism Live2D Native SDK构建
 
+![Logo](https://raw.githubusercontent.com/Positron114514/GunShipVPet/master/resources/icons/logo-tmp.png "Logo")
+
 *Still WIP*
 
 <br>
@@ -11,7 +13,7 @@
 ## About this project
 
 该项目旨在使用Qt与Live2D构建一个可用的虚拟桌宠程序，基于Cubism开源的demo工程修改与完善；
-并与*文心一言（暂定）* API进行对接，实现与虚拟桌宠的实用性交互（如聊天、文本生成等功能）；
+并与*文心一言* API进行对接，实现与虚拟桌宠的实用性交互（如聊天、文本生成等功能）；
 同时，计划使用*bert-vits（暂定）* 训练声音库，并实现TTS（Text to speak）功能
 
 **Qt C++ SDK**
