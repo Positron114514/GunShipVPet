@@ -6,12 +6,20 @@
 #define PY_CHAT_API_PATH "llm/chatapi"
 #define PY_INIT_PATH "llm/init"
 
+#define PY_LOAD_JSON_FAILED "loadJsonFailed"
+#define PY_REQUEST_FAILED "requestFailed"
+
 
 // python headers
+// 这里需要修改一下路径, 目前路径是我本机上的路径, 需要从注册表读取用户的python安装路径然后进行操作
+// 实在不行可以安装一个python到用户路径(抽象)
 #include "C:/Users/Lenovo/AppData/Local/Programs/Python/Python36/include/Python.h"
 #include "qheaders.h"
 
-
+// 使用方法:
+// 1. 声明 LlmHandler
+// 2. 调用方法 getAccessToken 获取 accessToken (因为有可能调用失败所以没有放在构造函数里)
+// 3. 调用 getCompletion 方法来对话
 class LlmHandler{
 public:
     // init
@@ -21,7 +29,7 @@ public:
     static PyObject* getPyFunction(PyObject* pyFile, QString functionName);
 
     // get access token to wenxin
-    QString* getAccessToken();
+    void getAccessToken();
 
     // talk with llm
     // prompt: input string
@@ -34,7 +42,7 @@ private:
     PyObject* init;
     // function get_completion from python
     PyObject* pyGetCompletion;
-    QString* accessToken;
+    PyObject* accessToken;
 };
 
 #endif // LLMHANDLER_H
