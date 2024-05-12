@@ -6,7 +6,7 @@
 import os
 import requests
 import json
-from dotenv import load_dotenv, find_dotenv
+# from dotenv import load_dotenv, find_dotenv
 from requests.exceptions import JSONDecodeError
 
 
