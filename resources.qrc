@@ -70,5 +70,6 @@
         <file>resources/svgs/github.svg</file>
         <file>resources/svgs/help.svg</file>
         <file>resources/svgs/issues.svg</file>
+        <file>resources/svgs/settings.svg</file>
     </qresource>
 </RCC>

@@ -43,11 +43,6 @@ void SettingsDialog::ButtonBoxInit()
     auto buttonList = ui->configureBox->buttons();
     for(auto button: buttonList)
         button->setFixedSize(72, 26);
-
-    QFont font;
-    font.setPointSize(16);
-    font.setFamily("MiSans");
-    ui->ourName->setFont(font);
 }
 
 void SettingsDialog::GeneralSettingsInit()
@@ -111,9 +106,27 @@ void SettingsDialog::ModelSettingsInit()
 
 void SettingsDialog::LLMSettingsInit()
 {
-    ui->checkBoxTTS->setDisabled(true);
+    QStringList api = p->api();
+    if(!api[0].isEmpty() && !api[1].isEmpty())
+    {
+        ui->textEditAPIKey->setText(api[0]);
+        ui->textEditSecretKey->setText(api[1]);
+
+        ui->checkBoxTTS->setDisabled(!p->LLMEnable());
+        ui->checkBoxLLM->setChecked(p->LLMEnable());
+        ui->checkBoxTTS->setChecked(p->TTSEnable());
+    } else {
+        ui->checkBoxTTS->setDisabled(true);
+        ui->checkBoxLLM->setDisabled(true);
+    }
+
     connect(ui->checkBoxLLM, &QCheckBox::stateChanged,
             this, &SettingsDialog::onLLMBoxChanged);
+    connect(ui->checkBoxTTS, &QCheckBox::stateChanged,
+            this, &SettingsDialog::onTTSBoxChanged);
+
+    connect(ui->btnAPISave, &QPushButton::pressed,
+            this, &SettingsDialog::onAPISaveClicked);
 }
 
 void SettingsDialog::AboutSettingsInit()
@@ -122,6 +135,8 @@ void SettingsDialog::AboutSettingsInit()
         QString url = "https://github.com/Positron114514/GunShipVPet";
         QDesktopServices::openUrl(QUrl(url.toLatin1()));
     });
+
+    connect(ui->tabWidget, &QTabWidget::currentChanged, this, &SettingsDialog::onChangedAboutPage);
 
     // if(p->isRegAutoRun())
     //     ui->btnRegAutoRun->setDisabled(true);
@@ -138,6 +153,9 @@ void SettingsDialog::accept()
     p->setModelIndex(modelIndex);
 
     p->setFps(ui->comboFPSSetting->currentText().toInt());
+
+    p->setLLMEnable(ui->checkBoxLLM->isChecked());
+    p->setTTSEnable(ui->checkBoxTTS->isChecked());
 
     qDebug() << QT_BACKGROUND_LOG << "settings carded";
 
@@ -214,7 +232,20 @@ void SettingsDialog::onImportClicked()
 
 void SettingsDialog::onLLMBoxChanged()
 {
-    ui->checkBoxTTS->setDisabled(!ui->checkBoxLLM->isChecked());
+    p->setLLMEnable(ui->checkBoxLLM->isChecked());
+    if(!ui->checkBoxLLM->isChecked())
+    {
+        ui->checkBoxTTS->setDisabled(true);
+        ui->checkBoxTTS->setChecked(false);
+        p->setTTSEnable(false);
+    } else {
+        ui->checkBoxTTS->setDisabled(false);
+    }
+}
+
+void SettingsDialog::onTTSBoxChanged()
+{
+    p->setTTSEnable(ui->checkBoxTTS->isChecked());
 }
 
 void SettingsDialog::onAutoRunBtnClicked()
@@ -262,6 +293,45 @@ void SettingsDialog::onAutoRunBtnClicked()
 
             ui->btnSetAutoRun->setDisabled(true);
             ui->labelAutoRunInfo->setText("看起来功能出现了问题，暂时不可用...");
+        }
+    }
+}
+
+void SettingsDialog::onChangedAboutPage()
+{
+    QWidget *tab = ui->tabWidget->currentWidget();
+    if(tab == ui->aboutTab)
+    {
+        QFont font;
+        font.setFamily("MiSans");
+        font.setPointSize(16);
+        ui->ourName->setFont(font);
+    }
+}
+
+void SettingsDialog::onAPISaveClicked()
+{
+    QString apiKey = ui->textEditAPIKey->text();
+    QString secretKey = ui->textEditSecretKey->text();
+    if(!apiKey.isEmpty() && !secretKey.isEmpty())
+    {
+        p->setAPI(apiKey, secretKey);
+        QMessageBox msg(this);
+        msg.setWindowTitle("提示");
+        msg.setText("API设置成功");
+        msg.exec();
+        ui->checkBoxLLM->setDisabled(false);
+    } else {
+        QMessageBox msg(this);
+        msg.setWindowTitle("失败");
+        msg.setText("请完整填写文心一言API并重试");
+        msg.exec();
+
+        QStringList cur = p->api();
+        if(!cur[0].isEmpty() && !cur[1].isEmpty())
+        {
+            ui->textEditAPIKey->setText(cur[0]);
+            ui->textEditSecretKey->setText(cur[1]);
         }
     }
 }

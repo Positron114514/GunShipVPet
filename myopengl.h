@@ -11,6 +11,7 @@
 
 #include "qheaders.h"
 #include "vpetinterface.h"
+#include "chatwindow.h"
 
 class MyOpenGL : public QOpenGLWidget
 {
@@ -22,7 +23,11 @@ public:
 
     void setOpenGLFps();
 
-    void transparentMouse();
+    // 聊天框相关接口
+    void setChatWindowP(ChatWindow *window);
+    ChatWindow *chatWindowP();
+
+    bool isMouseOnModel();
 
     // 重载函数
     void initializeGL() override;
@@ -36,10 +41,15 @@ protected:
     void mouseDoubleClickEvent(QMouseEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
 
+public slots:
+    void chatWindowDestroy();
+
 private:
     QTimer * timer;
     bool isDragging = false;
     QPointF originPos;
+
+    ChatWindow *chat = nullptr;
 
 signals:
 };

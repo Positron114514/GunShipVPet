@@ -71,8 +71,17 @@ void MyOpenGL::mousePressEvent(QMouseEvent *event)
 
     if(event->buttons() == Qt::LeftButton)
     {
-        isDragging = true;
-        originPos = event->globalPosition();
+        // Bugs need to be fixed
+        if(/*isMouseOnModel()*/true)
+        {
+            qDebug() << QT_BACKGROUND_LOG << "Disable transparent mouse event";
+            p->setAttribute(Qt::WA_TransparentForMouseEvents, false);  // 鼠标操作穿透
+            isDragging = true;
+            originPos = event->globalPosition();
+        } else {
+            qDebug() << QT_BACKGROUND_LOG << "Enable transparent mouse event";
+            p->setAttribute(Qt::WA_TransparentForMouseEvents, true);  // 鼠标操作穿透
+        }
     } else {
         int modelNum = FileHandler::getModelNum();
         p->setModelIndex((p->modelIndex() + 1) % modelNum);
@@ -89,8 +98,18 @@ void MyOpenGL::mouseReleaseEvent(QMouseEvent *event)
 
 void MyOpenGL::mouseDoubleClickEvent(QMouseEvent *event)
 {
-    // 空实现
-    qDebug() << QT_INTERFACE_LOG << "LLM action";
+    if(!p->LLMEnable())
+        return; // 若功能未开启，则不执行新建窗口
+
+    // 设置只能存在一个chat窗口
+    if(chat == nullptr)
+    {
+        chat = new ChatWindow(p);
+        chat->show();
+        connect(chat, &ChatWindow::windowClose, this, &MyOpenGL::chatWindowDestroy);
+        qDebug() << QT_INTERFACE_LOG << "ChatWindow created";
+    }
+
 }
 
 void MyOpenGL::wheelEvent(QWheelEvent *event)
@@ -134,23 +153,23 @@ void MyOpenGL::setOpenGLFps()
     timer->setInterval((1.0 / p->fps()) * 100);
 }
 
-// 会出现恶性bug
-void MyOpenGL::transparentMouse()
-{
-    HWND hWnd=(HWND)(this->winId());
-    POINT pt;
-    GetCursorPos(&pt);
-    ScreenToClient(hWnd,&pt);
-    long double x, y;
-    x = pt.x * 2.0 / width() - 1.0;
-    y = 1.0 - pt.y * 2.0 / height();
-    bool res = LAppModel::GetInstance()->isMouseOnModel(x, y);
-    if(res)
-        SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLongW(hWnd,GWL_EXSTYLE)&(~WS_EX_TRANSPARENT));
-    else
-        SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLongW(hWnd,GWL_EXSTYLE)|WS_EX_TRANSPARENT);
-    DragAcceptFiles(hWnd,true);
-}
+// // 会出现恶性bug
+// void MyOpenGL::transparentMouse()
+// {
+//     HWND hWnd=(HWND)(this->winId());
+//     POINT pt;
+//     GetCursorPos(&pt);
+//     ScreenToClient(hWnd,&pt);
+//     long double x, y;
+//     x = pt.x * 2.0 / width() - 1.0;
+//     y = 1.0 - pt.y * 2.0 / height();
+//     bool res = LAppModel::GetInstance()->isMouseOnModel(x, y);
+//     if(res)
+//         SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLongW(hWnd,GWL_EXSTYLE)&(~WS_EX_TRANSPARENT));
+//     else
+//         SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLongW(hWnd,GWL_EXSTYLE)|WS_EX_TRANSPARENT);
+//     DragAcceptFiles(hWnd,true);
+// }
 
 // OpenGL相关重载
 void MyOpenGL::initializeGL()
@@ -169,4 +188,33 @@ void MyOpenGL::paintGL()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     // glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+}
+
+bool MyOpenGL::isMouseOnModel()
+{
+    int mx = QCursor::pos().x();
+    int my = QCursor::pos().y();
+
+    float clickX = mx - this->x();
+    float clickY = my - this->y();
+
+    LAppDelegate::GetInstance()->GetView()->TransformCoordinate(&clickX, &clickY);
+
+    return LAppLive2DManager::GetInstance()->GetModel(p->modelIndex())->isMouseOnModel(clickX, clickY);
+}
+
+void MyOpenGL::setChatWindowP(ChatWindow *window)
+{
+    chat = window;
+}
+
+ChatWindow * MyOpenGL::chatWindowP()
+{
+    return chat;
+}
+
+void MyOpenGL::chatWindowDestroy()
+{
+    delete chat;
+    chat = nullptr;
 }

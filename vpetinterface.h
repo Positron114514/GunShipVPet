@@ -43,6 +43,16 @@ public:
     void setModelIndex(int index);
     int modelIndex();
 
+    // 对话功能实现接口
+    void setLLMEnable(bool state);
+    bool LLMEnable();
+    void setTTSEnable(bool state);
+    bool TTSEnable();
+
+    // api接口：其中api返回值下标为0是apikey，1是secretkey
+    void setAPI(QString api, QString secret);
+    QStringList api();
+
     // 开机自启实现函数:注册表实现（实验性）
     void regAutoRun();
     bool isRegAutoRun();
@@ -55,9 +65,14 @@ public:
     // void setStartupAutoRun(bool state);
     // bool startupAutoRun();
 
+signals:
+    void LLMChanged(bool state);
+
 public slots:
     void onSettingsClicked();
+    void onChatClicked();
     void onTrayIconActivated(QSystemTrayIcon::ActivationReason reason);
+    void onLLMChanged(bool state);
 
 private:
     Ui::VPetInterface *ui;
@@ -67,6 +82,7 @@ private:
     QMenu *trayMenu;    // 托盘菜单
     QAction *actionQuit;    // 退出动作
     QAction *actionSettings;    // 设置动作
+    QAction *actionChat;    // 大模型对话动作
 
     QPushButton *btn;
 
@@ -78,5 +94,11 @@ private:
     bool isWindowOnTop = true;
     bool isWheelZoomActive = true;
     bool isSystemStartup = false;
+
+    bool isLLMEnable = true;
+    bool isTTSEnable = false;
+
+    QString apiKey;
+    QString secretKey;
 };
 #endif // VPETINTERFACE_H

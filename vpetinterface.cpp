@@ -3,6 +3,7 @@
 #include "settingsdialog.h"
 #include "configsaver.h"
 #include "customdir.h"
+#include "chatwindow.h"
 
 #pragma comment(lib, "kernel32.lib")
 #pragma comment(lib, "user32.lib")
@@ -31,6 +32,8 @@ VPetInterface::VPetInterface(QWidget *parent)
     this->setWindowFlag(Qt::Tool);
     this->setAttribute(Qt::WA_TranslucentBackground);
     this->setAttribute(Qt::WA_ShowWithoutActivating);
+
+    // this->setAttribute(Qt::WA_TransparentForMouseEvents, true);  // 鼠标操作穿透测试
 
     // 设置初始化
     setWindowOnTopState(true);
@@ -75,12 +78,17 @@ void VPetInterface::InitializeSystemTray()
 
     actionQuit = new QAction("退出", this);
     actionSettings = new QAction("设置", this);
+    actionChat = new QAction("对话", this);
 
     // action 信号与槽
     connect(actionQuit, &QAction::triggered, this, &QApplication::quit);
     connect(actionSettings, &QAction::triggered, this, &VPetInterface::onSettingsClicked);
+    connect(actionChat, &QAction::triggered, this, &VPetInterface::onChatClicked);
+    connect(this, &VPetInterface::LLMChanged, this, &VPetInterface::onLLMChanged);
 
     // 菜单设置：添加actions时，从上往下
+    trayMenu->addAction(actionChat);
+    trayMenu->addSeparator();
     trayMenu->addAction(actionSettings);
     trayMenu->addAction(actionQuit);
 
@@ -103,6 +111,19 @@ void VPetInterface::onSettingsClicked()
     int returnStatus = settings.exec();
 
     qDebug() << QT_INTERFACE_LOG << "Settings quited, return value" << returnStatus;
+}
+
+void VPetInterface::onChatClicked()
+{
+    ChatWindow *window = ui->live2dWidget->chatWindowP();
+    if(window == nullptr)
+    {
+        window = new ChatWindow(this);
+        ui->live2dWidget->setChatWindowP(window);
+        window->show();
+        connect(window, &ChatWindow::windowClose, ui->live2dWidget, &MyOpenGL::chatWindowDestroy);
+        qDebug() << QT_INTERFACE_LOG << "ChatWindow created";
+    }
 }
 
 void VPetInterface::setWheelZoomState(bool state)
@@ -196,6 +217,44 @@ int VPetInterface::modelIndex()
     return curModel;
 }
 
+void VPetInterface::setAPI(QString api, QString secret)
+{
+    apiKey = api;
+    secretKey = secret;
+}
+
+QStringList VPetInterface::api()
+{
+    QStringList list;
+    list.push_back(apiKey);
+    list.push_back(secretKey);
+    return list;
+}
+
+void VPetInterface::setLLMEnable(bool state)
+{
+    isLLMEnable = state;
+    qDebug() << QT_INTERFACE_LOG << "LLM Status" << isLLMEnable;
+}
+
+bool VPetInterface::LLMEnable()
+{
+    return isLLMEnable;
+}
+
+void VPetInterface::setTTSEnable(bool state)
+{
+    isTTSEnable = state;
+    qDebug() << QT_INTERFACE_LOG << "TTS Status" << isTTSEnable;
+
+    emit LLMChanged(isLLMEnable);  // 信号触发
+}
+
+bool VPetInterface::TTSEnable()
+{
+    return isTTSEnable;
+}
+
 void VPetInterface::regAutoRun()
 {
     QString appPath = QApplication::applicationFilePath();
@@ -255,4 +314,9 @@ void VPetInterface::onTrayIconActivated(QSystemTrayIcon::ActivationReason reason
     default:
         break;
     }
+}
+
+void VPetInterface::onLLMChanged(bool state)
+{
+    actionChat->setDisabled(!state);
 }

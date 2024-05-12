@@ -6,6 +6,28 @@ ConfigSaver::ConfigSaver(VPetInterface *parent)
 
 }
 
+QString ConfigSaver::CesarEncrypt(QString str)
+{
+    int l = str.length();
+    QString encr = "";
+    for(int i = 0; i < l; i++)
+    {
+        encr.append(QChar(str[i].toLatin1() - API_CESAR_KEY));
+    }
+    return encr;
+}
+
+QString ConfigSaver::CesarDecrypt(QString str)
+{
+    int l = str.length();
+    QString decr = "";
+    for(int i = 0; i < l; i++)
+    {
+        decr.append(QChar(str[i].toLatin1() + API_CESAR_KEY));
+    }
+    return decr;
+}
+
 QJsonObject *ConfigSaver::readConfigFile()
 {
     QFile file(CustomDir::customDir() + QDir::separator() + CONFIG_DIR);
@@ -70,8 +92,6 @@ void ConfigSaver::writeConfig(VPetInterface *p)
     rootObject.insert("windowOnTop", p->windowOnTopState());
     // Wheel zoom state
     rootObject.insert("wheelZoom", p->wheelZoomState());
-    // System startup autorun state
-    // rootObject.insert("startupAutoRun", p->startupAutoRun());
     // Mainwindow size config
     QJsonArray windowSize;
     windowSize.append(p->width());
@@ -82,6 +102,15 @@ void ConfigSaver::writeConfig(VPetInterface *p)
     windowPos.append(p->pos().x());
     windowPos.append(p->pos().y());
     rootObject.insert("position", windowPos);
+    // API config
+    QJsonArray api;
+    QStringList apiList = p->api();
+    api.append(CesarEncrypt(apiList[0]));
+    api.append(CesarEncrypt(apiList[1]));
+    rootObject.insert("apiKeys", api);
+    // LLM&TTS config
+    rootObject.insert("chatLLM", p->LLMEnable());
+    rootObject.insert("chatTTS", p->TTSEnable());
 
     saveConfigFile(rootObject);
 }
@@ -164,7 +193,14 @@ void ConfigSaver::loadConfig(VPetInterface *p)
     // Window position config
     auto windowPos = root->value("position");
     p->move(windowPos[0].toInt(), windowPos[1].toInt());
+    // apikeys config
+    auto api = root->value("apiKeys");
+    p->setAPI(CesarDecrypt(api[0].toString()), CesarDecrypt(api[1].toString()));
+    // LLM&TTS config
+    p->setLLMEnable(root->value("chatLLM").toBool());
+    p->setTTSEnable(root->value("chatTTS").toBool());
 
+    // qDebug() << QT_DEBUG_OUTPUT << "api keys:" << p->api();
 
     // // Model Path
     // QJsonArray *ModelPath = getModelPath();
@@ -174,5 +210,5 @@ void ConfigSaver::loadConfig(VPetInterface *p)
     // }
     // 把 load model path 写在live2d里了, 要不然一直崩, 应该是加载顺序的问题
 
-    qDebug() << "Load config successfully.";
+    qDebug() << QT_BACKGROUND_LOG << "Load config successfully.";
 }

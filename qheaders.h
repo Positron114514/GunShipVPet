@@ -17,9 +17,14 @@
 #define DEFAULT_MODEL 0
 #define LOG_DIR "log.txt"
 #define CONFIG_DIR "config.json"
+#define API_CESAR_KEY 6
 
 // System based macros
 #define REG_AUTO_RUN "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+
+// C++ native headers
+#include <string>
+#include <cstring>
 
 // Windows native headers
 #include <windows.h>
@@ -71,6 +76,8 @@
 #include <QSettings>
 #include <QDesktopServices>
 #include <QMessageBox>
+#include <QCloseEvent>
+#include <QThread>
 
 
 #endif // QHEADERS_H

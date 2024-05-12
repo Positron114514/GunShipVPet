@@ -157,6 +157,12 @@ void LAppView::Render()
     }
 }
 
+void LAppView::TransformCoordinate(float* x, float* y)
+{
+    *x = _deviceToScreen->TransformX(*x);
+    *y = _deviceToScreen->TransformY(*y);
+}
+
 // Fix: Delete background
 // 虽然但是现在只能变成黑色
 // 原本函数的功能是初始化背景和人物模型, 删掉背景后就剩下人物模型了
