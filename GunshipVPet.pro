@@ -102,3 +102,15 @@ RESOURCES += \
 
 DISTFILES += \
     todolist.md
+
+# python 路径
+# 后续需要改动 (不同机器上路径不同)
+# 改完了, 现在要求项目强制安装一个 python3.8.10
+win32:CONFIG(release, debug|release): LIBS += -L./python3.8.10/libs -lpython38
+else:win32:CONFIG(debug, debug|release): LIBS += -L./python3.8.10/libs -lpython38d
+
+INCLUDEPATH += ./python3.8.10/libs
+DEPENDPATH += ./python3.8.10/libs
+
+INCLUDEPATH += ./python3.8.10/include
+LIBS += -L./python3.8.10/libs -lpython38
