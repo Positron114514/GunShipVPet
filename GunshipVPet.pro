@@ -30,7 +30,9 @@ SOURCES += \
     optimizedslider.cpp \
     qssloader.cpp \
     settingsdialog.cpp \
-    vpetinterface.cpp
+    vpetinterface.cpp \
+    llmhandler.cpp
+
 
 HEADERS += \
     FileHandler.hpp \
@@ -55,7 +57,8 @@ HEADERS += \
     qheaders.h \
     qssloader.h \
     settingsdialog.h \
-    vpetinterface.h
+    vpetinterface.h \
+    llmhandler.h
 
 FORMS += \
     chatwindow.ui \
