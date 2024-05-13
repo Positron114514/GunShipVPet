@@ -31,6 +31,8 @@
 
 计划使用Python实现大语言模型API接入，并用Qt实现与Python程序交互的数据接口与交互界面
 
+ps: 项目使用 python 3.8.10 进行大模型接入, 因此需要安装 python3.8.10 在工程目录下
+
 **QSS美化**
 
 移植自[QtMaterial](https://github.com/UN-GCPDS/qt-material)，并根据UI开发需要修改了qss样式表中内容

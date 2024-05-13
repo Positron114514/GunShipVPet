@@ -6,18 +6,17 @@
 #define PY_CHAT_API_PATH "llm/chatapi"
 #define PY_INIT_PATH "llm/init"
 
+// 错误处理
 #define PY_LOAD_JSON_FAILED "loadJsonFailed"
 #define PY_REQUEST_FAILED "requestFailed"
 
 
-// python headers
-// 这里需要修改一下路径, 目前路径是我本机上的路径, 需要从注册表读取用户的python安装路径然后进行操作
-// 实在不行可以安装一个python到用户路径(抽象)
-#include "C:/Users/Lenovo/AppData/Local/Programs/Python/Python36/include/Python.h"
+// 注意: 这里需要强制安装 python3.8.10 在工程项目里面
+#include "./python3.8.10/include/Python.h"
 #include "qheaders.h"
 
 // 使用方法:
-// 1. 声明 LlmHandler
+// 1. 声明一个 LlmHandler 对象
 // 2. 调用方法 getAccessToken 获取 accessToken (因为有可能调用失败所以没有放在构造函数里)
 // 3. 调用 getCompletion 方法来对话
 class LlmHandler{
@@ -34,7 +33,10 @@ public:
     // talk with llm
     // prompt: input string
     // return: output string
+    // 注意: 如果触发 PY_LOAD_JSON_FAILED 或 PY_REQUEST_FAILED, 返回值为 NULL
     QString* getCompletion(QString *prompt);
+
+    ~LlmHandler();
 
 
 private:
