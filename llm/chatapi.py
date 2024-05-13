@@ -66,11 +66,11 @@ def get_access_token():
         except JSONDecodeError as e:
             print(f"解析 JSON 失败: {e}")
             print("响应内容：", response.text)
-            return None
+            return "loadJsonFailed"
     else:
         print(f"请求失败，状态码：{response.status_code}")
         print("响应内容：", response.text)
-        return None
+        return "requestFailed"
 
 
 def get_completion(prompt: str, access_token, temperature=0.1):
