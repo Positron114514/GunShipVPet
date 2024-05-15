@@ -30,7 +30,9 @@ SOURCES += \
     optimizedslider.cpp \
     qssloader.cpp \
     settingsdialog.cpp \
-    vpetinterface.cpp
+    vpetinterface.cpp \
+    llmhandler.cpp
+
 
 HEADERS += \
     FileHandler.hpp \
@@ -55,7 +57,8 @@ HEADERS += \
     qheaders.h \
     qssloader.h \
     settingsdialog.h \
-    vpetinterface.h
+    vpetinterface.h \
+    llmhandler.h
 
 FORMS += \
     chatwindow.ui \
@@ -102,3 +105,15 @@ RESOURCES += \
 
 DISTFILES += \
     todolist.md
+
+# python 路径
+# 后续需要改动 (不同机器上路径不同)
+# 改完了, 现在要求项目强制安装一个 python3.8.10
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/python3.8.10/libs -lpython38
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/python3.8.10/libs -lpython38d
+
+INCLUDEPATH += $$PWD/python3.8.10/libs
+DEPENDPATH += $$PWD/python3.8.10/libs
+
+INCLUDEPATH += $$PWD/python3.8.10/include
+LIBS += -L$$PWD/python3.8.10/libs -lpython38
