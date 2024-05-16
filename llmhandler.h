@@ -28,7 +28,7 @@ public:
     static PyObject* getPyFunction(PyObject* pyFile, QString functionName);
 
     // get access token to wenxin
-    void getAccessToken();
+    void getAccessToken(QString apiKey, QString secretKey);
 
     // talk with llm
     // prompt: input string

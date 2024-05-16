@@ -38,11 +38,18 @@ PyObject* LlmHandler::getPyFunction(PyObject* pyFile, QString functionName)
     return retObj;
 }
 
-void LlmHandler::getAccessToken()
+void LlmHandler::getAccessToken(QString apiKey, QString secretKey)
 {
+    PyObject* args = PyTuple_New(2);
     PyObject* pyGetAccessToken = getPyFunction(chatApi, PY_GET_ACCESS_TOKEN);
+
+    PyObject* pyApiKey = PyUnicode_FromString(apiKey.toStdString().c_str());
+    PyObject* pySecretKey = PyUnicode_FromString(secretKey.toStdString().c_str());
+
+    PyTuple_SetItem(args, 0, pyApiKey);
+    PyTuple_SetItem(args, 1, pySecretKey);
     // 运行函数
-    accessToken = PyObject_CallFunction(pyGetAccessToken, 0);
+    accessToken = PyObject_CallObject(pyGetAccessToken, args);
     if(!accessToken)
     {
         qDebug() << QT_DEBUG_OUTPUT << "fail to load access token";

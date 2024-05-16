@@ -40,11 +40,11 @@ def load_wenxin_api_key():
     return apikey, secretkey
 
 
-def get_access_token():
+def get_access_token(apikey, secretkey):
     """
     使用 API Key，Secret Key 获取access_token，替换下列示例中的应用API Key、应用Secret Key
     """
-    apikey, secretkey = load_wenxin_api_key()
+    # apikey, secretkey = load_wenxin_api_key()
 
     # 指定网址
     url = f"https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id={apikey}&client_secret={secretkey}"
