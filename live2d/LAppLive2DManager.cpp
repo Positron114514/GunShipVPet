@@ -99,6 +99,40 @@ void LAppLive2DManager::AddModel(Csm::csmString modelDir){
     qDebug() << QT_BACKGROUND_LOG << "Add Model Path: " << modelDir.GetRawString();
     crawlPath += "*.*";
 
+    // 查找该文件夹
+    int index = modelDir.GetLength() - 1;
+    const csmChar* modelDirRaw = modelDir.GetRawString();
+
+    while(modelDirRaw[index] != '\\' && modelDirRaw[index] != '/')
+    {
+        --index;
+    }
+
+    csmString folderName(modelDirRaw + index + 1);
+
+    qDebug() << QT_DEBUG_OUTPUT << "Folder name: " << folderName.GetRawString();
+
+    csmString model3jsonPath(targetDir);
+    model3jsonPath += folderName;
+    model3jsonPath += ".model3.json";
+
+    qDebug() << QT_BACKGROUND_LOG << "Finding current folder: " << model3jsonPath.GetRawString();
+
+    struct _finddata_t fdata2;
+    if (_findfirst(model3jsonPath.GetRawString(), &fdata2) != -1)
+    {
+        _modelDir.PushBack(csmString(folderName));
+        qsort(_modelDir.GetPtr(), _modelDir.GetSize(), sizeof(csmString), CompareCsmString);
+        // 把所有文件复制到 Resource文件夹中
+        QString resDirPath(ResourcesPath);
+        resDirPath.append(folderName.GetRawString());
+        qDebug() << QT_BACKGROUND_LOG << "saving files to: " << resDirPath;
+        FileHandler::copyDirectoryFiles(modelDir.GetRawString(), resDirPath);
+        qDebug() << QT_BACKGROUND_LOG << "Find json file successfully.";
+        return;
+    }
+
+    // 查找该文件夹下的文件夹
     struct _finddata_t fdata;
     intptr_t fh = _findfirst(crawlPath.GetRawString(), &fdata);
     if (fh == -1)
@@ -141,6 +175,8 @@ void LAppLive2DManager::AddModel(Csm::csmString modelDir){
         }
 
     }
+
+    qDebug() << QT_DEBUG_OUTPUT << "Finish finding subFolders. Start to load current folder.";
 }
 
 void LAppLive2DManager::SetUpModel()
