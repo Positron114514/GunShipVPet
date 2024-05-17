@@ -87,7 +87,10 @@ INCLUDEPATH += $$PWD/sdk/Framework/src \
 LIBS += $$PWD/sdk/Framework/lib/Framework.lib \
     $$PWD/sdk/glew/lib/libglew32.lib \
     $$PWD/sdk/glfw/lib/glfw3.lib \
-    $$PWD/sdk/Core/lib/windows/x86_64/143/Live2DCubismCore_MT.lib
+    $$PWD/sdk/Core/lib/windows/x86_64/143/Live2DCubismCore_MT.lib \
+    -L$$PWD/sdk/python/libs -lpython38
+
+DEPENDPATH += $$PWD/python3.8.10/libs
 
 # 启用GL
 DEFINES += CSM_TARGET_WIN_GL
@@ -110,11 +113,6 @@ DISTFILES += \
 # python 路径
 # 后续需要改动 (不同机器上路径不同)
 # 改完了, 现在要求项目强制安装一个 python3.8.10
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/python3.8.10/libs -lpython38
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/python3.8.10/libs -lpython38d
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/sdk/python/libs -lpython38
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/sdk/python/libs -lpython38d
 
-INCLUDEPATH += $$PWD/python3.8.10/libs
-DEPENDPATH += $$PWD/python3.8.10/libs
-
-INCLUDEPATH += $$PWD/python3.8.10/include
-LIBS += -L$$PWD/python3.8.10/libs -lpython38

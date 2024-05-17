@@ -98,6 +98,9 @@ void MyOpenGL::mouseReleaseEvent(QMouseEvent *event)
 
 void MyOpenGL::mouseDoubleClickEvent(QMouseEvent *event)
 {
+    if(event->buttons() == Qt::RightButton)
+        return;
+
     if(!p->LLMEnable())
         return; // 若功能未开启，则不执行新建窗口
 

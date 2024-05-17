@@ -23,7 +23,7 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=E:\Codes\Qt\GunshipVPetApp
-OutputBaseFilename=setup-GunshipVPet-v1.0-basever
+OutputBaseFilename="setup-GunshipVPet-{#MyAppVersion}"
 SetupIconFile=E:\Codes\Qt\GunshipVPet\resources\icons\logo.ico
 Compression=lzma
 SolidCompression=yes
@@ -37,8 +37,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "E:\Codes\Qt\GunshipVPetApp\app\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\Codes\Qt\GunshipVPetApp\app\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "E:\Codes\Qt\GunshipVPetApp\app\resources\*"; DestDir: "{userdocs}\resources"; Flags: ignoreversion
+Source: "E:\Codes\Qt\GunshipVPetApp\app\*"; Excludes: "E:\Codes\Qt\GunshipVPetApp\app\resources\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Codes\Qt\GunshipVPetApp\app\resources\*"; DestDir: "{userdocs}\GunshipVPet\resources"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -48,3 +48,14 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 
+[Code]
+procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+
+begin
+  if CurUninstallStep = usUninstall then
+    if MsgBox('您是否要删除用户设置？', mbConfirmation, MB_YESNO) = IDYES then
+      DelTree(ExpandConstant('{userdocs}\GunshipVPet'), True, True, True);
+end;
+
+[UninstallDelete]
+;Type: filesandordirs; Name: "{userdocs}\GunshipVPet\*"
