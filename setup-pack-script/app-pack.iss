@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "GunshipVPet虚拟桌宠"
-#define MyAppVersion "1.0-base version"
+#define MyAppVersion "1.1-base version-alpha"
 #define MyAppPublisher "NJU EL 武装直升机组"
 #define MyAppURL "https://github.com/Positron114514/GunShipVPet"
 #define MyAppExeName "GunshipVPet.exe"
@@ -38,6 +38,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "E:\Codes\Qt\GunshipVPetApp\app\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\Codes\Qt\GunshipVPetApp\app\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Codes\Qt\GunshipVPetApp\app\resources\*"; DestDir: "{userdocs}\resources"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
