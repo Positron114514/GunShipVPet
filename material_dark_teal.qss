@@ -227,6 +227,7 @@ QComboBox::down-arrow:disabled {
 QComboBox QAbstractItemView {
   background-color: #232629;
   border: 2px solid #4f5b62;
+  /* border: 2px solid #232629; */
   border-radius: 4px;
 }
 
@@ -237,6 +238,31 @@ QComboBox[frame='false'] {
 }
 QComboBox[frame='false']:disabled {
   color: rgba(255, 255, 255, 0.2);
+}
+
+QComboBox QScrollBar::vertical {
+  width: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+}
+
+QComboBox QScrollBar::handle::vertical {
+  border-radius: 4px;
+  width: 8px;
+  background: #8a1de9b6
+}
+
+QComboBox QScrollBar::handle::vertical:hover {
+  background: #1de9b6
+}
+
+QComboBox QScrollBar::add-line::vertical {
+  border: none;
+}
+
+QComboBox QScrollBar::sub-line::vertical {
+  border: none;
 }
 
 /*  ------------------------------------------------------------------------  */
@@ -850,12 +876,13 @@ QScrollBar:horizontal {
 
 QScrollBar:vertical {
   border: 0;
-  background: #232629;
+  background: #28232629;
   width: 8px;
 }
 
 QScrollBar::handle {
-  background: rgba(29, 233, 182, 0.1);
+  background: rgba(29, 233, 182, 0.3);
+  border-radius: 7px;
 }
 
 QScrollBar::handle:horizontal {
@@ -868,7 +895,7 @@ QScrollBar::handle:vertical {
 
 QScrollBar::handle:vertical:hover,
 QScrollBar::handle:horizontal:hover {
-  background: #1de9b6;
+  background: #e81de9b6;
 }
 
 QScrollBar::add-line:vertical,

@@ -212,9 +212,9 @@ void SettingsDialog::onComboBoxChanged()
     qDebug() << QT_DEBUG_OUTPUT << "current index:" << modelIndex;
 }
 
+/*
 void SettingsDialog::onImportClicked()
 {
-    // unfinished
     QString folderDir = QFileDialog::getExistingDirectory(this, "选择模型文件夹", "/");
 
     // QDir fromDir(folderDir);
@@ -223,7 +223,27 @@ void SettingsDialog::onImportClicked()
     FileHandler::addModel(folderDir);
 
     // 将选定路径保存在 config.json 中
-    FileHandler::saveModelPath(folderDir);
+    // FileHandler::saveModelPath(folderDir);
+
+    // FileHandler::copyDirectoryFiles(folderDir, "resources/" + QDir(folderDir).dirName(), true);
+    // qDebug() << QT_BACKGROUND_LOG << fileDir << "has been moved to resources";
+
+    ui->comboModel->clear();
+    fileDir = FileHandler::getModelDirList();
+    ui->comboModel->addItems(fileDir);
+}
+*/
+
+void SettingsDialog::onImportClicked()
+{
+    QString modelDir = QFileDialog::getOpenFileName(this,
+                                                    "选择模型",
+                                                    "/",
+                                                    tr("模型文件(*.model3.json)"));
+
+    QFileInfo modelInfo(modelDir);
+    // qDebug() << QT_DEBUG_OUTPUT << info.path();
+    FileHandler::addModel(modelInfo.path());
 
     ui->comboModel->clear();
     fileDir = FileHandler::getModelDirList();

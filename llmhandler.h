@@ -12,7 +12,7 @@
 
 
 // 注意: 这里需要强制安装 python3.8.10 在工程项目里面
-#include "./python3.8.10/include/Python.h"
+#include "Python.h"
 #include "qheaders.h"
 
 // 使用方法:

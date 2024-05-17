@@ -152,11 +152,15 @@ void LAppLive2DManager::AddModel(Csm::csmString modelDir){
 
             // フォルダと同名の.model3.jsonがあるか探索する
             // 翻译: 搜索是否有与文件夹同名的 model3.json
-            csmString model3jsonPath(targetDir);
-            model3jsonPath += fdata.name;
-            model3jsonPath.Append(1, '/');
-            model3jsonPath += fdata.name;
-            model3jsonPath += ".model3.json";
+            QString path = ResourcesPath +
+                           QString(fdata.name) + "/" +
+                           QString(fdata.name) + ".model3.json";
+
+            csmString model3jsonPath = FileHandler::toCsmString(path);
+            // model3jsonPath += fdata.name;
+            // model3jsonPath.Append(1, '/');
+            // model3jsonPath += fdata.name;
+            // model3jsonPath += ".model3.json";
 
             qDebug() << QT_BACKGROUND_LOG << "Finding: " << model3jsonPath.GetRawString();
 
@@ -201,11 +205,15 @@ void LAppLive2DManager::SetUpModel()
         {
             // フォルダと同名の.model3.jsonがあるか探索する
             // 翻译: 搜索是否有与文件夹同名的 model3.json
-            csmString model3jsonPath(ResourcesPath);
-            model3jsonPath += fdata.name;
-            model3jsonPath.Append(1, '/');
-            model3jsonPath += fdata.name;
-            model3jsonPath += ".model3.json";
+            QString path = ResourcesPath +
+                           QString(fdata.name) + "/" +
+                           QString(fdata.name) + ".model3.json";
+
+            csmString model3jsonPath = FileHandler::toCsmString(path);
+            // model3jsonPath += fdata.name;
+            // model3jsonPath.Append(1, '/');
+            // model3jsonPath += fdata.name;
+            // model3jsonPath += ".model3.json";
 
             struct _finddata_t fdata2;
             if (_findfirst(model3jsonPath.GetRawString(), &fdata2) != -1)

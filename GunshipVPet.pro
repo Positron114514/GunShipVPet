@@ -80,7 +80,8 @@ INCLUDEPATH += $$PWD/sdk/Framework/src \
     $$PWD/sdk/glew/include \
     $$PWD/sdk/glfw/include \
     $$PWD/sdk/Core/include \
-    $$PWD/sdk/stb
+    $$PWD/sdk/stb \
+    $$PWD/sdk/python/include
 
 # SDK库路径
 LIBS += $$PWD/sdk/Framework/lib/Framework.lib \

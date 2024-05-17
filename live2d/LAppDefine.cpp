@@ -8,6 +8,10 @@
 #include "LAppDefine.hpp"
 #include <CubismFramework.hpp>
 
+#include <QByteArray>
+#include <QString>
+#include "customdir.h"
+
 namespace LAppDefine {
 
     using namespace Csm;
@@ -28,14 +32,18 @@ namespace LAppDefine {
     const csmFloat32 ViewLogicalMaxTop = 2.0f;
 
     // 相対パス
-    const csmChar* ResourcesPath = "Resources/";
+    // 相对路径
+    QByteArray pathArr =
+        QString(CustomDir::customDir() + QDir::separator() + "resources/").toLatin1();
+    const csmChar* ResourcesPath = pathArr.data();
+    // const csmChar* ResourcesPath = "resources/";
 
     // モデルの後ろにある背景の画像ファイル
-    const csmChar* BackImageName = "back_class_normal.png";
-    // 歯車
-    const csmChar* GearImageName = "icon_gear.png";
-    // 終了ボタン
-    const csmChar* PowerImageName = "close.png";
+    // const csmChar* BackImageName = "back_class_normal.png";
+    // // 歯車
+    // const csmChar* GearImageName = "icon_gear.png";
+    // // 終了ボタン
+    // const csmChar* PowerImageName = "close.png";
 
     // モデル定義------------------------------------------
     // 外部定義ファイル(json)と合わせる
