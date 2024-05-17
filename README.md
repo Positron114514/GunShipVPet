@@ -1,10 +1,10 @@
 # GunshipVPet 虚拟桌宠 
 
+<img src="./resources/icons/logo-tmp.png" width = "50" height = "50" alt="Logo" align=center />
+
 **by NJU EL 武装直升机组**
 
 这是参与2024 NJU EL程序设计大赛交互组的作品，使用Qt和Cubism Live2D Native SDK构建
-
-![Logo](https://raw.githubusercontent.com/Positron114514/GunShipVPet/master/resources/icons/logo-tmp.png "Logo")
 
 *Still WIP*
 
