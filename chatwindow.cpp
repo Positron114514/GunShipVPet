@@ -12,6 +12,7 @@ ChatWindow::ChatWindow(QWidget *mainApp, QWidget *parent)
 
     // 窗口属性设置
     this->setWindowTitle("对话...");
+    this->setWindowIcon(QIcon(":/ico/resources/icons/main-logo.ico"));
     this->setWindowFlag(Qt::WindowMaximizeButtonHint, false);
 
     InitializeUI();

@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/ico">
-        <file>resources/icons/logo.ico</file>
+        <file>resources/icons/tray-logo.ico</file>
+        <file>resources/icons/main-logo.ico</file>
     </qresource>
     <qresource prefix="/img">
         <file>resources/images/bg-transparent.png</file>

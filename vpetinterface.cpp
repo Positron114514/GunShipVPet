@@ -19,7 +19,7 @@ VPetInterface::VPetInterface(QWidget *parent)
 
     // 窗体初始化设置
     this->setWindowTitle("GunshipVPet虚拟桌宠");
-    this->setWindowIcon(QIcon(":/ico/resources/icons/logo.ico"));
+    this->setWindowIcon(QIcon(":/ico/resources/icons/main-logo.ico"));
     this->setFont(QFont(":/font/MiSans-Regular.ttf"));
 
     // 窗体几何设置
@@ -71,7 +71,7 @@ void VPetInterface::InitializeSystemTray()
 
     // 系统托盘相关设置
     trayIcon = new QSystemTrayIcon(this);
-    trayIcon->setIcon(QIcon(":/ico/resources/icons/logo.ico"));
+    trayIcon->setIcon(QIcon(":/ico/resources/icons/tray-logo.ico"));
     trayIcon->setToolTip("虚拟桌宠");
 
     connect(trayIcon, &QSystemTrayIcon::activated, this, &VPetInterface::onTrayIconActivated);
