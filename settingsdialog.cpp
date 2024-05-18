@@ -19,6 +19,7 @@ SettingsDialog::SettingsDialog(QWidget *parent)
     this->setWindowTitle("虚拟桌宠设置");
     this->setWindowIcon(QIcon(":/img/resources/icons/settings.png"));
     this->setWindowModality(Qt::WindowModal);
+    this->setAttribute(Qt::WA_DeleteOnClose, true);
 
     ButtonBoxInit();
     GeneralSettingsInit();

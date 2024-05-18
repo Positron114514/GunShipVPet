@@ -27,8 +27,6 @@ public:
     void setChatWindowP(ChatWindow *window);
     ChatWindow *chatWindowP();
 
-    bool isMouseOnModel();
-
     // 重载函数
     void initializeGL() override;
     void resizeGL(int w, int h) override;

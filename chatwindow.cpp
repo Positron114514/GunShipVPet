@@ -44,8 +44,17 @@ void ChatWindow::onSettingsClicked()
 {
     qDebug() << QT_INTERFACE_LOG << "Settings Action triggered";
 
-    SettingsDialog settings(p);
-    int returnStatus = settings.exec();
+    if(p->getSettings() == nullptr)
+    {
+        SettingsDialog* settings = new SettingsDialog(p);
+        p->setSettings(settings);
 
-    qDebug() << QT_INTERFACE_LOG << "Settings quited, return value" << returnStatus;
+        int returnStatus = settings->exec();
+
+        qDebug() << QT_INTERFACE_LOG << "Settings quited, return value" << returnStatus;
+
+        p->setSettings(nullptr);
+    }
+
+    ui->chat->setDisabled(!p->LLMEnable());
 }

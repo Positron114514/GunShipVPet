@@ -9,8 +9,6 @@ MyOpenGL::MyOpenGL(QWidget *parent)
 {
     p = (VPetInterface*) this->parentWidget(); // 新增变量存父对象
 
-    // this->setAttribute(Qt::WA_TranslucentBackground, true);
-
     // 定时器任务
     timer = new QTimer(this);
     // 定时器信号与槽
@@ -71,20 +69,14 @@ void MyOpenGL::mousePressEvent(QMouseEvent *event)
 
     if(event->buttons() == Qt::LeftButton)
     {
-        // Bugs need to be fixed
-        if(/*isMouseOnModel()*/true)
-        {
-            qDebug() << QT_BACKGROUND_LOG << "Disable transparent mouse event";
-            p->setAttribute(Qt::WA_TransparentForMouseEvents, false);  // 鼠标操作穿透
-            isDragging = true;
-            originPos = event->globalPosition();
-        } else {
-            qDebug() << QT_BACKGROUND_LOG << "Enable transparent mouse event";
-            p->setAttribute(Qt::WA_TransparentForMouseEvents, true);  // 鼠标操作穿透
-        }
-    } else {
+        isDragging = true;
+        originPos = event->globalPosition();
+    } else if(event->buttons() == Qt::RightButton) {
         int modelNum = FileHandler::getModelNum();
         p->setModelIndex((p->modelIndex() + 1) % modelNum);
+    } else {
+        p->setWindowOnTopState(false);
+        p->transparentMouseEvent();
     }
 }
 
@@ -98,7 +90,7 @@ void MyOpenGL::mouseReleaseEvent(QMouseEvent *event)
 
 void MyOpenGL::mouseDoubleClickEvent(QMouseEvent *event)
 {
-    if(event->buttons() == Qt::RightButton)
+    if(event->buttons() != Qt::LeftButton)
         return;
 
     if(!p->LLMEnable())
@@ -191,19 +183,6 @@ void MyOpenGL::paintGL()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     // glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-}
-
-bool MyOpenGL::isMouseOnModel()
-{
-    int mx = QCursor::pos().x();
-    int my = QCursor::pos().y();
-
-    float clickX = mx - this->x();
-    float clickY = my - this->y();
-
-    LAppDelegate::GetInstance()->GetView()->TransformCoordinate(&clickX, &clickY);
-
-    return LAppLive2DManager::GetInstance()->GetModel(p->modelIndex())->isMouseOnModel(clickX, clickY);
 }
 
 void MyOpenGL::setChatWindowP(ChatWindow *window)

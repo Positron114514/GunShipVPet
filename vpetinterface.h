@@ -5,6 +5,8 @@
 
 #include "qheaders.h"
 
+class SettingsDialog;
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class VPetInterface;
@@ -57,13 +59,11 @@ public:
     void regAutoRun();
     bool isRegAutoRun();
 
-    // 开机自启实现函数:快捷方式实现
-    // void lnkAutoRun();
-    // bool isLnkAutoRun();
+    void transparentMouseEvent();
 
-    // 开机自启状态存储接口
-    // void setStartupAutoRun(bool state);
-    // bool startupAutoRun();
+    // 设置接口
+    void setSettings(SettingsDialog *pointer);
+    SettingsDialog *getSettings();
 
 signals:
     void LLMChanged(bool state);
@@ -85,6 +85,8 @@ private:
     QAction *actionChat;    // 大模型对话动作
 
     QPushButton *btn;
+
+    SettingsDialog *settings = nullptr;
 
     // ConfigSaver *saver;
 

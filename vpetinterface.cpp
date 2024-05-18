@@ -107,10 +107,16 @@ void VPetInterface::onSettingsClicked()
 {
     qDebug() << QT_INTERFACE_LOG << "Settings Action triggered";
 
-    SettingsDialog settings(this);
-    int returnStatus = settings.exec();
+    if(settings == nullptr)
+    {
+        settings = new SettingsDialog(this);
+        // connect(settings, &SettingsDialog::windowClose, this, &VPetInterface::onSettingsClosed);
+        int returnStatus = settings->exec();
 
-    qDebug() << QT_INTERFACE_LOG << "Settings quited, return value" << returnStatus;
+        qDebug() << QT_INTERFACE_LOG << "Settings quited, return value" << returnStatus;
+
+        settings = nullptr;
+    }
 }
 
 void VPetInterface::onChatClicked()
@@ -284,29 +290,14 @@ bool VPetInterface::isRegAutoRun()
     return (settings.contains(name) && newPath == oldPath);
 }
 
-// void VPetInterface::lnkAutoRun()
-// {
-//     QString startupPath = CustomDir::autoRunLnkDir();
-//     QString srcFile = QApplication::applicationFilePath();
-
-//     if(QFile(startupPath).exists())
-//         QFile::remove(startupPath);
-
-//     QFile::link(srcFile, startupPath);
-// }
-
-// bool VPetInterface::isLnkAutoRun()
-// {
-//     QString startupPath = CustomDir::autoRunLnkDir();
-//     return QFile(startupPath).exists();
-// }
-
 void VPetInterface::onTrayIconActivated(QSystemTrayIcon::ActivationReason reason)
 {
     switch(reason)
     {
     case QSystemTrayIcon::Trigger:
         this->showNormal(); // 单击，显示桌宠本身
+        this->setAttribute(Qt::WA_TransparentForMouseEvents, false);
+        this->setWindowOnTopState(true);
         break;
     case QSystemTrayIcon::DoubleClick:
         onSettingsClicked();    // 双击，显示设置界面
@@ -319,4 +310,23 @@ void VPetInterface::onTrayIconActivated(QSystemTrayIcon::ActivationReason reason
 void VPetInterface::onLLMChanged(bool state)
 {
     actionChat->setDisabled(!state);
+}
+
+void VPetInterface::transparentMouseEvent()
+{
+    this->setAttribute(Qt::WA_TransparentForMouseEvents, true);  // 鼠标操作穿透
+}
+
+SettingsDialog* VPetInterface::getSettings()
+{
+    return settings;
+}
+
+void VPetInterface::setSettings(SettingsDialog *pointer)
+{
+    settings = pointer;
+    if(pointer != nullptr)
+        qDebug() << QT_INTERFACE_LOG << "Settings created" << settings;
+    else
+        qDebug() << QT_BACKGROUND_LOG << "Settings deleted";
 }

@@ -78,6 +78,8 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 #include <QThread>
+#include <QWindow>
+#include <QPixmap>
 
 
 #endif // QHEADERS_H
