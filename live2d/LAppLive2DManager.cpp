@@ -188,8 +188,11 @@ void LAppLive2DManager::SetUpModel()
     // ResourcesPathの中にあるフォルダ名を全てクロールし、モデルが存在するフォルダを定義する。
     // フォルダはあるが同名の.model3.jsonが見つからなかった場合はリストに含めない。
     // 翻译: 获取 Resource 文件夹中的模型 若找不到则不包含 (?)
+    qDebug() << QT_DEBUG_OUTPUT << "Satrt set up model";
     csmString crawlPath(ResourcesPath);
     crawlPath += "*.*";
+
+    qDebug() << QT_DEBUG_OUTPUT << "Crawl path: " << crawlPath.GetRawString();
 
     struct _finddata_t fdata;
     intptr_t fh = _findfirst(crawlPath.GetRawString(), &fdata);
