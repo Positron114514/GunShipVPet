@@ -28,8 +28,10 @@ SOURCES += \
     main.cpp \
     myopengl.cpp \
     optimizedslider.cpp \
+    pythonhandler.cpp \
     qssloader.cpp \
     settingsdialog.cpp \
+    ttshandler.cpp \
     vpetinterface.cpp \
     llmhandler.cpp
 
@@ -54,9 +56,11 @@ HEADERS += \
     loghandler.h \
     myopengl.h \
     optimizedslider.h \
+    pythonhandler.h \
     qheaders.h \
     qssloader.h \
     settingsdialog.h \
+    ttshandler.h \
     vpetinterface.h \
     llmhandler.h
 

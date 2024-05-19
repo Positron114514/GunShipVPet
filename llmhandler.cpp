@@ -3,15 +3,6 @@
 // init
 LlmHandler::LlmHandler()
 {
-    Py_Initialize();
-    if(!Py_IsInitialized())
-    {
-        qDebug() << QT_DEBUG_OUTPUT << "Fail to initiallize python.";
-    }
-
-    PyRun_SimpleString("import sys");
-    PyRun_SimpleString("sys.path.append('./')");
-
     // 加载python文件
     chatApi = PyImport_ImportModule(PY_CHAT_API_PATH);
     if(!chatApi)

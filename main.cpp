@@ -1,4 +1,8 @@
+#include "pythonhandler.h"
+// #undef slots
+// #define slots Q_SLOTS
 #include "vpetinterface.h"
+
 
 #include <QApplication>
 #include "loghandler.h"
@@ -10,7 +14,7 @@ QMutex mutex;
 
 int main(int argc, char *argv[])
 {
-
+    PythonHadler::initPython();
     LogHandler::initLog();
     qInstallMessageHandler(LogHandler::message);
 

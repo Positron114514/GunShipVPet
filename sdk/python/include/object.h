@@ -177,6 +177,7 @@ typedef struct _typeobject PyTypeObject;
 /* PyTypeObject is defined in cpython/object.h */
 #endif
 
+#undef slots
 typedef struct{
     int slot;    /* slot id, see below */
     void *pfunc; /* function pointer */
@@ -189,6 +190,8 @@ typedef struct{
     unsigned int flags;
     PyType_Slot *slots; /* terminated by slot==0. */
 } PyType_Spec;
+
+#define slots Q_SLOTS
 
 PyAPI_FUNC(PyObject*) PyType_FromSpec(PyType_Spec*);
 #if !defined(Py_LIMITED_API) || Py_LIMITED_API+0 >= 0x03030000

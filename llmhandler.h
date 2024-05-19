@@ -3,8 +3,8 @@
 
 #define PY_GET_ACCESS_TOKEN "get_access_token"
 #define PY_GET_COMPLETION "get_completion"
-#define PY_CHAT_API_PATH "llm/chatapi"
-#define PY_INIT_PATH "llm/init"
+#define PY_CHAT_API_PATH "python/llm/chatapi"
+#define PY_INIT_PATH "python/llm/init"
 
 // 错误处理
 #define PY_LOAD_JSON_FAILED "loadJsonFailed"
