@@ -139,9 +139,10 @@ void VPetInterface::setWheelZoomState(bool state)
     qDebug() << QT_BACKGROUND_LOG << "wheel zoom active?" << state;
 }
 
-void VPetInterface::setWindowOnTopState(bool state)
+void VPetInterface::setWindowOnTopState(bool state, bool override)
 {
-    isWindowOnTop = state;
+    if(override)
+        isWindowOnTop = state;
 
     if(state)
         this->setWindowFlag(Qt::WindowStaysOnTopHint, true);   // 窗口置顶
@@ -297,7 +298,9 @@ void VPetInterface::onTrayIconActivated(QSystemTrayIcon::ActivationReason reason
     case QSystemTrayIcon::Trigger:
         this->showNormal(); // 单击，显示桌宠本身
         this->setAttribute(Qt::WA_TransparentForMouseEvents, false);
-        this->setWindowOnTopState(true);
+        ui->live2dWidget->setAttribute(Qt::WA_TransparentForMouseEvents, false);
+        if(isWindowOnTop)
+            this->setWindowOnTopState(true, false);
         break;
     case QSystemTrayIcon::DoubleClick:
         onSettingsClicked();    // 双击，显示设置界面
@@ -315,6 +318,7 @@ void VPetInterface::onLLMChanged(bool state)
 void VPetInterface::transparentMouseEvent()
 {
     this->setAttribute(Qt::WA_TransparentForMouseEvents, true);  // 鼠标操作穿透
+    ui->live2dWidget->setAttribute(Qt::WA_TransparentForMouseEvents, true);
 }
 
 SettingsDialog* VPetInterface::getSettings()

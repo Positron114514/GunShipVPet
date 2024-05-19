@@ -28,7 +28,7 @@ public:
     void InitializeAppDir();
 
     // 功能开关接口
-    void setWindowOnTopState(bool state);
+    void setWindowOnTopState(bool state, bool override = true);
     void setWheelZoomState(bool state);
     bool windowOnTopState();
     bool wheelZoomState();

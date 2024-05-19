@@ -75,7 +75,7 @@ void MyOpenGL::mousePressEvent(QMouseEvent *event)
         int modelNum = FileHandler::getModelNum();
         p->setModelIndex((p->modelIndex() + 1) % modelNum);
     } else {
-        p->setWindowOnTopState(false);
+        p->setWindowOnTopState(false, false);
         p->transparentMouseEvent();
     }
 }

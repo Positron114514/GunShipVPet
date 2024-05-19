@@ -2,6 +2,7 @@
 #define PYTHONHANDLER_H
 
 #include "Python.h"
+#include "qheaders.h"
 
 class PythonHadler
 {
