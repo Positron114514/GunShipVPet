@@ -38,7 +38,7 @@ public:
 
     /**
     * @brief   Resources フォルダにあるモデルフォルダ名をセットする
-    *
+    * 设置文件夹中的模型文件夹名称
     */
     void SetUpModel();
 

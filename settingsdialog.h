@@ -38,6 +38,7 @@ public slots:
     // void onRegBtnClicked();     // 实验功能槽函数
     void onChangedAboutPage();  // 切换到帮助与反馈界面后的槽函数
     void onAPISaveClicked();    // API保存按钮按下操作
+    void onDeleteModelClicked();
 
 signals:
     void LLMStateChanged(bool state);

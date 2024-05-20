@@ -11,6 +11,7 @@ public:
     static QString customDir();
     static QString startupDir();
     static QString autoRunLnkDir();
+    static QString resourcesDir();
 };
 
 #endif // CUSTOMDIR_H

@@ -107,6 +107,40 @@ bool FileHandler::copyDirectoryFiles(const QString &fromDir, const QString &toDi
     return true;
 }
 
+// 删除文件夹
+bool FileHandler::deleteFolder(const QString &folderPath)
+{
+    if(folderPath.isEmpty() || !QDir().exists(folderPath))
+    {
+        qDebug() << QT_BACKGROUND_LOG << "delete folder: invalid path";
+        return false;
+    }
+
+    QFileInfo info(folderPath);
+
+    if(info.isFile())
+    {
+        qDebug() << QT_BACKGROUND_LOG << "delete folder: dir isn't a folder";
+        return false;
+    }
+
+    if(info.isDir())
+    {
+        QDir dir(folderPath);
+        dir.removeRecursively();
+        qDebug() << QT_BACKGROUND_LOG << "delete folder: deleted dir";
+        return true;
+    }
+
+    qDebug() << QT_BACKGROUND_LOG << "delete folder: unknown fault";
+    return false;
+}
+
+void FileHandler::resetModel()
+{
+    LAppLive2DManager::GetInstance()->SetUpModel();
+}
+
 // 一些类型转换函数
 // 主要方便这个文件里一些函数
 // 用不用都行, 设成 public 了

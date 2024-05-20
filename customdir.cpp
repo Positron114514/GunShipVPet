@@ -21,3 +21,8 @@ QString CustomDir::autoRunLnkDir()
 {
     return startupDir() + QDir::separator() + "\\GunshipVPet.lnk";
 }
+
+QString CustomDir::resourcesDir()
+{
+    return CustomDir::customDir() + QDir::separator() + "resources/";
+}

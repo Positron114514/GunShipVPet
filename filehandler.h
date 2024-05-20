@@ -47,6 +47,11 @@ public:
     // fromDir -> toDir, 复制文件夹中的内容
     static bool copyDirectoryFiles(const QString &fromDir, const QString &toDir, bool coverFileIfExist=true);
 
+    // 删除路经为的dir文件夹
+    static bool deleteFolder(const QString &folderPath);
+
+    // 重新加载模型列表
+    static void resetModel();
 
     // 一些类型转换函数
     // 用不用都行, 设成 public 了

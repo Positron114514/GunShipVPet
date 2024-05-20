@@ -37,7 +37,7 @@ QJsonObject *ConfigSaver::readConfigFile()
         return NULL;
     }
 
-    qDebug() << QT_BACKGROUND_LOG << "file opened";
+    qDebug() << QT_BACKGROUND_LOG << "config file opened";
 
     // 读取文件的全部内容
     QTextStream stream(&file);

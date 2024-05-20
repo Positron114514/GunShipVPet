@@ -388,6 +388,7 @@ void SettingsDialog::onDeleteModelClicked()
             warning.setIcon(QMessageBox::Warning);
             warning.setText("请先选择其他模型再尝试删除");
             warning.exec();
+            qDebug() << QT_BACKGROUND_LOG << "trying to delete a ac"
             return;
         }
 

@@ -33,8 +33,7 @@ namespace LAppDefine {
 
     // 相対パス
     // 相对路径
-    QByteArray pathArr =
-        QString(CustomDir::customDir() + QDir::separator() + "resources/").toUtf8();
+    QByteArray pathArr = CustomDir::resourcesDir().toUtf8();
     const csmChar* ResourcesPath = pathArr.data();
     // const csmChar* ResourcesPath = "resources/";
 

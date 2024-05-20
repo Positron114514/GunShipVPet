@@ -208,7 +208,7 @@ void VPetInterface::setModelIndex(int index)
         return;
 
     curModel = index;
-    if(index <= FileHandler::getModelNum())
+    if(index < FileHandler::getModelNum())
         FileHandler::switchModel(index);
     else
     {
