@@ -21,3 +21,22 @@ PyObject* PythonHandler::getPyFunction(PyObject* pyFile, QString functionName)
     }
     return retObj;
 }
+
+void PythonHandler::importMoudle(QString moudleName)
+{
+
+    QString pySentence = "import " + moudleName;
+    PyRun_SimpleString(pySentence.toStdString().c_str());
+}
+
+void PythonHandler::importNecessaryPyMoudle()
+{
+    importMoudle("os");
+    importMoudle("requests");
+    importMoudle("json");
+
+    PyRun_SimpleString("from requests.exceptions import JSONDecodeError");
+
+    importMoudle("edge_tts");
+    importMoudle("asyncio");
+}

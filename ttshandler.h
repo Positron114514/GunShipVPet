@@ -30,6 +30,7 @@ public:
     void textToMp3File(QString* text, int voiceIndex);
 
     // 获取所有可使用声音的list
+    // 返回值为原指针, 可能存在危险
     QStringList* getVoiceList();
 
     // void setModelVoice(int modelIndex, int VoiceIndex);

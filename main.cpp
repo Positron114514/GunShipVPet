@@ -16,6 +16,7 @@ QMutex mutex;
 int main(int argc, char *argv[])
 {
     PythonHandler::initPython();
+    PythonHandler::importNecessaryPyMoudle();
     LogHandler::initLog();
     qInstallMessageHandler(LogHandler::message);
 

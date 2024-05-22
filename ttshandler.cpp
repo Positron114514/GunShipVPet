@@ -108,3 +108,19 @@ void TtsHandler::stop()
         _player->stop();
     }
 }
+
+QStringList* TtsHandler::getVoiceList()
+{
+    return _voiceList;
+}
+
+TtsHandler::~TtsHandler()
+{
+    delete _ttsApi;
+    delete _pyTextToMp3File;
+    delete _voiceList;
+    delete _rate;
+    delete _volume;
+    delete _mp3SaveFileName;
+    delete _player;
+}
