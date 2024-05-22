@@ -101,6 +101,12 @@ void TtsHandler::speak(QString* text, int voiceIndex)
     _player->play();
 }
 
+void TtsHandler::test(int voiceIndex)
+{
+    QString s = QString::fromUtf8("你好, 这是一条测试");
+    speak(&s, voiceIndex);
+}
+
 void TtsHandler::stop()
 {
     if(_player->isPlaying())

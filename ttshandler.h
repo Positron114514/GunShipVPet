@@ -36,7 +36,10 @@ public:
     // void setModelVoice(int modelIndex, int VoiceIndex);
 
     // 说话(直接调用该函数即可)
-    void speak(QString* text, int vopiceIndex);
+    void speak(QString* text, int voiceIndex);
+
+    // 测试声音
+    void test(int voiceIndex);
 
     // 停止说话
     void stop();
