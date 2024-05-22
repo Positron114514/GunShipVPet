@@ -13,11 +13,13 @@
 #define MIN_MODEL_WIDTH 140
 #define DEFAULT_MODEL_WIDTH 250
 #define MODEL_PROPORTION 1.2
+#define DEFAULT_POS_PROPORTION 0.8
 #define DEFAULT_FPS 30
 #define DEFAULT_MODEL 0
 #define LOG_DIR "log.txt"
 #define CONFIG_DIR "config.json"
 #define API_CESAR_KEY 6
+#define AUTOSAVE_TIMEOUT 60000
 
 // System based macros
 #define REG_AUTO_RUN "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
@@ -80,9 +82,8 @@
 #include <QThread>
 #include <QWindow>
 #include <QPixmap>
+#include <QScreen>
 #include <QtCore/QCoreApplication>
 #include <QtMultimedia/QMediaPlayer>
-
-
 
 #endif // QHEADERS_H

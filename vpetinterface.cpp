@@ -22,9 +22,11 @@ VPetInterface::VPetInterface(QWidget *parent)
     this->setWindowIcon(QIcon(":/ico/resources/icons/main-logo.ico"));
     this->setFont(QFont(":/font/MiSans-Regular.ttf"));
 
+    QRect geo = QGuiApplication::primaryScreen()->geometry();
+
     // 窗体几何设置
     this->resize(DEFAULT_MODEL_WIDTH, DEFAULT_MODEL_WIDTH * MODEL_PROPORTION);
-    this->move(1350, 650);  // 窗体默认放右下角
+    this->move(geo.width() * DEFAULT_POS_PROPORTION, geo.height() * DEFAULT_POS_PROPORTION);  // 窗体默认放右下角
 
     // 设置窗体透明
     this->setWindowFlag(Qt::WindowType::MSWindowsOwnDC, false);
@@ -50,6 +52,9 @@ VPetInterface::VPetInterface(QWidget *parent)
 
     // 初始化配置文件
     ConfigSaver::loadConfig(this);
+
+    // 初始化自动保存
+    InitializeAutoSaveService(AUTOSAVE_TIMEOUT);
 }
 
 VPetInterface::~VPetInterface()
@@ -101,6 +106,15 @@ void VPetInterface::InitializeAppDir()
     QDir dir(CustomDir::customDir());
     if(!dir.exists())
         QDir().mkdir(CustomDir::customDir());  // 不存在则创建文件夹
+}
+
+void VPetInterface::InitializeAutoSaveService(int mesc)
+{
+    autoSaveTimer = new QTimer(this);
+
+    connect(autoSaveTimer, &QTimer::timeout, this, &VPetInterface::generalSaveConfig);
+
+    autoSaveTimer->start(mesc);
 }
 
 void VPetInterface::onSettingsClicked()
@@ -166,6 +180,9 @@ bool VPetInterface::windowOnTopState()
 
 void VPetInterface::resizeWindow(int width, int height)
 {
+    if(width < MIN_MODEL_WIDTH || height < MIN_MODEL_WIDTH * MODEL_PROPORTION)
+        return;
+
     QSize orgSize = this->size();
 
     this->resize(width, height);
@@ -179,6 +196,9 @@ void VPetInterface::resizeWindow(int width, int height)
 
 void VPetInterface::resizeWindow(QSize size)
 {
+    if(size.width() < MIN_MODEL_WIDTH || size.height() < MIN_MODEL_WIDTH * MODEL_PROPORTION)
+        return;
+
     QSize orgSize = this->size();
 
     this->resize(size);
@@ -333,4 +353,10 @@ void VPetInterface::setSettings(SettingsDialog *pointer)
         qDebug() << QT_INTERFACE_LOG << "Settings created" << settings;
     else
         qDebug() << QT_BACKGROUND_LOG << "Settings deleted";
+}
+
+void VPetInterface::generalSaveConfig()
+{
+    ConfigSaver::writeConfig(this);
+    qDebug() << QT_BACKGROUND_LOG << "config.json saved";
 }
