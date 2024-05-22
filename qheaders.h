@@ -80,6 +80,9 @@
 #include <QThread>
 #include <QWindow>
 #include <QPixmap>
+#include <QtCore/QCoreApplication>
+#include <QtMultimedia/QMediaPlayer>
+
 
 
 #endif // QHEADERS_H

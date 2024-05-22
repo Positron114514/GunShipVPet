@@ -77,6 +77,10 @@ QT += opengl
 QT += core gui openglwidgets
 QT += widgets
 
+# media
+QT += multimedia
+
+
 # Configurations for Live2D SDK
 
 # SDK include路径

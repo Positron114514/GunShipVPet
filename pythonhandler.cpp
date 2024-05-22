@@ -1,6 +1,6 @@
 #include "pythonhandler.h"
 
-void PythonHadler::initPython()
+void PythonHandler::initPython()
 {
     Py_Initialize();
     if(!Py_IsInitialized())
@@ -10,4 +10,14 @@ void PythonHadler::initPython()
 
     PyRun_SimpleString("import sys");
     PyRun_SimpleString("sys.path.append('./')");
+}
+
+PyObject* PythonHandler::getPyFunction(PyObject* pyFile, QString functionName)
+{
+    PyObject* retObj = PyObject_GetAttrString(pyFile, functionName.toStdString().c_str());
+    if(!retObj)
+    {
+        qDebug() << QT_DEBUG_OUTPUT << "Fail to load function: " << functionName;
+    }
+    return retObj;
 }
