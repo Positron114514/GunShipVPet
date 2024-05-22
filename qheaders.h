@@ -82,5 +82,7 @@
 #include <QWindow>
 #include <QPixmap>
 #include <QScreen>
+#include <QtCore/QCoreApplication>
+#include <QtMultimedia/QMediaPlayer>
 
 #endif // QHEADERS_H

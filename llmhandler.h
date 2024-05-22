@@ -12,7 +12,7 @@
 
 
 // 注意: 这里需要强制安装 python3.8.10 在工程项目里面
-#include "Python.h"
+#include "pythonhandler.h"
 #include "qheaders.h"
 
 // 使用方法:
@@ -23,9 +23,6 @@ class LlmHandler{
 public:
     // init
     LlmHandler();
-
-    // 获取python文件中的函数, 并返回一个 PyObject
-    static PyObject* getPyFunction(PyObject* pyFile, QString functionName);
 
     // get access token to wenxin
     void getAccessToken(QString apiKey, QString secretKey);

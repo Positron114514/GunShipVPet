@@ -16,23 +16,13 @@ LlmHandler::LlmHandler()
         qDebug() << QT_DEBUG_OUTPUT << "Fail to load llm/init.py";
     }
 
-    pyGetCompletion = getPyFunction(chatApi, PY_GET_COMPLETION);
-}
-
-PyObject* LlmHandler::getPyFunction(PyObject* pyFile, QString functionName)
-{
-    PyObject* retObj = PyObject_GetAttrString(pyFile, functionName.toStdString().c_str());
-    if(!retObj)
-    {
-        qDebug() << QT_DEBUG_OUTPUT << "Fail to load function: " << functionName;
-    }
-    return retObj;
+    pyGetCompletion = PythonHandler::getPyFunction(chatApi, PY_GET_COMPLETION);
 }
 
 void LlmHandler::getAccessToken(QString apiKey, QString secretKey)
 {
     PyObject* args = PyTuple_New(2);
-    PyObject* pyGetAccessToken = getPyFunction(chatApi, PY_GET_ACCESS_TOKEN);
+    PyObject* pyGetAccessToken = PythonHandler::getPyFunction(chatApi, PY_GET_ACCESS_TOKEN);
 
     PyObject* pyApiKey = PyUnicode_FromString(apiKey.toStdString().c_str());
     PyObject* pySecretKey = PyUnicode_FromString(secretKey.toStdString().c_str());
