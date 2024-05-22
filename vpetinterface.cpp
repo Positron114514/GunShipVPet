@@ -22,9 +22,11 @@ VPetInterface::VPetInterface(QWidget *parent)
     this->setWindowIcon(QIcon(":/ico/resources/icons/main-logo.ico"));
     this->setFont(QFont(":/font/MiSans-Regular.ttf"));
 
+    QRect geo = QGuiApplication::primaryScreen()->geometry();
+
     // 窗体几何设置
     this->resize(DEFAULT_MODEL_WIDTH, DEFAULT_MODEL_WIDTH * MODEL_PROPORTION);
-    this->move(1350, 650);  // 窗体默认放右下角
+    this->move(geo.width() * DEFAULT_POS_PROPORTION, geo.height() * DEFAULT_POS_PROPORTION);  // 窗体默认放右下角
 
     // 设置窗体透明
     this->setWindowFlag(Qt::WindowType::MSWindowsOwnDC, false);
@@ -166,6 +168,9 @@ bool VPetInterface::windowOnTopState()
 
 void VPetInterface::resizeWindow(int width, int height)
 {
+    if(width < MIN_MODEL_WIDTH || height < MIN_MODEL_WIDTH * MODEL_PROPORTION)
+        return;
+
     QSize orgSize = this->size();
 
     this->resize(width, height);
@@ -179,6 +184,9 @@ void VPetInterface::resizeWindow(int width, int height)
 
 void VPetInterface::resizeWindow(QSize size)
 {
+    if(size.width() < MIN_MODEL_WIDTH || size.height() < MIN_MODEL_WIDTH * MODEL_PROPORTION)
+        return;
+
     QSize orgSize = this->size();
 
     this->resize(size);

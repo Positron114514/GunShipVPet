@@ -13,6 +13,7 @@
 #define MIN_MODEL_WIDTH 140
 #define DEFAULT_MODEL_WIDTH 250
 #define MODEL_PROPORTION 1.2
+#define DEFAULT_POS_PROPORTION 0.8
 #define DEFAULT_FPS 30
 #define DEFAULT_MODEL 0
 #define LOG_DIR "log.txt"
@@ -80,6 +81,6 @@
 #include <QThread>
 #include <QWindow>
 #include <QPixmap>
-
+#include <QScreen>
 
 #endif // QHEADERS_H
