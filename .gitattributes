@@ -2,4 +2,41 @@
 
 sdk/** linguist-vendored
 
+sdk/Framework/src/** linguist-vendored
+sdk/Framework/src/* linguist-vendored
+sdk/Framework/src/Effect/** linguist-vendored
+sdk/Framework/src/Effect/* linguist-vendored
+sdk/Framework/src/Id/** linguist-vendored
+sdk/Framework/src/Id/* linguist-vendored
+sdk/Framework/src/Math/** linguist-vendored
+sdk/Framework/src/Math/* linguist-vendored
+sdk/Framework/src/Model/** linguist-vendored
+sdk/Framework/src/Model/* linguist-vendored
+sdk/Framework/src/Motion/** linguist-vendored
+sdk/Framework/src/Motion/* linguist-vendored
+sdk/Framework/src/Physics/** linguist-vendored
+sdk/Framework/src/Physics/* linguist-vendored
+sdk/Framework/src/Rendering/** linguist-vendored
+sdk/Framework/src/Rendering/* linguist-vendored
+sdk/Framework/src/Type/** linguist-vendored
+sdk/Framework/src/Type/* linguist-vendored
+sdk/Framework/src/Utils/** linguist-vendored
+sdk/Framework/src/Utils/* linguist-vendored
+
+sdk/Core/include/** linguist-vendored
+
+sdk/glew/src/** linguist-vendored
+sdk/glew/src/* linguist-vendored
+sdk/glew/include/GL/** linguist-vendored
+sdk/glew/include/GL/* linguist-vendored
+
+sdk/glfw/src/** linguist-vendored
+sdk/glfw/src/* linguist-vendored
+sdk/glfw/include/GLFW/** linguist-vendored
+sdk/glfw/include/GLFW/* linguist-vendored
+
 sdk/python/** linguist-vendored
+sdk/python/* linguist-vendored
+
+sdk/stb/** linguist-vendored
+sdk/stb/* linguist-vendored
