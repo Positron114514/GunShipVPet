@@ -282,6 +282,22 @@ bool VPetInterface::TTSEnable()
     return isTTSEnable;
 }
 
+void VPetInterface::setVoice(int index)
+{
+    if(curVoice == index)
+        return;
+
+    curVoice = index;
+    // 设置语音包
+
+    qDebug() << QT_INTERFACE_LOG << "voice model changed:";
+}
+
+int VPetInterface::voice()
+{
+    return curVoice;
+}
+
 void VPetInterface::regAutoRun()
 {
     QString appPath = QApplication::applicationFilePath();

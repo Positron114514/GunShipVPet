@@ -72,5 +72,8 @@
         <file>resources/svgs/help.svg</file>
         <file>resources/svgs/issues.svg</file>
         <file>resources/svgs/settings.svg</file>
+        <file>resources/svgs/sound.svg</file>
+        <file>resources/svgs/preview.svg</file>
+        <file>resources/svgs/speak.svg</file>
     </qresource>
 </RCC>

@@ -26,6 +26,7 @@ SettingsDialog::SettingsDialog(QWidget *parent)
     ButtonBoxInit();
     GeneralSettingsInit();
     ModelSettingsInit();
+    VoiceSettingsInit();
     LLMSettingsInit();
     AboutSettingsInit();
 }
@@ -108,6 +109,11 @@ void SettingsDialog::ModelSettingsInit()
             this, &SettingsDialog::onImportClicked);
     connect(ui->deleteButton, &QPushButton::clicked,
             this, &SettingsDialog::onDeleteModelClicked);
+}
+
+void SettingsDialog::VoiceSettingsInit()
+{
+
 }
 
 void SettingsDialog::LLMSettingsInit()

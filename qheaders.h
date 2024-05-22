@@ -20,6 +20,7 @@
 #define CONFIG_DIR "config.json"
 #define API_CESAR_KEY 6
 #define AUTOSAVE_TIMEOUT 60000
+#define DEFAULT_VOICE 0
 
 // System based macros
 #define REG_AUTO_RUN "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"

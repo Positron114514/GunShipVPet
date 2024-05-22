@@ -57,6 +57,10 @@ public:
     void setAPI(QString api, QString secret);
     QStringList api();
 
+    // tts语音包接口
+    void setVoice(int index);
+    int voice();
+
     // 开机自启实现函数:注册表实现（实验性）
     void regAutoRun();
     bool isRegAutoRun();
@@ -97,6 +101,7 @@ private:
 
     int curFps = DEFAULT_FPS;
     int curModel = DEFAULT_MODEL;
+    int curVoice = DEFAULT_VOICE;
 
     bool isWindowOnTop = true;
     bool isWheelZoomActive = true;
