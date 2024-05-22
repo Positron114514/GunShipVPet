@@ -52,6 +52,9 @@ VPetInterface::VPetInterface(QWidget *parent)
 
     // 初始化配置文件
     ConfigSaver::loadConfig(this);
+
+    // 初始化自动保存
+    InitializeAutoSaveService(AUTOSAVE_TIMEOUT);
 }
 
 VPetInterface::~VPetInterface()
@@ -103,6 +106,15 @@ void VPetInterface::InitializeAppDir()
     QDir dir(CustomDir::customDir());
     if(!dir.exists())
         QDir().mkdir(CustomDir::customDir());  // 不存在则创建文件夹
+}
+
+void VPetInterface::InitializeAutoSaveService(int mesc)
+{
+    autoSaveTimer = new QTimer(this);
+
+    connect(autoSaveTimer, &QTimer::timeout, this, &VPetInterface::generalSaveConfig);
+
+    autoSaveTimer->start(mesc);
 }
 
 void VPetInterface::onSettingsClicked()
@@ -341,4 +353,10 @@ void VPetInterface::setSettings(SettingsDialog *pointer)
         qDebug() << QT_INTERFACE_LOG << "Settings created" << settings;
     else
         qDebug() << QT_BACKGROUND_LOG << "Settings deleted";
+}
+
+void VPetInterface::generalSaveConfig()
+{
+    ConfigSaver::writeConfig(this);
+    qDebug() << QT_BACKGROUND_LOG << "config.json saved";
 }

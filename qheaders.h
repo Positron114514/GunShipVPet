@@ -19,6 +19,7 @@
 #define LOG_DIR "log.txt"
 #define CONFIG_DIR "config.json"
 #define API_CESAR_KEY 6
+#define AUTOSAVE_TIMEOUT 60000
 
 // System based macros
 #define REG_AUTO_RUN "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"

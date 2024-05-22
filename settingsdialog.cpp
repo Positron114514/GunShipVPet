@@ -1,6 +1,7 @@
 #include "settingsdialog.h"
 #include "ui_settingsdialog.h"
 #include "customdir.h"
+#include "configsaver.h"
 
 #define ZOOM_ENABLE_REQ "(关闭鼠标缩放后可用)"
 
@@ -31,6 +32,7 @@ SettingsDialog::SettingsDialog(QWidget *parent)
 
 SettingsDialog::~SettingsDialog()
 {
+    ConfigSaver::writeConfig(p);
     qDebug() << QT_BACKGROUND_LOG << "Settings released";
     delete ui;
 }

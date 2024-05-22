@@ -1,3 +1,5 @@
 *.h linguist-language=C++
 
-ano-dir/** linguist-vendored
+sdk/** linguist-vendored
+
+sdk/python/** linguist-vendored

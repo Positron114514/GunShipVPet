@@ -27,6 +27,8 @@ public:
 
     void InitializeAppDir();
 
+    void InitializeAutoSaveService(int mesc);
+
     // 功能开关接口
     void setWindowOnTopState(bool state, bool override = true);
     void setWheelZoomState(bool state);
@@ -73,6 +75,7 @@ public slots:
     void onChatClicked();
     void onTrayIconActivated(QSystemTrayIcon::ActivationReason reason);
     void onLLMChanged(bool state);
+    void generalSaveConfig();
 
 private:
     Ui::VPetInterface *ui;
@@ -87,6 +90,8 @@ private:
     QPushButton *btn;
 
     SettingsDialog *settings = nullptr;
+
+    QTimer *autoSaveTimer = nullptr;
 
     // ConfigSaver *saver;
 
