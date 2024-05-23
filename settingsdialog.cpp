@@ -113,7 +113,29 @@ void SettingsDialog::ModelSettingsInit()
 
 void SettingsDialog::VoiceSettingsInit()
 {
+    // 初始化音量条、语速条及相关标签
+    ui->volumeSlider->setMaximum(100);
+    ui->volumeSlider->setMinimum(0);
+    ui->volumeSlider->setPageStep(1);
+    ui->volumeSlider->setValue(p->volume());
+    ui->volume->setText(QString::number(p->volume()) + "%");
 
+    ui->paceSlider->setMaximum(100);
+    ui->paceSlider->setMinimum(0);
+    ui->volumeSlider->setPageStep(1);
+    ui->paceSlider->setValue(p->pace());
+    ui->pace->setText(QString::number(p->pace()) + "%");
+
+    // 音量条语速条信号和槽
+    connect(ui->volumeSlider, &OptimizedSlider::sliderMoved,
+            this, &SettingsDialog::onVolumeChanged);
+    connect(ui->volumeSlider, &OptimizedSlider::sliderReleased,
+            this, &SettingsDialog::onVolumeChanged);
+
+    connect(ui->paceSlider, &OptimizedSlider::sliderMoved,
+            this, &SettingsDialog::onPaceChanged);
+    connect(ui->paceSlider, &OptimizedSlider::sliderReleased,
+            this, &SettingsDialog::onPaceChanged);
 }
 
 void SettingsDialog::LLMSettingsInit()
@@ -223,28 +245,6 @@ void SettingsDialog::onComboBoxChanged()
     modelIndex = ui->comboModel->currentIndex();
     qDebug() << QT_DEBUG_OUTPUT << "current index:" << modelIndex;
 }
-
-/*
-void SettingsDialog::onImportClicked()
-{
-    QString folderDir = QFileDialog::getExistingDirectory(this, "选择模型文件夹", "/");
-
-    // QDir fromDir(folderDir);
-    // QDir targetDir("Resources/");
-
-    FileHandler::addModel(folderDir);
-
-    // 将选定路径保存在 config.json 中
-    // FileHandler::saveModelPath(folderDir);
-
-    // FileHandler::copyDirectoryFiles(folderDir, "resources/" + QDir(folderDir).dirName(), true);
-    // qDebug() << QT_BACKGROUND_LOG << fileDir << "has been moved to resources";
-
-    ui->comboModel->clear();
-    fileDir = FileHandler::getModelDirList();
-    ui->comboModel->addItems(fileDir);
-}
-*/
 
 void SettingsDialog::onImportClicked()
 {
@@ -422,4 +422,39 @@ void SettingsDialog::onDeleteModelClicked()
 
         ui->comboModel->setCurrentIndex(p->modelIndex());
     }
+}
+
+void SettingsDialog::onVolumeChanged()
+{
+    int volume = ui->volumeSlider->value();
+    int returnValue;
+
+    if(volume > HIGH_VOLUME)
+    {
+        if(!isHighVolumeNotified)
+        {
+            QMessageBox notify(this);
+            notify.setWindowTitle("高音量警告");
+            notify.setText("音量高于" + QString::number(HIGH_VOLUME) + "%，可能会损伤听力，是否继续？");
+            notify.setIcon(QMessageBox::Warning);
+            notify.addButton("确定", QMessageBox::AcceptRole);
+            notify.addButton("取消", QMessageBox::RejectRole);
+            returnValue = notify.exec();
+            if(returnValue)
+                isHighVolumeNotified = true;
+            else
+                return;
+        }
+    }
+
+    p->setVolume(volume);
+    ui->volume->setText(QString::number(p->volume()) + "%");
+}
+
+void SettingsDialog::onPaceChanged()
+{
+    int pace = ui->paceSlider->value();
+
+    p->setPace(pace);
+    ui->pace->setText(QString::number(p->pace()) + "%");
 }

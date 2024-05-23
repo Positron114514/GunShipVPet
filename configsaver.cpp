@@ -111,6 +111,11 @@ void ConfigSaver::writeConfig(VPetInterface *p)
     // LLM&TTS config
     rootObject.insert("chatLLM", p->LLMEnable());
     rootObject.insert("chatTTS", p->TTSEnable());
+    // voice config
+    rootObject.insert("voice", p->voice());
+    // volume&pace config
+    rootObject.insert("volume", p->volume());
+    rootObject.insert("pace", p->pace());
 
     saveConfigFile(rootObject);
 }
@@ -199,6 +204,13 @@ void ConfigSaver::loadConfig(VPetInterface *p)
     // LLM&TTS config
     p->setLLMEnable(root->value("chatLLM").toBool());
     p->setTTSEnable(root->value("chatTTS").toBool());
+    // voice config
+    p->setVoice(root->value("voice").toInt());
+    // volume&pace config
+    auto volume = root->value("volume");
+    p->setVolume(volume.toInt());
+    auto pace = root->value("pace");
+    p->setPace(pace.toInt());
 
     // qDebug() << QT_DEBUG_OUTPUT << "api keys:" << p->api();
 

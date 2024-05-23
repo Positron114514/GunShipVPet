@@ -40,6 +40,8 @@ public slots:
     void onChangedAboutPage();  // 切换到帮助与反馈界面后的槽函数
     void onAPISaveClicked();    // API保存按钮按下操作
     void onDeleteModelClicked();
+    void onVolumeChanged();
+    void onPaceChanged();
 
 signals:
     void LLMStateChanged(bool state);
@@ -58,6 +60,8 @@ private:
     QSize orgSize;  // 初始窗口大小状态存储
 
     int autoRunErrorTime = 0;   // 添加自启失败次数
+
+    bool isHighVolumeNotified = false;
 };
 
 #endif // SETTINGSDIALOG_H

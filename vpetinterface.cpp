@@ -41,9 +41,6 @@ VPetInterface::VPetInterface(QWidget *parent)
     setWindowOnTopState(true);
     setWheelZoomState(true);
 
-    // 初始化交互控件
-    InitializeInterface();
-
     // 初始化用户文件目录
     InitializeAppDir();
 
@@ -62,12 +59,6 @@ VPetInterface::~VPetInterface()
     ConfigSaver::writeConfig(this); // 保存配置文件
     qDebug() << QT_BACKGROUND_LOG << "VPetInterface released";
     delete ui;
-}
-
-void VPetInterface::InitializeInterface()
-{
-    // FloatButtonWidget *w = new FloatButtonWidget;
-    // ui->live2dWidget->layout()->addWidget(w);
 }
 
 void VPetInterface::InitializeSystemTray()
@@ -296,6 +287,32 @@ void VPetInterface::setVoice(int index)
 int VPetInterface::voice()
 {
     return curVoice;
+}
+
+void VPetInterface::setVolume(int volume)
+{
+    if(volume < 0 || volume > 100)
+        return;
+    curVolume = volume;
+    qDebug() << QT_INTERFACE_LOG << "volume changed to:" << volume;
+}
+
+int VPetInterface::volume()
+{
+    return curVolume;
+}
+
+void VPetInterface::setPace(int pace)
+{
+    if(pace < 0 || pace > 100)
+        return;
+    curPace = pace;
+    qDebug() << QT_INTERFACE_LOG << "pace changed to:" << pace;
+}
+
+int VPetInterface::pace()
+{
+    return curPace;
 }
 
 void VPetInterface::regAutoRun()

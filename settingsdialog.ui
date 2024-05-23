@@ -450,7 +450,7 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="OptimizedSlider" name="horizontalSlider">
+      <widget class="OptimizedSlider" name="volumeSlider">
        <property name="geometry">
         <rect>
          <x>140</x>
@@ -489,7 +489,7 @@
         <string>语速</string>
        </property>
       </widget>
-      <widget class="OptimizedSlider" name="horizontalSlider_2">
+      <widget class="OptimizedSlider" name="paceSlider">
        <property name="geometry">
         <rect>
          <x>140</x>

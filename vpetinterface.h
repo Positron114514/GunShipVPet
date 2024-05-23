@@ -21,8 +21,6 @@ public:
     VPetInterface(QWidget *parent = nullptr);
     ~VPetInterface();
 
-    void InitializeInterface();
-
     void InitializeSystemTray();
 
     void InitializeAppDir();
@@ -60,6 +58,14 @@ public:
     // tts语音包接口
     void setVoice(int index);
     int voice();
+
+    // tts音量接口
+    void setVolume(int volume);
+    int volume();
+
+    // tts语速接口
+    void setPace(int pace);
+    int pace();
 
     // 开机自启实现函数:注册表实现（实验性）
     void regAutoRun();
@@ -102,6 +108,8 @@ private:
     int curFps = DEFAULT_FPS;
     int curModel = DEFAULT_MODEL;
     int curVoice = DEFAULT_VOICE;
+    int curVolume = DEFAULT_VOLUME;
+    int curPace = DEFAULT_PACE;
 
     bool isWindowOnTop = true;
     bool isWheelZoomActive = true;

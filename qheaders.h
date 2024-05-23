@@ -21,6 +21,9 @@
 #define API_CESAR_KEY 6
 #define AUTOSAVE_TIMEOUT 60000
 #define DEFAULT_VOICE 0
+#define DEFAULT_VOLUME 50
+#define DEFAULT_PACE 50
+#define HIGH_VOLUME 75
 
 // System based macros
 #define REG_AUTO_RUN "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
