@@ -81,3 +81,9 @@ qss
 
 # Build
 build
+
+# vscode
+.vscode
+
+# my python
+python3.8.10

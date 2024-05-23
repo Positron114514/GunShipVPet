@@ -10,6 +10,8 @@ void PythonHandler::initPython()
 
     PyRun_SimpleString("import sys");
     PyRun_SimpleString("sys.path.append('./')");
+    PyRun_SimpleString("sys.path.append('./python/llm')");
+    PyRun_SimpleString("sys.path.append('./python/tts')");
 }
 
 PyObject* PythonHandler::getPyFunction(PyObject* pyFile, QString functionName)

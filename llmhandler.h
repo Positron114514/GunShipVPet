@@ -3,8 +3,8 @@
 
 #define PY_GET_ACCESS_TOKEN "get_access_token"
 #define PY_GET_COMPLETION "get_completion"
-#define PY_CHAT_API_PATH "python/llm/chatapi"
-#define PY_INIT_PATH "python/llm/init"
+#define PY_CHAT_API_PATH "chatapi"
+#define PY_INIT_PATH "init"
 
 // 错误处理
 #define PY_LOAD_JSON_FAILED "loadJsonFailed"
@@ -26,6 +26,9 @@ public:
 
     // get access token to wenxin
     void getAccessToken(QString apiKey, QString secretKey);
+
+    // 获取当前的对象, 若无则创建
+    static LlmHandler* getInstance();
 
     // talk with llm
     // prompt: input string

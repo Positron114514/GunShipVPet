@@ -1,5 +1,11 @@
 #include "ttshandler.h"
 
+namespace
+{
+TtsHandler* _ttsHandler;
+}
+
+
 TtsHandler::TtsHandler()
 {
     // init voioce list
@@ -26,7 +32,21 @@ TtsHandler::TtsHandler()
 
     // get text_to_mp3_file in python
     _ttsApi = PyImport_ImportModule(PY_TTS_PATH);
+    if(_ttsApi == NULL)
+    {
+        qDebug() << QT_DEBUG_OUTPUT << "Fail to load ttsApi.";
+    }
     _pyTextToMp3File = PythonHandler::getPyFunction(_ttsApi, "text_to_mp3_file");
+}
+
+TtsHandler* TtsHandler::getInstance()
+{
+    if(_ttsHandler == NULL)
+    {
+        _ttsHandler = new TtsHandler();
+    }
+
+    return _ttsHandler;
 }
 
 void TtsHandler::textToMp3File(QString* text, int voiceIndex)

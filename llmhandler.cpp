@@ -1,22 +1,38 @@
 #include "llmhandler.h"
 
+// llmhandler
+namespace
+{
+LlmHandler* _llmHandler;
+}
+
 // init
 LlmHandler::LlmHandler()
 {
     // 加载python文件
     chatApi = PyImport_ImportModule(PY_CHAT_API_PATH);
-    if(!chatApi)
+    if(chatApi == NULL)
     {
         qDebug() << QT_DEBUG_OUTPUT << "Fail to load llm/chatapi.py";
     }
 
     init = PyImport_ImportModule(PY_INIT_PATH);
-    if(!init)
+    if(init == NULL)
     {
         qDebug() << QT_DEBUG_OUTPUT << "Fail to load llm/init.py";
     }
 
     pyGetCompletion = PythonHandler::getPyFunction(chatApi, PY_GET_COMPLETION);
+}
+
+LlmHandler* LlmHandler::getInstance()
+{
+    if(_llmHandler == NULL)
+    {
+        _llmHandler = new LlmHandler();
+    }
+
+    return _llmHandler;
 }
 
 void LlmHandler::getAccessToken(QString apiKey, QString secretKey)

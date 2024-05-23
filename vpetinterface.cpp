@@ -52,6 +52,9 @@ VPetInterface::VPetInterface(QWidget *parent)
 
     // 初始化自动保存
     InitializeAutoSaveService(AUTOSAVE_TIMEOUT);
+
+    // 初始化 Llm 和 Tts
+    // InitiallizeLlmAndTts();
 }
 
 VPetInterface::~VPetInterface()
@@ -107,6 +110,12 @@ void VPetInterface::InitializeAutoSaveService(int mesc)
 
     autoSaveTimer->start(mesc);
 }
+
+// void VPetInterface::InitiallizeLlmAndTts()
+// {
+//     _llmHandler = new LlmHandler();
+//     _ttsHandler = new TtsHandler();
+// }
 
 void VPetInterface::onSettingsClicked()
 {

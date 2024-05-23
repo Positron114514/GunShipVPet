@@ -2,7 +2,7 @@
 #define TTSHANDLER_H
 
 // paths
-#define PY_TTS_PATH "python/tts/ttsApi"
+#define PY_TTS_PATH "ttsApi"
 
 #define MP3_SAVE_FILE "./mp3/voice.mp3"
 
@@ -25,6 +25,9 @@ class TtsHandler
 {
 public:
     TtsHandler();
+
+    // 获取当前对象, 若无则创建
+    static TtsHandler* getInstance();
 
     // call text_to_mp3_file in python
     void textToMp3File(QString* text, int voiceIndex);

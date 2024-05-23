@@ -4,6 +4,7 @@
 #pragma once
 
 #include "qheaders.h"
+#include "llminterface.h"
 
 class SettingsDialog;
 
@@ -26,6 +27,9 @@ public:
     void InitializeAppDir();
 
     void InitializeAutoSaveService(int mesc);
+
+    // // 初始化 LLM 和 TTS
+    // void InitiallizeLlmAndTts();
 
     // 功能开关接口
     void setWindowOnTopState(bool state, bool override = true);
@@ -103,6 +107,10 @@ private:
 
     QTimer *autoSaveTimer = nullptr;
 
+    // // llmHandler
+    // LlmHandler* _llmHandler;
+    // // ttsHandler
+    // TtsHandler* _ttsHandler;
     // ConfigSaver *saver;
 
     int curFps = DEFAULT_FPS;
