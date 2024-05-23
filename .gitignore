@@ -78,3 +78,6 @@ qss
 
 # Photoshop
 *.psd
+
+# Build
+build
