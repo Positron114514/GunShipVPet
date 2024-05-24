@@ -36,6 +36,9 @@ public:
     // 返回值为原指针, 可能存在危险
     QStringList* getVoiceList();
 
+    // 判断是否是合法的index
+    bool isValidIndex(int voiceIndex);
+
     // void setModelVoice(int modelIndex, int VoiceIndex);
 
     // 说话(直接调用该函数即可)

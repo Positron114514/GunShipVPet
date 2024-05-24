@@ -37,6 +37,21 @@ TtsHandler::TtsHandler()
         qDebug() << QT_DEBUG_OUTPUT << "Fail to load ttsApi.";
     }
     _pyTextToMp3File = PythonHandler::getPyFunction(_ttsApi, "text_to_mp3_file");
+
+    qDebug() << QT_DEBUG_OUTPUT << "init ttsHandler successfully.";
+}
+
+bool TtsHandler::isValidIndex(int voiceIndex)
+{
+    if(voiceIndex >= VOICE_NUMBER || voiceIndex < 0)
+    {
+        qDebug() << QT_DEBUG_OUTPUT << "incalid voiceIndex";
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 TtsHandler* TtsHandler::getInstance()
@@ -51,6 +66,11 @@ TtsHandler* TtsHandler::getInstance()
 
 void TtsHandler::textToMp3File(QString* text, int voiceIndex)
 {
+    if(!isValidIndex(voiceIndex))
+    {
+        return;
+    }
+
     PyObject* args = PyTuple_New(5);
     // text
     PyObject* pyText = PyUnicode_FromString(text->toStdString().c_str());
@@ -110,6 +130,11 @@ void TtsHandler::setVolume(int volume)
 
 void TtsHandler::speak(QString* text, int voiceIndex)
 {
+    if(!isValidIndex(voiceIndex))
+    {
+        return;
+    }
+
     textToMp3File(text, voiceIndex);
 
     // 防止声音混乱
@@ -123,6 +148,11 @@ void TtsHandler::speak(QString* text, int voiceIndex)
 
 void TtsHandler::test(int voiceIndex)
 {
+    if(!isValidIndex(voiceIndex))
+    {
+        return;
+    }
+
     QString s = QString::fromUtf8("你好, 这是一条测试");
     speak(&s, voiceIndex);
 }
