@@ -109,11 +109,7 @@
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="demoArea" stretch="">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetDefaultConstraint</enum>
-     </property>
-    </layout>
+    <widget class="QListWidget" name="demoArea"/>
    </item>
    <item>
     <widget class="QTextEdit" name="chat">

@@ -75,5 +75,7 @@
         <file>resources/svgs/sound.svg</file>
         <file>resources/svgs/preview.svg</file>
         <file>resources/svgs/speak.svg</file>
+        <file>resources/svgs/intelligence.svg</file>
+        <file>resources/svgs/user.svg</file>
     </qresource>
 </RCC>

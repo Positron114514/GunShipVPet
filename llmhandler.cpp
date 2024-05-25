@@ -92,7 +92,7 @@ QString* LlmHandler::getCompletion(QString *prompt)
     }
     else
     {
-        qDebug() << QT_DEBUG_OUTPUT << "llmRet: " << retRawString;
+        // qDebug() << QT_DEBUG_OUTPUT << "llmRet: " << retRawString;
         return new QString(retRawString);
     }
 }

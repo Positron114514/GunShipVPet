@@ -74,28 +74,80 @@ void ChatWindow::onSettingsClicked()
     ui->chat->setDisabled(!p->LLMEnable());
 }
 
-void ChatWindow::addMessage(const QString &text, ChatMessage::MessageType type)
+void ChatWindow::addMessage(const QString &text, MsgType type)
 {
-    qDebug() << QT_DEBUG_OUTPUT << "add message";
-    ChatMessage *message = new ChatMessage(text, type, this);
-    qDebug() << QT_DEBUG_OUTPUT << "add message1";
-    ui->demoArea->addWidget(message);
-    qDebug() << QT_DEBUG_OUTPUT << "add message2";
-    messages.append(message);
+    QFont titleFont("MiSans", 12, 600);
+    QFont contentFont("MiSans", 11, 400);
 
+    // QWidget *widgetSender = new QWidget;
+    QWidget *widgetMessage = new QWidget;
+    // widgetSender->setMaximumWidth(ui->demoArea->width());
+    widgetMessage->setMaximumWidth(ui->demoArea->width());
+    QLabel *message = new QLabel(widgetMessage);
+
+    QListWidgetItem *senderItem = new QListWidgetItem(ui->demoArea);
+    QListWidgetItem *messageItem = new QListWidgetItem(ui->demoArea);
+
+    switch(type)
+    {
+    case MsgType::User:
+        senderItem->setFont(titleFont);
+        senderItem->setIcon(QIcon(":/svg/resources/svgs/user.svg"));
+        senderItem->setText("您");
+        break;
+    case MsgType::LLM:
+        senderItem->setFont(titleFont);
+        senderItem->setIcon(QIcon(":/svg/resources/svgs/intelligence.svg"));
+        senderItem->setText("文心一言");
+        break;
+    }
+    // sender->setScaledContents(true);
+    // sender->resize(14, 14);
+    // sender->setAlignment(Qt::AlignLeft);
+
+    message->setText(text);
+    message->setFont(contentFont);
+    message->adjustSize();
+    message->setWordWrap(true);
+    message->setAlignment(Qt::AlignTop);
+    message->resize(widgetMessage->size());
+
+    senderItem->setFlags(senderItem->flags() & ~Qt::ItemIsEnabled & ~Qt::ItemIsSelectable);
+    messageItem->setFlags(messageItem->flags() & ~Qt::ItemIsEnabled & ~Qt::ItemIsSelectable);
+
+    ui->demoArea->addItem(senderItem);
+    ui->demoArea->addItem(messageItem);
+
+    ui->demoArea->setItemWidget(messageItem, widgetMessage);
+
+    // int lineNum = (fontMetrics().horizontalAdvance(message->text())) / ui->demoArea->width();
+    int totalWidth = fontMetrics().horizontalAdvance(message->text());
+    int oneLineWidth = ui->demoArea->width();
+    int lineHeight;
+
+    if(totalWidth < oneLineWidth)
+        lineHeight = 1;
+    else {
+        lineHeight = (totalWidth % oneLineWidth) ?
+                         (totalWidth / oneLineWidth + 1) : (totalWidth / oneLineWidth);
+    }
+    int totalHeight = lineHeight * 30;
+
+    messageItem->setSizeHint(QSize(0, totalHeight));
+    widgetMessage->show();
 }
 
 void ChatWindow::onMessageSent()
 {
     qDebug() << QT_DEBUG_OUTPUT << "message function";
     QString prompt = ui->chat->toPlainText();   // 读取prompt
-    addMessage(prompt, ChatMessage::User);
+    addMessage(prompt, MsgType::User);
 
     ui->chat->clear();  // 清空输入框
 
     qDebug() << QT_DEBUG_OUTPUT << "get result";
     QString result = *LlmInterface::getCompletion(&prompt); // 得到输出
-    addMessage(result, ChatMessage::LLM);
+    addMessage(result, MsgType::LLM);
 }
 
 void ChatWindow::keyPressEvent(QKeyEvent *event)

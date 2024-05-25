@@ -117,6 +117,10 @@ void VPetInterface::InitiallizeLlmAndTts()
     qDebug() << QT_BACKGROUND_LOG << "LLM & TTS initialize started";
     if(!isLLMEnable)
     {
+        QMessageBox msg(this);
+        msg.setWindowTitle("提示");
+        msg.setText("错误：获取accessToken失败（api不可用）");
+        msg.exec();
         qDebug() << QT_BACKGROUND_LOG << "LLM function not enabled, skip init";
         return;
     }

@@ -3,7 +3,6 @@
 
 #include "vpetinterface.h"
 #include "qheaders.h"
-#include "chatmessage.h"
 
 namespace Ui {
 class ChatWindow;
@@ -17,10 +16,16 @@ public:
     explicit ChatWindow(QWidget *mainApp = nullptr, QWidget *parent = nullptr);
     ~ChatWindow();
 
+    enum MsgType
+    {
+        User = 0,
+        LLM = 1
+    };
+
     void InitializeUI();
     void InitializeChat();
 
-    void addMessage(const QString &text, ChatMessage::MessageType type);
+    void addMessage(const QString &text, MsgType type);
 
 signals:
     void windowClose();
@@ -40,7 +45,6 @@ private:
     VPetInterface *p = nullptr;
 
     // QVBoxLayout *layout = nullptr;
-    QList<ChatMessage*> messages;
 };
 
 #endif // CHATWINDOW_H
