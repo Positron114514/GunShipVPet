@@ -89,5 +89,8 @@
 #include <QScreen>
 #include <QtCore/QCoreApplication>
 #include <QtMultimedia/QMediaPlayer>
+#include <QPainter>
+#include <QVBoxLayout>
+#include <QList>
 
 #endif // QHEADERS_H

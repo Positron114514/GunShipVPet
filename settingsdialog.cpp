@@ -2,6 +2,7 @@
 #include "ui_settingsdialog.h"
 #include "customdir.h"
 #include "configsaver.h"
+#include "llminterface.h"
 
 #define ZOOM_ENABLE_REQ "(关闭鼠标缩放后可用)"
 
@@ -113,6 +114,9 @@ void SettingsDialog::ModelSettingsInit()
 
 void SettingsDialog::VoiceSettingsInit()
 {
+    auto voiceList = *LlmInterface::getVoiceList(); // 取值
+    ui->comboVoice->addItems(voiceList);
+
     // 初始化音量条、语速条及相关标签
     ui->volumeSlider->setMaximum(100);
     ui->volumeSlider->setMinimum(0);

@@ -28,8 +28,7 @@ public:
 
     void InitializeAutoSaveService(int mesc);
 
-    // // 初始化 LLM 和 TTS
-    // void InitiallizeLlmAndTts();
+    void InitiallizeLlmAndTts();
 
     // 功能开关接口
     void setWindowOnTopState(bool state, bool override = true);

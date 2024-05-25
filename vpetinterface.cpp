@@ -4,6 +4,7 @@
 #include "configsaver.h"
 #include "customdir.h"
 #include "chatwindow.h"
+#include "llminterface.h".h"
 
 #pragma comment(lib, "kernel32.lib")
 #pragma comment(lib, "user32.lib")
@@ -54,7 +55,7 @@ VPetInterface::VPetInterface(QWidget *parent)
     InitializeAutoSaveService(AUTOSAVE_TIMEOUT);
 
     // 初始化 Llm 和 Tts
-    // InitiallizeLlmAndTts();
+    InitiallizeLlmAndTts();
 }
 
 VPetInterface::~VPetInterface()
@@ -111,11 +112,17 @@ void VPetInterface::InitializeAutoSaveService(int mesc)
     autoSaveTimer->start(mesc);
 }
 
-// void VPetInterface::InitiallizeLlmAndTts()
-// {
-//     _llmHandler = new LlmHandler();
-//     _ttsHandler = new TtsHandler();
-// }
+void VPetInterface::InitiallizeLlmAndTts()
+{
+    qDebug() << QT_BACKGROUND_LOG << "LLM & TTS initialize started";
+    if(!isLLMEnable)
+    {
+        qDebug() << QT_BACKGROUND_LOG << "LLM function not enabled, skip init";
+        return;
+    }
+
+    LlmInterface::getAccessToken(apiKey, secretKey);    // 设置accesstoken
+}
 
 void VPetInterface::onSettingsClicked()
 {
@@ -303,6 +310,7 @@ void VPetInterface::setVolume(int volume)
     if(volume < 0 || volume > 100)
         return;
     curVolume = volume;
+    LlmInterface::setVolume(curVolume); // 设置音量
     qDebug() << QT_INTERFACE_LOG << "volume changed to:" << volume;
 }
 
@@ -316,6 +324,7 @@ void VPetInterface::setPace(int pace)
     if(pace < 0 || pace > 100)
         return;
     curPace = pace;
+    LlmInterface::setRate(curPace);
     qDebug() << QT_INTERFACE_LOG << "pace changed to:" << pace;
 }
 

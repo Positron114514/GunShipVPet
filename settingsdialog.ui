@@ -350,7 +350,7 @@
          <normaloff>:/svg/resources/svgs/preview.svg</normaloff>:/svg/resources/svgs/preview.svg</iconset>
        </property>
       </widget>
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="comboVoice">
        <property name="geometry">
         <rect>
          <x>20</x>
