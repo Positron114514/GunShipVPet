@@ -42,6 +42,7 @@ public slots:
     void onDeleteModelClicked();
     void onVolumeChanged();
     void onPaceChanged();
+    void testVoice();
 
 signals:
     void LLMStateChanged(bool state);

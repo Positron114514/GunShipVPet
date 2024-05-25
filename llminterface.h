@@ -13,7 +13,7 @@ public:
     // get access token to wenxin
     // accessToken 会直接加载到 llmhandler.cpp 的对象中, 因此无返回值
     // !使用 getCompletion 前必须调用该方法
-    static void getAccessToken(QString apiKey, QString secretKey);
+    static bool getAccessToken(QString apiKey, QString secretKey);
 
     // talk with llm
     // prompt: input string

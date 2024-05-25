@@ -4,7 +4,8 @@
 // paths
 #define PY_TTS_PATH "ttsApi"
 
-#define MP3_SAVE_FILE "./mp3/voice.mp3"
+#define MP3_SAVE_FILE "./voice.mp3"
+// #define MP3_LOAD_PATH "./python/tts/voice.mp3"
 
 // voices
 #define VOICE_NUMBER 6
@@ -56,7 +57,7 @@ public:
 
     // 调整 volume
     // range: -100 ~ 100
-    void setVolume(int volume);
+    void setVolume(double volume);
 
     ~TtsHandler();
 
@@ -68,6 +69,7 @@ private:
     PyObject* _volume;
     PyObject* _mp3SaveFileName;
     QMediaPlayer * _player;
+    QAudioOutput* _audioOutput;
 };
 
 

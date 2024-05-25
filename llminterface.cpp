@@ -3,9 +3,10 @@
 // get access token to wenxin
 // accessToken 会直接加载到 llmhandler.cpp 的对象中, 因此无返回值
 // !使用 getCompletion 前必须调用该方法
-void LlmInterface::getAccessToken(QString apiKey, QString secretKey)
+bool LlmInterface::getAccessToken(QString apiKey, QString secretKey)
 {
     LlmHandler::getInstance()->getAccessToken(apiKey, secretKey);
+    return LlmHandler::getInstance()->isAccessTokenAviliable();
 }
 
 // talk with llm

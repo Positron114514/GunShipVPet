@@ -56,6 +56,11 @@ void LlmHandler::getAccessToken(QString apiKey, QString secretKey)
     }
 }
 
+bool LlmHandler::isAccessTokenAviliable()
+{
+    return accessToken != NULL;
+}
+
 // talk with llm
 // prompt: input string
 // return: output string
@@ -80,13 +85,14 @@ QString* LlmHandler::getCompletion(QString *prompt)
         qDebug() << QT_DEBUG_OUTPUT << "fail to load json file when getting Completion.";
         return NULL;
     }
-    else if(strcmp(retRawString, PY_REQUEST_FAILED))
+    else if(strcmp(retRawString, PY_REQUEST_FAILED) == 0)
     {
         qDebug() << QT_DEBUG_OUTPUT << "request failed when getting completion.";
         return NULL;
     }
     else
     {
+        qDebug() << QT_DEBUG_OUTPUT << "llmRet: " << retRawString;
         return new QString(retRawString);
     }
 }

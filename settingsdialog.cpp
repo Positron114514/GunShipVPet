@@ -140,6 +140,9 @@ void SettingsDialog::VoiceSettingsInit()
             this, &SettingsDialog::onPaceChanged);
     connect(ui->paceSlider, &OptimizedSlider::sliderReleased,
             this, &SettingsDialog::onPaceChanged);
+
+    connect(ui->previewButton, &QPushButton::clicked,
+            this, &SettingsDialog::testVoice);
 }
 
 void SettingsDialog::LLMSettingsInit()
@@ -354,7 +357,15 @@ void SettingsDialog::onAPISaveClicked()
         p->setAPI(apiKey, secretKey);
         QMessageBox msg(this);
         msg.setWindowTitle("提示");
-        msg.setText("API设置成功");
+
+        if(!LlmInterface::getAccessToken(p->api()[0], p->api()[1]))
+        {
+            qDebug() << QT_DEBUG_OUTPUT << "failed to load access token";
+            msg.setText("错误：获取accessToken失败（api不可用）");
+        }else
+        {
+            msg.setText("API设置成功");
+        }
         msg.exec();
         ui->checkBoxLLM->setDisabled(false);
     } else {
@@ -461,4 +472,10 @@ void SettingsDialog::onPaceChanged()
 
     p->setPace(pace);
     ui->pace->setText(QString::number(p->pace()) + "%");
+}
+
+void SettingsDialog::testVoice()
+{
+    qDebug() << QT_DEBUG_OUTPUT << "test triggered";
+    LlmInterface::test(0);
 }

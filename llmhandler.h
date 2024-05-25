@@ -27,6 +27,9 @@ public:
     // get access token to wenxin
     void getAccessToken(QString apiKey, QString secretKey);
 
+    // 检测 accessToken 是否可用
+    bool isAccessTokenAviliable();
+
     // 获取当前的对象, 若无则创建
     static LlmHandler* getInstance();
 

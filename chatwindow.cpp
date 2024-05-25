@@ -93,9 +93,9 @@ void ChatWindow::onMessageSent()
 
     ui->chat->clear();  // 清空输入框
 
-    // qDebug() << QT_DEBUG_OUTPUT << "get result";
-    // QString result = *LlmInterface::getCompletion(&prompt); // 得到输出
-    // addMessage(result, ChatMessage::LLM);
+    qDebug() << QT_DEBUG_OUTPUT << "get result";
+    QString result = *LlmInterface::getCompletion(&prompt); // 得到输出
+    addMessage(result, ChatMessage::LLM);
 }
 
 void ChatWindow::keyPressEvent(QKeyEvent *event)

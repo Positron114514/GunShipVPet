@@ -29,6 +29,9 @@ TtsHandler::TtsHandler()
     {
         qDebug() << QT_DEBUG_OUTPUT << "player is not avaliable on this platform";
     }
+    _audioOutput = new QAudioOutput();
+    _audioOutput->setVolume(50);
+    _player->setAudioOutput(_audioOutput);
 
     // get text_to_mp3_file in python
     _ttsApi = PyImport_ImportModule(PY_TTS_PATH);
@@ -66,6 +69,7 @@ TtsHandler* TtsHandler::getInstance()
 
 void TtsHandler::textToMp3File(QString* text, int voiceIndex)
 {
+    qDebug() << QT_DEBUG_OUTPUT << "loading textToMp3File";
     if(!isValidIndex(voiceIndex))
     {
         return;
@@ -73,6 +77,7 @@ void TtsHandler::textToMp3File(QString* text, int voiceIndex)
 
     PyObject* args = PyTuple_New(5);
     // text
+    qDebug() << QT_DEBUG_OUTPUT << "speaking: " << text->toStdString().c_str();
     PyObject* pyText = PyUnicode_FromString(text->toStdString().c_str());
     // voice
     PyObject* pyVoice = PyUnicode_FromString((*_voiceList)[voiceIndex].toStdString().c_str());
@@ -107,25 +112,15 @@ void TtsHandler::setRate(int rate)
     _rate = PyUnicode_FromString(newRate);
 }
 
-void TtsHandler::setVolume(int volume)
+void TtsHandler::setVolume(double volume)
 {
-    if(volume > 100 || volume < -100)
+    if(volume > 100 || volume < 0)
     {
         qDebug() << QT_DEBUG_OUTPUT << "Invalid volume";
         return;
     }
 
-    char newVolume[10] = {};
-
-    if(volume >= 0)
-    {
-        sprintf(newVolume, "+%d%%", volume);
-    }else
-    {
-        sprintf(newVolume, "%d%%", volume);
-    }
-
-    _volume = PyUnicode_FromString(newVolume);
+    _audioOutput->setVolume(volume);
 }
 
 void TtsHandler::speak(QString* text, int voiceIndex)
@@ -141,8 +136,11 @@ void TtsHandler::speak(QString* text, int voiceIndex)
     stop();
 
     _player->setSource(QUrl::fromLocalFile(MP3_SAVE_FILE));
+
+    qDebug() << QT_DEBUG_OUTPUT << "set player source: " << MP3_SAVE_FILE;
     // 如果是在资源文件里用 fromEncoded 函数获取地址
     //player->setMedia(QUrl::fromEncoded("qrc:/mp3/552800.mp3"));
+
     _player->play();
 }
 

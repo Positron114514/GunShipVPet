@@ -93,5 +93,6 @@
 #include <QVBoxLayout>
 #include <QList>
 #include <QLabel>
+#include <QAudioOutput>
 
 #endif // QHEADERS_H
