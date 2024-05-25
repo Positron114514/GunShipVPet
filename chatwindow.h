@@ -39,7 +39,7 @@ private:
     Ui::ChatWindow *ui;
     VPetInterface *p = nullptr;
 
-    QVBoxLayout *layout = nullptr;
+    // QVBoxLayout *layout = nullptr;
     QList<ChatMessage*> messages;
 };
 

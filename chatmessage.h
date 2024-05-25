@@ -20,17 +20,21 @@ public:
     // 构造函数
     explicit ChatMessage(const QString &text, MessageType type, QWidget *parent = nullptr);
 
+    void InitializeLabels();
+
     inline QColor hex2QColor(QString hex)
     {
         return QColor(hex.toUInt(NULL, 16));
     }
 
 protected:
-    void paintEvent(QPaintEvent *event) override;
+    // void paintEvent(QPaintEvent *event) override;
 
 private:
     QString msgText;
     MessageType msgType;
+
+    QLabel *sender, *content;
 
 signals:
 };

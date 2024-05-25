@@ -16,6 +16,8 @@ ChatWindow::ChatWindow(QWidget *mainApp, QWidget *parent)
     this->setWindowIcon(QIcon(":/ico/resources/icons/main-logo.ico"));
     this->setWindowFlag(Qt::WindowMaximizeButtonHint, false);
 
+    this->grabKeyboard();
+
     InitializeUI();
 }
 
@@ -40,7 +42,9 @@ void ChatWindow::InitializeUI()
     font.setPointSize(14);
     ui->title->setFont(font);
 
-    layout = new QVBoxLayout(ui->demoArea);
+
+
+    // layout = new QVBoxLayout(ui->demoArea);
 
     // 回车键等操作信号与槽连接
     connect(this, &ChatWindow::returnPressed, this, &ChatWindow::onMessageSent);
@@ -72,24 +76,30 @@ void ChatWindow::onSettingsClicked()
 
 void ChatWindow::addMessage(const QString &text, ChatMessage::MessageType type)
 {
-    ChatMessage *message = new ChatMessage(text, type, ui->demoArea);
-    layout->addWidget(message);
+    qDebug() << QT_DEBUG_OUTPUT << "add message";
+    ChatMessage *message = new ChatMessage(text, type, this);
+    qDebug() << QT_DEBUG_OUTPUT << "add message1";
+    ui->demoArea->addWidget(message);
+    qDebug() << QT_DEBUG_OUTPUT << "add message2";
     messages.append(message);
+
 }
 
 void ChatWindow::onMessageSent()
 {
+    qDebug() << QT_DEBUG_OUTPUT << "message function";
     QString prompt = ui->chat->toPlainText();   // 读取prompt
     addMessage(prompt, ChatMessage::User);
 
     ui->chat->clear();  // 清空输入框
 
-    QString result = *LlmInterface::getCompletion(&prompt); // 得到输出
-    addMessage(result, ChatMessage::LLM);
+    // qDebug() << QT_DEBUG_OUTPUT << "get result";
+    // QString result = *LlmInterface::getCompletion(&prompt); // 得到输出
+    // addMessage(result, ChatMessage::LLM);
 }
 
 void ChatWindow::keyPressEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_Return)
+    if(event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
         emit returnPressed();
 }

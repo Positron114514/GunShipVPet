@@ -92,5 +92,6 @@
 #include <QPainter>
 #include <QVBoxLayout>
 #include <QList>
+#include <QLabel>
 
 #endif // QHEADERS_H
