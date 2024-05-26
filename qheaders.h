@@ -89,9 +89,8 @@
 #include <QScreen>
 #include <QtCore/QCoreApplication>
 #include <QtMultimedia/QMediaPlayer>
-#include <QPainter>
-#include <QVBoxLayout>
-#include <QList>
+#include <QListWidget>
+#include <QMovie>
 #include <QLabel>
 #include <QAudioOutput>
 

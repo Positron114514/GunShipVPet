@@ -32,6 +32,7 @@ SOURCES += \
     optimizedslider.cpp \
     pythonhandler.cpp \
     qssloader.cpp \
+    secondthread.cpp \
     settingsdialog.cpp \
     ttshandler.cpp \
     vpetinterface.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
     pythonhandler.h \
     qheaders.h \
     qssloader.h \
+    secondthread.h \
     settingsdialog.h \
     ttshandler.h \
     vpetinterface.h \
@@ -116,6 +118,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    gif.qrc \
     resources.qrc
 
 DISTFILES += \

@@ -1,7 +1,6 @@
 #include "chatwindow.h"
 #include "ui_chatwindow.h"
 #include "settingsdialog.h"
-#include "llminterface.h"
 #include "loadingpage.h"
 
 ChatWindow::ChatWindow(QWidget *mainApp, QWidget *parent)
@@ -17,9 +16,8 @@ ChatWindow::ChatWindow(QWidget *mainApp, QWidget *parent)
     this->setWindowIcon(QIcon(":/ico/resources/icons/main-logo.ico"));
     this->setWindowFlag(Qt::WindowMaximizeButtonHint, false);
 
-    this->grabKeyboard();
-
     InitializeUI();
+    InitializeChat();
 }
 
 ChatWindow::~ChatWindow()
@@ -43,15 +41,37 @@ void ChatWindow::InitializeUI()
     font.setPointSize(14);
     ui->title->setFont(font);
 
-    // layout = new QVBoxLayout(ui->demoArea);
-
     // 回车键等操作信号与槽连接
     connect(this, &ChatWindow::returnPressed, this, &ChatWindow::onMessageSent);
 }
 
 void ChatWindow::InitializeChat()
 {
-    p->InitiallizeLlmAndTts();  // 初始化llm和tts
+    ui->btnSend->setFocus();
+    ui->btnSend->setDefault(true);
+    ui->chat->installEventFilter(this);
+}
+
+bool ChatWindow::eventFilter(QObject *target, QEvent *event)
+{
+    if(target == ui->chat)
+    {
+        //获取按键信号
+        if(event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *k = static_cast<QKeyEvent *>(event);
+            if(k->key() == Qt::Key_Return)
+            {
+                if(k->modifiers() == Qt::ShiftModifier)
+                    ui->chat->setText(ui->chat->toPlainText() + "\n");
+                else
+                    emit returnPressed();               //链接槽信号
+                return true;
+            }
+        }
+    }
+
+    return QWidget::eventFilter(target,event);
 }
 
 void ChatWindow::onSettingsClicked()
@@ -75,6 +95,8 @@ void ChatWindow::onSettingsClicked()
 
 void ChatWindow::addMessage(const QString &text, MsgType type)
 {
+    // ui->demoArea->removeItemWidget(loading);
+
     QFont titleFont("MiSans", 12, 600);
     QFont contentFont("MiSans", 11, 400);
 
@@ -121,7 +143,7 @@ void ChatWindow::addMessage(const QString &text, MsgType type)
 
     // int lineNum = (fontMetrics().horizontalAdvance(message->text())) / ui->demoArea->width();
     int totalWidth = fontMetrics().horizontalAdvance(message->text());
-    int oneLineWidth = ui->demoArea->width();
+    int oneLineWidth = ui->demoArea->width() - 100;
     int lineHeight;
 
     if(totalWidth < oneLineWidth)
@@ -130,7 +152,7 @@ void ChatWindow::addMessage(const QString &text, MsgType type)
         lineHeight = (totalWidth % oneLineWidth) ?
                          (totalWidth / oneLineWidth + 1) : (totalWidth / oneLineWidth);
     }
-    int totalHeight = lineHeight * 30;
+    int totalHeight = (lineHeight + countNewLine(text)) * 30;
 
     messageItem->setSizeHint(QSize(0, totalHeight));
     widgetMessage->show();
@@ -138,28 +160,33 @@ void ChatWindow::addMessage(const QString &text, MsgType type)
 
 void ChatWindow::onMessageSent()
 {
-    LoadingPage *load = new LoadingPage(this);
-    load->show();
-
     QCoreApplication::processEvents();
 
     // qDebug() << QT_DEBUG_OUTPUT << "message function";
     QString prompt = ui->chat->toPlainText();   // 读取prompt
     addMessage(prompt, MsgType::User);
+    thread = new SecondThread(this, prompt);
 
     ui->chat->clear();  // 清空输入框
 
-    // qDebug() << QT_DEBUG_OUTPUT << "get result";
-    QString result = *LlmInterface::getCompletion(&prompt); // 得到输出
-    addMessage(result, MsgType::LLM);
+    LoadingPage *loading = new LoadingPage(this);
 
-    load->close();
+    // qDebug() << QT_DEBUG_OUTPUT << "get result";
+    if(p->tokenState())
+    {
+        connect(thread, &SecondThread::done, loading, &LoadingPage::onFinishProcess);
+        connect(thread, &SecondThread::done, this, &ChatWindow::onGetResult);
+        thread->start();
+        loading->exec();
+    } else {
+        QMessageBox msgBox(this);
+        msgBox.setWindowTitle("提示...");
+        msgBox.setText("Access Token暂不可用");
+        msgBox.exec();
+    }
 }
 
-void ChatWindow::keyPressEvent(QKeyEvent *event)
+void ChatWindow::onGetResult(QString result)
 {
-    if(event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
-        emit returnPressed();
-
-    // keyPressEvent(event);
+    addMessage(result, MsgType::LLM);
 }

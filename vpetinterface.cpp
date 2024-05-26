@@ -122,6 +122,7 @@ void VPetInterface::InitiallizeLlmAndTts()
         msg.setText("错误：获取accessToken失败（api不可用）");
         msg.exec();
         qDebug() << QT_BACKGROUND_LOG << "LLM function not enabled, skip init";
+        setTokenState(false);
         return;
     }
 
@@ -335,6 +336,16 @@ void VPetInterface::setPace(int pace)
 int VPetInterface::pace()
 {
     return curPace;
+}
+
+void VPetInterface::setTokenState(bool state)
+{
+    isAccessTokenAvail = state;
+}
+
+bool VPetInterface::tokenState()
+{
+    return isAccessTokenAvail;
 }
 
 void VPetInterface::regAutoRun()

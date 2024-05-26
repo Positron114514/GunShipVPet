@@ -70,6 +70,10 @@ public:
     void setPace(int pace);
     int pace();
 
+    // accesstoken状态接口
+    void setTokenState(bool state);
+    bool tokenState();
+
     // 开机自启实现函数:注册表实现（实验性）
     void regAutoRun();
     bool isRegAutoRun();
@@ -124,6 +128,8 @@ private:
 
     bool isLLMEnable = true;
     bool isTTSEnable = false;
+
+    bool isAccessTokenAvail = true;
 
     QString apiKey;
     QString secretKey;

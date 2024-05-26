@@ -2,12 +2,20 @@
 #define LOADINGPAGE_H
 
 #include <QDialog>
-#include "qheaders.h"
+#include <QWidget>
+#include <QMovie>
 
 class LoadingPage : public QDialog
 {
+    Q_OBJECT
 public:
-    explicit LoadingPage(QWidget *parent = nullptr);
+    LoadingPage(QWidget *parent);
+
+public slots:
+    void onFinishProcess();
+
+private:
+    QMovie *move;
 };
 
 #endif // LOADINGPAGE_H
