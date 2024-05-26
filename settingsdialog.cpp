@@ -362,6 +362,7 @@ void SettingsDialog::onAPISaveClicked()
         {
             qDebug() << QT_DEBUG_OUTPUT << "failed to load access token";
             msg.setText("错误：获取accessToken失败（api不可用）");
+            p->setTokenState(false);
         }else
         {
             msg.setText("API设置成功");

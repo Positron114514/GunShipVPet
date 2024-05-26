@@ -3,6 +3,7 @@
 
 #include "vpetinterface.h"
 #include "qheaders.h"
+#include "secondthread.h"
 
 namespace Ui {
 class ChatWindow;
@@ -27,6 +28,17 @@ public:
 
     void addMessage(const QString &text, MsgType type);
 
+    inline int countNewLine(const QString &text)
+    {
+        int cnt = 0;
+        for(int i = 0; i < text.length(); i++)
+        {
+            if(text[i] == '\n')
+                cnt++;
+        }
+        return cnt;
+    }
+
 signals:
     void windowClose();
     void returnPressed();
@@ -34,15 +46,18 @@ signals:
 public slots:
     void onSettingsClicked();
     void onMessageSent();
+    void onGetResult(QString result);
 
 protected:
     void closeEvent(QCloseEvent *event) override;
     // void paintEvent(QPaintEvent *event) override;
-    void keyPressEvent(QKeyEvent *event) override;
+    bool eventFilter(QObject *target, QEvent *event) override;
 
 private:
     Ui::ChatWindow *ui;
     VPetInterface *p = nullptr;
+
+    SecondThread *thread;
 
     // QVBoxLayout *layout = nullptr;
 };

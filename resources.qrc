@@ -78,4 +78,5 @@
         <file>resources/svgs/intelligence.svg</file>
         <file>resources/svgs/user.svg</file>
     </qresource>
+    <qresource prefix="/gif"/>
 </RCC>

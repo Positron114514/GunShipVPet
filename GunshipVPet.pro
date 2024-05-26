@@ -25,12 +25,14 @@ SOURCES += \
     live2d/LAppWavFileHandler.cpp \
     live2d/TouchManager.cpp \
     llminterface.cpp \
+    loadingpage.cpp \
     loghandler.cpp \
     main.cpp \
     myopengl.cpp \
     optimizedslider.cpp \
     pythonhandler.cpp \
     qssloader.cpp \
+    secondthread.cpp \
     settingsdialog.cpp \
     ttshandler.cpp \
     vpetinterface.cpp \
@@ -54,12 +56,14 @@ HEADERS += \
     live2d/LAppWavFileHandler.hpp \
     live2d/TouchManager.hpp \
     llminterface.h \
+    loadingpage.h \
     loghandler.h \
     myopengl.h \
     optimizedslider.h \
     pythonhandler.h \
     qheaders.h \
     qssloader.h \
+    secondthread.h \
     settingsdialog.h \
     ttshandler.h \
     vpetinterface.h \
@@ -114,6 +118,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    gif.qrc \
     resources.qrc
 
 DISTFILES += \
