@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "GunshipVPet虚拟桌宠"
-#define MyAppVersion "1.1-base version"
+#define MyAppVersion "2.0-alpha1"
 #define MyAppPublisher "NJU EL 武装直升机组"
 #define MyAppURL "https://github.com/Positron114514/GunShipVPet"
 #define MyAppExeName "GunshipVPet.exe"

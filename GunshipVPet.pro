@@ -25,6 +25,7 @@ SOURCES += \
     live2d/LAppWavFileHandler.cpp \
     live2d/TouchManager.cpp \
     llminterface.cpp \
+    loadingpage.cpp \
     loghandler.cpp \
     main.cpp \
     myopengl.cpp \
@@ -54,6 +55,7 @@ HEADERS += \
     live2d/LAppWavFileHandler.hpp \
     live2d/TouchManager.hpp \
     llminterface.h \
+    loadingpage.h \
     loghandler.h \
     myopengl.h \
     optimizedslider.h \

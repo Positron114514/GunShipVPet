@@ -2,6 +2,7 @@
 #include "ui_chatwindow.h"
 #include "settingsdialog.h"
 #include "llminterface.h"
+#include "loadingpage.h"
 
 ChatWindow::ChatWindow(QWidget *mainApp, QWidget *parent)
     : QWidget(parent)
@@ -41,8 +42,6 @@ void ChatWindow::InitializeUI()
     font.setFamily("MiSans");
     font.setPointSize(14);
     ui->title->setFont(font);
-
-
 
     // layout = new QVBoxLayout(ui->demoArea);
 
@@ -139,19 +138,28 @@ void ChatWindow::addMessage(const QString &text, MsgType type)
 
 void ChatWindow::onMessageSent()
 {
-    qDebug() << QT_DEBUG_OUTPUT << "message function";
+    LoadingPage *load = new LoadingPage(this);
+    load->show();
+
+    QCoreApplication::processEvents();
+
+    // qDebug() << QT_DEBUG_OUTPUT << "message function";
     QString prompt = ui->chat->toPlainText();   // 读取prompt
     addMessage(prompt, MsgType::User);
 
     ui->chat->clear();  // 清空输入框
 
-    qDebug() << QT_DEBUG_OUTPUT << "get result";
+    // qDebug() << QT_DEBUG_OUTPUT << "get result";
     QString result = *LlmInterface::getCompletion(&prompt); // 得到输出
     addMessage(result, MsgType::LLM);
+
+    load->close();
 }
 
 void ChatWindow::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
         emit returnPressed();
+
+    // keyPressEvent(event);
 }
