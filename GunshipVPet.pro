@@ -35,6 +35,7 @@ SOURCES += \
     secondthread.cpp \
     settingsdialog.cpp \
     ttshandler.cpp \
+    voicethread.cpp \
     vpetinterface.cpp \
     llmhandler.cpp
 
@@ -66,6 +67,7 @@ HEADERS += \
     secondthread.h \
     settingsdialog.h \
     ttshandler.h \
+    voicethread.h \
     vpetinterface.h \
     llmhandler.h
 
