@@ -1,6 +1,7 @@
 #include "chatwindow.h"
 #include "ui_chatwindow.h"
 #include "settingsdialog.h"
+#include "llminterface.h"
 #include "loadingpage.h"
 
 ChatWindow::ChatWindow(QWidget *mainApp, QWidget *parent)
@@ -22,6 +23,8 @@ ChatWindow::ChatWindow(QWidget *mainApp, QWidget *parent)
 
 ChatWindow::~ChatWindow()
 {
+    LlmInterface::stop();
+
     delete ui;
 }
 
@@ -165,7 +168,8 @@ void ChatWindow::onMessageSent()
     // qDebug() << QT_DEBUG_OUTPUT << "message function";
     QString prompt = ui->chat->toPlainText();   // 读取prompt
     addMessage(prompt, MsgType::User);
-    thread = new SecondThread(this, prompt);
+
+    thread = new SecondThread(this, prompt, p->TTSEnable(), p->voice());    // 初始化线程
 
     ui->chat->clear();  // 清空输入框
 

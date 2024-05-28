@@ -6,6 +6,7 @@
 #include "qheaders.h"
 #include "filehandler.h"
 #include "vpetinterface.h"
+#include "voicethread.h"
 
 namespace Ui {
 class SettingsDialog;
@@ -63,6 +64,8 @@ private:
     int autoRunErrorTime = 0;   // 添加自启失败次数
 
     bool isHighVolumeNotified = false;
+
+    VoiceThread *thread = nullptr;
 };
 
 #endif // SETTINGSDIALOG_H

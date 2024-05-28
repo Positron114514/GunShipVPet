@@ -4,6 +4,7 @@
 #include "vpetinterface.h"
 #include "qheaders.h"
 #include "secondthread.h"
+#include "voicethread.h"
 
 namespace Ui {
 class ChatWindow;

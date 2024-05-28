@@ -123,6 +123,7 @@ void SettingsDialog::VoiceSettingsInit()
     ui->volumeSlider->setPageStep(1);
     ui->volumeSlider->setValue(p->volume());
     ui->volume->setText(QString::number(p->volume()) + "%");
+    ui->comboVoice->setCurrentIndex(p->voice());
 
     ui->paceSlider->setMaximum(100);
     ui->paceSlider->setMinimum(0);
@@ -197,6 +198,8 @@ void SettingsDialog::accept()
 
     p->setLLMEnable(ui->checkBoxLLM->isChecked());
     p->setTTSEnable(ui->checkBoxTTS->isChecked());
+
+    p->setVoice(ui->comboVoice->currentIndex());
 
     qDebug() << QT_BACKGROUND_LOG << "settings carded";
 
@@ -478,5 +481,10 @@ void SettingsDialog::onPaceChanged()
 void SettingsDialog::testVoice()
 {
     qDebug() << QT_DEBUG_OUTPUT << "test triggered";
-    LlmInterface::test(0);
+    ui->previewButton->setEnabled(false);
+    thread = new VoiceThread(this, VoiceThread::Test, ui->comboVoice->currentIndex());
+    thread->start();
+    connect(thread, &VoiceThread::done, this, [=]() {
+        ui->previewButton->setEnabled(true);
+    });
 }

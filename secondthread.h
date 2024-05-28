@@ -3,15 +3,21 @@
 
 #include <QObject>
 #include <QThread>
+#include "voicethread.h"
 
 class SecondThread : public QThread
 {
     Q_OBJECT
 public:
-    explicit SecondThread(QObject *parent = nullptr, QString prompt = "");
+    explicit SecondThread(QObject *parent = nullptr, QString prompt = "",
+                          bool tts = false, int index = 0);
 
 private:
-    QString m_prompt;
+    QString _prompt;
+    VoiceThread *thread;
+
+    bool _tts;
+    int _index;
 
 protected:
     void run();
