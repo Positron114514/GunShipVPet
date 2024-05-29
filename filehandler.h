@@ -8,6 +8,7 @@
 #include "live2d/LAppLive2DManager.hpp"
 #include "live2d/LAppWavFileHandler.hpp"
 #include "live2d/LAppPal.hpp"
+#include "live2d/LAppModel.hpp"
 #include "qheaders.h"
 
 #define BUF_SIZE 256
@@ -52,6 +53,12 @@ public:
 
     // 重新加载模型列表
     static void resetModel();
+
+    // 将声音绑定到模型
+    static void saveVoiceToModel(int voiceIndex);
+
+    // 加载模型的 voiceIndex
+    static int getModelVoiceIndex();
 
     // 一些类型转换函数
     // 用不用都行, 设成 public 了

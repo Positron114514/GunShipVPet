@@ -141,6 +141,23 @@ void FileHandler::resetModel()
     LAppLive2DManager::GetInstance()->SetUpModel();
 }
 
+void FileHandler::saveVoiceToModel(int voiceIndex)
+{
+    LAppLive2DManager::GetInstance()->saveCurrentModleVoiceIndex(voiceIndex);
+}
+
+int FileHandler::getModelVoiceIndex()
+{
+    LAppModel* model = LAppLive2DManager::GetInstance()->GetModel(0);
+    if(model != NULL)
+    {
+        int index = model->getVoice();
+        qDebug() << QT_DEBUG_OUTPUT << "get voice from model. index: " << index;
+        return index;
+    }
+    return -1;
+}
+
 // 一些类型转换函数
 // 主要方便这个文件里一些函数
 // 用不用都行, 设成 public 了

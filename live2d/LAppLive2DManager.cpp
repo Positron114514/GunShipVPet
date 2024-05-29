@@ -347,6 +347,30 @@ void LAppLive2DManager::NextScene()
     ChangeScene(no);
 }
 
+void LAppLive2DManager::saveCurrentModleVoiceIndex(int index)
+{
+    qDebug() << QT_DEBUG_OUTPUT << "Saving voice index to model dir path";
+    const csmString& model = _modelDir[_sceneIndex];
+    csmString modelPath(ResourcesPath);
+    modelPath += model;
+    modelPath.Append(1, '/');
+
+    csmString modelVoiceFileName(modelPath);
+    modelVoiceFileName += VOICE_SAVE_PATH;
+
+    QFile voiceSaveFile(modelVoiceFileName.GetRawString());
+
+    voiceSaveFile.open(QIODevice::WriteOnly | QIODevice::Text);
+
+
+    QString indexString((char)(index + '0'));
+
+    voiceSaveFile.write(indexString.toUtf8());
+    voiceSaveFile.close();
+
+    qDebug() << QT_DEBUG_OUTPUT << "Save index to " << modelVoiceFileName.GetRawString() << " Successfully";
+}
+
 void LAppLive2DManager::ChangeScene(Csm::csmInt32 index)
 {
     _sceneIndex = index;

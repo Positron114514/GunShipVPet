@@ -144,6 +144,9 @@ void SettingsDialog::VoiceSettingsInit()
 
     connect(ui->previewButton, &QPushButton::clicked,
             this, &SettingsDialog::testVoice);
+
+    connect(ui->voiceBindButton, &QPushButton::clicked,
+            this, &SettingsDialog::onSaveToModelClicked);
 }
 
 void SettingsDialog::LLMSettingsInit()
@@ -200,6 +203,13 @@ void SettingsDialog::accept()
     p->setTTSEnable(ui->checkBoxTTS->isChecked());
 
     p->setVoice(ui->comboVoice->currentIndex());
+
+    int voiceIndex = FileHandler::getModelVoiceIndex();
+    if(voiceIndex != -1)
+    {
+        qDebug() << "Find voice from model. index: " << voiceIndex;
+        p->setVoice(voiceIndex);
+    }
 
     qDebug() << QT_BACKGROUND_LOG << "settings carded";
 
@@ -487,4 +497,11 @@ void SettingsDialog::testVoice()
     connect(thread, &VoiceThread::done, this, [=]() {
         ui->previewButton->setEnabled(true);
     });
+}
+
+void SettingsDialog::onSaveToModelClicked()
+{
+    qDebug() << QT_DEBUG_OUTPUT << "Save voice to model triggered";
+
+    FileHandler::saveVoiceToModel(p->voice());
 }

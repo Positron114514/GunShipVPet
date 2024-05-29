@@ -44,6 +44,7 @@ public slots:
     void onVolumeChanged();
     void onPaceChanged();
     void testVoice();
+    void onSaveToModelClicked();
 
 signals:
     void LLMStateChanged(bool state);

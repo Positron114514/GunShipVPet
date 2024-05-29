@@ -108,6 +108,9 @@ public:
     */
     void ChangeScene(Csm::csmInt32 index);
 
+    // 保存当前模型的声音索引
+    void saveCurrentModleVoiceIndex(int index);
+
     /**
      * @brief   モデル個数を得る
      * @return  所持モデル個数

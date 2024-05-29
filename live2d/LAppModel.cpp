@@ -86,6 +86,38 @@ LAppModel::~LAppModel()
     delete(_modelSetting);
 }
 
+void LAppModel::setVoice(int voiceIndex)
+{
+    _voiceIndex = voiceIndex;
+}
+
+void LAppModel::loadVoice(QString filePath)
+{
+    QString filePathWithName(filePath);
+    filePathWithName += VOICE_SAVE_PATH;
+
+    if(!QFile::exists(filePathWithName))
+    {
+        qDebug() << QT_DEBUG_OUTPUT << "fail to load file: " << filePathWithName << ", set voiceIndex to -1(Invalid)";
+        setVoice(-1);
+    }
+    QFile file(filePathWithName);
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+
+    QTextStream in(&file);
+
+    QString line = in.readLine(); // 只有一行
+    qDebug() << QT_DEBUG_OUTPUT << "index read: " << line;
+
+    setVoice(line.toInt());
+    qDebug() << QT_DEBUG_OUTPUT << "set model's voice index to " << line;
+}
+
+bool LAppModel::hasVoiceBonded()
+{
+    return _voiceIndex != -1;
+}
+
 void LAppModel::LoadAssets(const csmChar* dir, const csmChar* fileName)
 {
     _modelHomeDir = dir;
@@ -113,6 +145,13 @@ void LAppModel::LoadAssets(const csmChar* dir, const csmChar* fileName)
     CreateRenderer();
 
     SetupTextures();
+
+    loadVoice(dir);
+}
+
+int LAppModel::getVoice()
+{
+    return _voiceIndex;
 }
 
 void LAppModel::SetupModel(ICubismModelSetting* setting)

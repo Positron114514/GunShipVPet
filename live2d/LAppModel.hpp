@@ -7,11 +7,14 @@
 
 #pragma once
 
+#define VOICE_SAVE_PATH "voice.gv"
+
 #include <CubismFramework.hpp>
 #include <Model/CubismUserModel.hpp>
 #include <ICubismModelSetting.hpp>
 #include <Type/csmRectF.hpp>
 #include <Rendering/OpenGL/CubismOffscreenSurface_OpenGLES2.hpp>
+#include "llminterface.h"
 // #include "ModelAPI.hpp"
 #include "LAppWavFileHandler.hpp"
 
@@ -45,6 +48,14 @@ public:
      * @param model MoldeAPI::Model, 即存放model信息的函数
      */
     // void LAppModel::ResetModel(ModelAPI::Model *model);
+    void setVoice(int voice);
+
+    void loadVoice(QString filePath);
+
+    // 检测是否已经绑定了声音
+    bool hasVoiceBonded();
+
+    int getVoice();
 
     /**
      * @brief レンダラを再構築する
@@ -214,4 +225,6 @@ private:
     Csm::Rendering::CubismOffscreenSurface_OpenGLES2 _renderBuffer; ///< 非帧缓冲绘制目标
 
     inline static LAppModel *instance = nullptr;
+
+    int _voiceIndex;
 };
