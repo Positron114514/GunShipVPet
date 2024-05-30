@@ -47,9 +47,13 @@ void LlmHandler::getAccessToken(QString apiKey, QString secretKey)
     PyTuple_SetItem(args, 1, pySecretKey);
     // 运行函数
     accessToken = PyObject_CallObject(pyGetAccessToken, args);
-    if(!accessToken)
+    // 检测返回值
+    char* accessTokenCStr;
+    PyArg_Parse(accessToken, "s", &accessTokenCStr);
+    if(strcmp(accessTokenCStr, PY_LOAD_JSON_FAILED) == 0|| strcmp(accessTokenCStr, PY_REQUEST_FAILED) == 0)
     {
         qDebug() << QT_DEBUG_OUTPUT << "fail to load access token";
+        accessToken = NULL;
     }else
     {
         qDebug() << QT_DEBUG_OUTPUT << "load access token successfully";
