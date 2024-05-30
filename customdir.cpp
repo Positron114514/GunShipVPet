@@ -8,7 +8,7 @@ CustomDir::CustomDir()
 QString CustomDir::customDir()
 {
     return QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) +
-        QDir::separator() + APP_NAME;
+        '/' + APP_NAME;
 }
 
 QString CustomDir::startupDir()
@@ -24,5 +24,10 @@ QString CustomDir::autoRunLnkDir()
 
 QString CustomDir::resourcesDir()
 {
-    return CustomDir::customDir() + QDir::separator() + "resources/";
+    return CustomDir::customDir() + "/resources/";
+}
+
+QString CustomDir::voiceOutputDir()
+{
+    return CustomDir::customDir() + "/voice.mp3";
 }

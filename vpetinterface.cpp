@@ -300,8 +300,10 @@ void VPetInterface::setVoice(int index)
         return;
 
     curVoice = index;
-    // 设置语音包
 
+    if(!isTTSEnable)
+        return;
+    // 设置语音包
     qDebug() << QT_INTERFACE_LOG << "voice model changed:";
 }
 
@@ -315,6 +317,8 @@ void VPetInterface::setVolume(int volume)
     if(volume < 0 || volume > 100)
         return;
     curVolume = volume;
+    if(!isTTSEnable)
+        return;
     LlmInterface::setVolume(curVolume); // 设置音量
     qDebug() << QT_INTERFACE_LOG << "volume changed to:" << volume;
 }
@@ -329,6 +333,8 @@ void VPetInterface::setPace(int pace)
     if(pace < 0 || pace > 100)
         return;
     curPace = pace;
+    if(!isTTSEnable)
+        return;
     LlmInterface::setRate(curPace);
     qDebug() << QT_INTERFACE_LOG << "pace changed to:" << pace;
 }

@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "GunshipVPet虚拟桌宠"
-#define MyAppVersion "2.0-alpha1"
+#define MyAppVersion "v2.0"
 #define MyAppPublisher "NJU EL 武装直升机组"
 #define MyAppURL "https://github.com/Positron114514/GunShipVPet"
 #define MyAppExeName "GunshipVPet.exe"
@@ -39,6 +39,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "E:\Codes\Qt\GunshipVPetApp\app\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\Codes\Qt\GunshipVPetApp\app\*"; Excludes: "E:\Codes\Qt\GunshipVPetApp\app\resources\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "E:\Codes\Qt\GunshipVPetApp\app\resources\*"; DestDir: "{userdocs}\GunshipVPet\resources"; Flags: ignoreversion recursesubdirs createallsubdirs
+;Source: "E:\Codes\Qt\GunshipVPetApp\install\python-3.8.10-amd64.exe"; DestDir: "{tmp}"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -46,9 +47,34 @@ Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
+;Filename: "{tmp}\python-3.8.10-amd64.exe"; Flags: skipifdoesntexist; StatusMsg: "Installing Python 3.8.10"
+;Filename: "pip.exe"; Parameters: "install edge-tts"; StatusMsg: "Installing edge-tts"
+;Filename: "pip.exe"; Parameters: "install requests"; StatusMsg: "Installing requests"
+;Filename: "pip.exe"; Parameters: "install json"; StatusMsg: "Installing json"
+;Filename: "pip.exe"; Parameters: "install asyncio"; StatusMsg: "Installing asyncio"
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 
 [Code]
+var pythonMissing: Boolean;
+function NeedInstallPython(): Boolean;
+begin
+  result := pythonMissing
+end;
+
+function InitializeSetup(): Boolean;
+begin
+  if RegValueExists(HKLM, 'HKEY_CURRENT_USER\Software\Classes\Installer\Dependencies\CPython-3.8', 'Version')
+  then
+  begin
+    pythonMissing := false;
+  end
+  else
+  begin
+    pythonMissing := true;
+  end;
+  result := true;
+end;
+
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 
 begin

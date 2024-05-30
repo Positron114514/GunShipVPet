@@ -126,7 +126,7 @@ private:
     bool isWheelZoomActive = true;
     bool isSystemStartup = false;
 
-    bool isLLMEnable = true;
+    bool isLLMEnable = false;
     bool isTTSEnable = false;
 
     bool isAccessTokenAvail = true;

@@ -12,6 +12,7 @@ public:
     static QString startupDir();
     static QString autoRunLnkDir();
     static QString resourcesDir();
+    static QString voiceOutputDir();
 };
 
 #endif // CUSTOMDIR_H

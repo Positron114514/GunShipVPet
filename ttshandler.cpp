@@ -1,4 +1,5 @@
 #include "ttshandler.h"
+#include "customdir.h"
 
 namespace
 {
@@ -21,7 +22,7 @@ TtsHandler::TtsHandler()
     // volume
     _volume = PyUnicode_FromString("+0%");
     // mp3SavePath
-    _mp3SaveFileName = PyUnicode_FromString(MP3_SAVE_FILE);
+    _mp3SaveFileName = PyUnicode_FromString(CustomDir::voiceOutputDir().toUtf8());
 
     // player
     _player = new QMediaPlayer();
@@ -135,9 +136,9 @@ void TtsHandler::speak(QString* text, int voiceIndex)
     // 防止声音混乱
     stop();
 
-    _player->setSource(QUrl::fromLocalFile(MP3_SAVE_FILE));
+    _player->setSource(QUrl::fromLocalFile(CustomDir::voiceOutputDir()));
 
-    qDebug() << QT_DEBUG_OUTPUT << "set player source: " << MP3_SAVE_FILE;
+    qDebug() << QT_DEBUG_OUTPUT << "set player source: " << CustomDir::voiceOutputDir();
     // 如果是在资源文件里用 fromEncoded 函数获取地址
     //player->setMedia(QUrl::fromEncoded("qrc:/mp3/552800.mp3"));
 
