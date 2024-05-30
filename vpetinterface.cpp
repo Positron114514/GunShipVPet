@@ -115,16 +115,18 @@ void VPetInterface::InitializeAutoSaveService(int mesc)
 void VPetInterface::InitiallizeLlmAndTts()
 {
     qDebug() << QT_BACKGROUND_LOG << "LLM & TTS initialize started";
+    // if(!isLLMEnable)
+    // {
+    //     QMessageBox msg(this);
+    //     msg.setWindowTitle("提示");
+    //     msg.setText("错误：获取accessToken失败（api不可用）");
+    //     msg.exec();
+    //     qDebug() << QT_BACKGROUND_LOG << "LLM function not enabled, skip init";
+    //     setTokenState(false);
+    //     return;
+    // }
     if(!isLLMEnable)
-    {
-        QMessageBox msg(this);
-        msg.setWindowTitle("提示");
-        msg.setText("错误：获取accessToken失败（api不可用）");
-        msg.exec();
-        qDebug() << QT_BACKGROUND_LOG << "LLM function not enabled, skip init";
-        setTokenState(false);
         return;
-    }
 
     LlmInterface::getAccessToken(apiKey, secretKey);    // 设置accesstoken
 }
